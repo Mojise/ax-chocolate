@@ -24,7 +24,7 @@ android {
             )
         }
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -61,14 +61,14 @@ afterEvaluate {
 
                 groupId = "com.github.mojise.ax-designsystem" // 깃허브 이름 예제
                 artifactId = "ax-designsystem" // 공개할 라이브러리의 이름 예제
-                version = "0.0.2" // 버전 예제
+                version = "0.0.3-beta" // 버전 예제
             }
             create<MavenPublication>("release") {
                 from(components["release"])
 
                 groupId = "com.github.mojise.ax-designsystem" // 깃허브 이름 예제
                 artifactId = "ax-designsystem" // 공개할 라이브러리의 이름 예제
-                version = "0.0.2" // 버전 예제
+                version = "0.0.3-beta" // 버전 예제
             }
         }
     }
