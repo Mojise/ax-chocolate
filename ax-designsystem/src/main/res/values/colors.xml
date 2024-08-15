@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="ax_ds_ripple_color">@color/ax_ds_gray400</color>
+    <color name="ax_ds_ripple_color_light">@color/ax_ds_gray300</color>
+
+    <color name="ax_ds_text_color_black">#212124</color>
+    <color name="ax_ds_text_color_dark_gray">#5D6166</color>
+
+    <color name="ax_dialog_basic_container_background">#FFFFFF</color>
+    <color name="ax_dialog_basic_title">@color/ax_ds_text_color_black</color>
+    <color name="ax_dialog_basic_content">@color/ax_ds_text_color_dark_gray</color>
+    <color name="ax_dialog_negative_button_background">#F2F3F6</color>
+    <color name="ax_dialog_positive_button_background">?attr/colorAccent</color>
+
+    <!-- 2014 Material Design color palettes -->
+    <color name="ax_ds_transparent">#00000000</color>
+    <color name="ax_ds_white">#FFFFFF</color>
+    <color name="ax_ds_black">#000000</color>
+
+    <color name="ax_ds_gray50">#FAFAFA</color>
+    <color name="ax_ds_gray100">#F5F5F5</color>
+    <color name="ax_ds_gray200">#EEEEEE</color>
+    <color name="ax_ds_gray250">#EAEAEA</color>
+    <color name="ax_ds_gray300">#E0E0E0</color>
+    <color name="ax_ds_gray400">#BDBDBD</color>
+    <color name="ax_ds_gray450">#AEAEAE</color>
+    <color name="ax_ds_gray500">#9E9E9E</color>
+    <color name="ax_ds_gray600">#757575</color>
+    <color name="ax_ds_gray600_a20">#33757575</color>
+    <color name="ax_ds_gray700">#616161</color>
+    <color name="ax_ds_gray800">#424242</color>
+    <color name="ax_ds_gray900">#212121</color>
+    <color name="ax_ds_grayA900">#99212121</color>
+
+    <color name="ax_ds_blue50">#E3F2FD</color>
+    <color name="ax_ds_blue100">#BBDEFB</color>
+    <color name="ax_ds_blue200">#90CAF9</color>
+    <color name="ax_ds_blue300">#64B5F6</color>
+    <color name="ax_ds_blue400">#42A5F5</color>
+    <color name="ax_ds_blue400A">#8042A5F5</color>
+    <color name="ax_ds_blue500">#2196F3</color>
+    <color name="ax_ds_blue600">#1E88E5</color>
+    <color name="ax_ds_blue700">#1976D2</color>
+    <color name="ax_ds_blue800">#1565C0</color>
+    <color name="ax_ds_blue900">#0D47A1</color>
+    <color name="ax_ds_blueA100">#82B1FF</color>
+    <color name="ax_ds_blueA200">#448AFF</color>
+    <color name="ax_ds_blueA300">#2979FF</color>
+    <color name="ax_ds_blueA400">#2962FF</color>
+
+    <color name="ax_ds_red">#FF0000</color>
+    <color name="ax_ds_red50">#FFEBEE</color>
+    <color name="ax_ds_red100">#FFCDD2</color>
+    <color name="ax_ds_red200">#EF9A9A</color>
+    <color name="ax_ds_red300">#E57373</color>
+    <color name="ax_ds_red400">#EF5350</color>
+    <color name="ax_ds_red500">#F44336</color>
+    <color name="ax_ds_red600">#E53935</color>
+    <color name="ax_ds_red700">#D32F2F</color>
+    <color name="ax_ds_red800">#C62828</color>
+    <color name="ax_ds_red900">#B71C1C</color>
+    <color name="ax_ds_redA100">#FF8A80</color>
+    <color name="ax_ds_redA200">#FF5252</color>
+    <color name="ax_ds_redA400">#FF1744</color>
+    <color name="ax_ds_redA700">#D50000</color>
+
+    <color name="ax_ds_yellow50">#FFFDE7</color>
+    <color name="ax_ds_yellow100">#FFF9C4</color>
+    <color name="ax_ds_yellow200">#FFF59D</color>
+    <color name="ax_ds_yellow300">#FFF176</color>
+    <color name="ax_ds_yellow400">#FFEE58</color>
+    <color name="ax_ds_yellow500">#FFEB3B</color>
+    <color name="ax_ds_yellow600">#FDD835</color>
+    <color name="ax_ds_yellow700">#FBC02D</color>
+    <color name="ax_ds_yellow800">#F9A825</color>
+    <color name="ax_ds_yellow900">#F57F17</color>
+    <color name="ax_ds_yellowA100">#FFFF8D</color>
+    <color name="ax_ds_yellowA200">#FFFF00</color>
+    <color name="ax_ds_yellowA400">#FFEA00</color>
+    <color name="ax_ds_yellowA700">#FFD600</color>
+
+    <color name="ax_ds_green50">#E8F5E9</color>
+    <color name="ax_ds_green100">#C8E6C9</color>
+    <color name="ax_ds_green200">#A5D6A7</color>
+    <color name="ax_ds_green300">#81C784</color>
+    <color name="ax_ds_green400">#66BB6A</color>
+    <color name="ax_ds_green500">#4CAF50</color>
+    <color name="ax_ds_green600">#43A047</color>
+    <color name="ax_ds_green700">#388E3C</color>
+    <color name="ax_ds_green800">#2E7D32</color>
+    <color name="ax_ds_green900">#1B5E20</color>
+    <color name="ax_ds_greenA100">#B9F6CA</color>
+    <color name="ax_ds_greenA200">#69F0AE</color>
+    <color name="ax_ds_greenA400">#00E676</color>
+    <color name="ax_ds_greenA700">#00C853</color>
+
+    <color name="ax_ds_teal50">#E0F2F1</color>
+    <color name="ax_ds_teal100">#B2DFDB</color>
+    <color name="ax_ds_teal200">#80CBC4</color>
+    <color name="ax_ds_teal300">#4DB6AC</color>
+    <color name="ax_ds_teal400">#26A69A</color>
+    <color name="ax_ds_teal500">#009688</color>
+    <color name="ax_ds_teal600">#00897B</color>
+    <color name="ax_ds_teal700">#00796B</color>
+    <color name="ax_ds_teal800">#00695C</color>
+    <color name="ax_ds_teal900">#004D40</color>
+    <color name="ax_ds_tealA100">#A7FFEB</color>
+    <color name="ax_ds_tealA200">#64FFDA</color>
+    <color name="ax_ds_tealA400">#1DE9B6</color>
+    <color name="ax_ds_tealA700">#00BFA5</color>
+
+    <color name="ax_ds_orange50">#FFF3E0</color>
+    <color name="ax_ds_orange100">#FFE0B2</color>
+    <color name="ax_ds_orange200">#FFCC80</color>
+    <color name="ax_ds_orange300">#FFB74D</color>
+    <color name="ax_ds_orange400">#FFA726</color>
+    <color name="ax_ds_orange500">#FF9800</color>
+    <color name="ax_ds_orange600">#FB8C00</color>
+    <color name="ax_ds_orange700">#F57C00</color>
+    <color name="ax_ds_orange800">#EF6C00</color>
+    <color name="ax_ds_orange900">#E65100</color>
+    <color name="ax_ds_orangeA100">#FFD180</color>
+    <color name="ax_ds_orangeA200">#FFAB40</color>
+    <color name="ax_ds_orangeA400">#FF9100</color>
+    <color name="ax_ds_orangeA700">#FF6D00</color>
+
+</resources>
