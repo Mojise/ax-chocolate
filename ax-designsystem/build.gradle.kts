@@ -47,10 +47,6 @@ dependencies {
     implementation(libs.material)
 
     implementation(libs.thirdparty.airbnb.lottie)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }
 
 afterEvaluate {
@@ -61,14 +57,14 @@ afterEvaluate {
 
                 groupId = "com.github.mojise.ax-designsystem" // 깃허브 이름 예제
                 artifactId = "ax-designsystem" // 공개할 라이브러리의 이름 예제
-                version = "0.0.5-beta" // 버전 예제
+                version = "0.0.6-beta" // 버전 예제
             }
             create<MavenPublication>("release") {
                 from(components["release"])
 
                 groupId = "com.github.mojise.ax-designsystem" // 깃허브 이름 예제
                 artifactId = "ax-designsystem" // 공개할 라이브러리의 이름 예제
-                version = "0.0.5-beta" // 버전 예제
+                version = "0.0.6-beta" // 버전 예제
             }
         }
     }
