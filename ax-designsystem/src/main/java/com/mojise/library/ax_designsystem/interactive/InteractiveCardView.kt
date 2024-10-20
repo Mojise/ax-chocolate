@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.MotionEvent
 import androidx.cardview.widget.CardView
 
-class InteractiveCardView @JvmOverloads constructor(
+open class InteractiveCardView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : CardView(context, attrs, defStyleAttr) {
 

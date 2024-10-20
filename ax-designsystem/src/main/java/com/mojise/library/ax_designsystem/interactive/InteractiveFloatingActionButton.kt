@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.MotionEvent
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class InteractiveFloatingActionButton @JvmOverloads constructor(
+open class InteractiveFloatingActionButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FloatingActionButton(context, attrs, defStyleAttr) {
 

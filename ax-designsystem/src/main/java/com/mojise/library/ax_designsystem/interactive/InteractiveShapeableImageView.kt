@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.MotionEvent
 import com.google.android.material.imageview.ShapeableImageView
 
-class InteractiveShapeableImageView @JvmOverloads constructor(
+open class InteractiveShapeableImageView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : ShapeableImageView(context, attrs, defStyleAttr) {
 
