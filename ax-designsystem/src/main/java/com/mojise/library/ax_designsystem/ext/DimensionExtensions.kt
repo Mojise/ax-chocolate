@@ -21,6 +21,22 @@ val Float.dp: Float
         Resources.getSystem().displayMetrics,
     )
 
+/** return integer sp value from the integer px value. */
+val Int.sp: Int
+    @JvmSynthetic inline get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_SP,
+        this.toFloat(),
+        Resources.getSystem().displayMetrics,
+    ).roundToInt()
+
+/** return float sp value from the float px value */
+val Float.sp: Float
+    @JvmSynthetic inline get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_SP,
+        this,
+        Resources.getSystem().displayMetrics,
+    )
+
 /** gets display size as a point. */
 val displaySize: Point
     @JvmSynthetic inline get() = Point(
