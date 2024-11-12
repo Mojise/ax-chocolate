@@ -13,10 +13,9 @@ open class InteractiveConstraintLayout @JvmOverloads constructor(
     private val helper: InteractiveViewHelper = InteractiveViewHelper(this, context, attrs, defStyleAttr, defStyleRes)
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean = try {
-        if (isEnabled.not()) {
-            super.dispatchTouchEvent(event)
+        if (isEnabled) {
+            helper.onTouchEvent(this, event)
         }
-        helper.onTouchEvent(this, event)
         super.dispatchTouchEvent(event)
     } catch (e: Exception) {
         // 터치 이벤트가 빠르게 연속적으로 발생하는 것을 방지하거나, 이미 파괴된 뷰에 이벤트가 전달되었을 경우 예외 처리
