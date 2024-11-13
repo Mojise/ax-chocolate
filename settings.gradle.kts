@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ax-designsystem"
+rootProject.name = "ax-chocolate"
 include(":app")
-include(":ax-designsystem")
+include(":ax-chocolate")

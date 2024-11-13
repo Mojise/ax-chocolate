@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.mojise.library.ax_designsystem.app"
+    namespace = "com.mojise.library.ax_chocolate.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.mojise.library.ax_designsystem"
+        applicationId = "com.mojise.library.ax_chocolate"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":ax-designsystem"))
+    implementation(project(":ax-chocolate"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="chocolate_action_bar_size">56dp</dimen>
+    <dimen name="chocolate_action_button_width_small">42dp</dimen>
+    <dimen name="chocolate_action_button_width_xsmall">36dp</dimen>
+    <dimen name="chocolate_action_button_size">48dp</dimen>
+    <dimen name="chocolate_action_button_margin">4dp</dimen>
+    <dimen name="chocolate_action_button_padding">12dp</dimen>
+
+    <!-- Design System Dimensions -->
+    <dimen name="chocolate_dialog_container_corner_radius">16dp</dimen>
+    <dimen name="chocolate_dialog_container_padding_vertical">20dp</dimen>
+    <dimen name="chocolate_dialog_container_padding_horizontal">@dimen/chocolate_dialog_container_corner_radius</dimen>
+    <dimen name="chocolate_dialog_content_padding_vertical">20dp</dimen>
+    <dimen name="chocolate_dialog_button_corner_radius">8dp</dimen>
+
+</resources>

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="ax_ds_modal_loading_message_data_loading">데이터 로딩 중입니다...</string>
-
-    <string name="ax_ds_dialog_basic_title">알림</string>
-</resources>
