@@ -14,7 +14,7 @@
         android:name=".ApplicationKotlin"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivityKotlin"
+            android:name=".main.MainActivityKotlin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

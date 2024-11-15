@@ -8,4 +8,10 @@
     </style>
 
     <style name="Theme.AxChocolate" parent="Base.Theme.AxChocolate" />
+
+    <style name="ShapeAppearance"/>
+    <style name="ShapeAppearance.Circle">
+        <item name="shapeCornerFamily">cut</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

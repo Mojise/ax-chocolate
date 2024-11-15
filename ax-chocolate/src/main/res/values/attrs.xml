@@ -1,82 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="interactiveCornerRadius" format="dimension"/>
-    <attr name="interactiveRippleColor" format="color"/>
-    <attr name="interactiveScaleRatio" format="float"/>
-    <attr name="interactiveApplyBackgroundOrForeground" format="enum">
-        <enum name="background" value="0"/>
-        <enum name="foreground" value="1"/>
+    <!-- 모서리 둥근 정도 크기 -->
+    <attr name="chocolateCornerRadius" format="dimension"/>
+    <!-- Ripple 색상 -->
+    <attr name="chocolateRippleColor" format="color"/>
+    <attr name="chocolateRippleSelectedColor" format="color"/>
+    <attr name="chocolateRippleApplyTo" format="enum">
+        <!-- Ripple 효과를 표시할 위치 (default=foreground) -->
+        <enum name="foreground" value="0"/>
+        <enum name="background" value="1"/>
+    </attr>
+    <!-- 배경 색상 -->
+    <attr name="chocolateBackgroundColor" format="color"/>
+    <attr name="chocolateBackgroundDisabledColor" format="color"/>
+    <attr name="chocolateBackgroundSelectedColor" format="color"/>
+    <!-- 배경 테두리 -->
+    <attr name="chocolateStrokeWidth" format="dimension"/>
+    <attr name="chocolateStrokeColor" format="color"/>
+    <attr name="chocolateStrokeDisabledColor" format="color"/>
+    <attr name="chocolateStrokeSelectedColor" foramt="color"/>
+    <!-- 뷰 터치 시, 눌림 애니메이션 효과 (scale down 크기) -->
+    <attr name="chocolatePressEffectEnabled" format="boolean"/> <!-- 눌림 효과 사용 여부 (default=true) -->
+    <attr name="chocolatePressEffectScaleRatio" format="float"/>
+    <attr name="chocolatePressEffectStrengthLevel" format="enum">
+        <enum name="light_tiny"    value="0"/> <!-- scale=0.98 : 눌림 효과 매우 작음 -->
+        <enum name="light"         value="1"/> <!-- scale=0.96 : 눌림 효과 작음 -->
+        <enum name="normal"        value="2"/> <!-- scale=0.94 : 눌림 효과 적당함 (default) -->
+        <enum name="heavy"         value="3"/> <!-- scale=0.92 : 눌림 효과 큼 -->
+        <enum name="heavy_strong"  value="4"/> <!-- scale=0.90 : 눌림 효과 매우 큼 -->
+        <enum name="heavy_extreme" value="5"/> <!-- scale=0.85 : 눌림 효과 매우 상당히 큼 -->
     </attr>
 
-    <!-- Interactive View Common Attributes -->
-    <declare-styleable name="interactiveCommonAttributes">
-        <attr name="interactiveCornerRadius"/>
-        <attr name="interactiveRippleColor"/>
-        <attr name="interactiveScaleRatio"/>
-        <attr name="interactiveApplyBackgroundOrForeground"/>
+    <!-- Chocolate View Common Attributes -->
+    <declare-styleable name="chocolateCommonAttributes">
+        <attr name="chocolatePressEffectEnabled"/>
+        <attr name="chocolatePressEffectScaleRatio"/>
+        <attr name="chocolatePressEffectStrengthLevel"/>
+        <attr name="chocolateCornerRadius"/>
+        <attr name="chocolateRippleColor"/>
+        <attr name="chocolateRippleSelectedColor"/>
+        <attr name="chocolateRippleApplyTo"/>
+        <attr name="chocolateStrokeWidth"/>
+        <attr name="chocolateStrokeColor"/>
+        <attr name="chocolateStrokeDisabledColor"/>
+        <attr name="chocolateStrokeSelectedColor"/>
+        <attr name="chocolateBackgroundColor"/>
+        <attr name="chocolateBackgroundDisabledColor"/>
+        <attr name="chocolateBackgroundSelectedColor"/>
     </declare-styleable>
 
-    <declare-styleable name="InteractiveConstraintLayout">
-        <attr name="interactiveCornerRadius"/>
-        <attr name="interactiveRippleColor"/>
-        <attr name="interactiveScaleRatio"/>
-        <attr name="interactiveApplyBackgroundOrForeground"/>
+    <declare-styleable name="ChocolateConstraintLayout">
+        <attr name="chocolatePressEffectEnabled"/>
+        <attr name="chocolatePressEffectScaleRatio"/>
+        <attr name="chocolatePressEffectStrengthLevel"/>
+        <attr name="chocolateCornerRadius"/>
+        <attr name="chocolateRippleColor"/>
+        <attr name="chocolateRippleSelectedColor"/>
+        <attr name="chocolateRippleApplyTo"/>
+        <attr name="chocolateStrokeWidth"/>
+        <attr name="chocolateStrokeColor"/>
+        <attr name="chocolateStrokeDisabledColor"/>
+        <attr name="chocolateStrokeSelectedColor"/>
+        <attr name="chocolateBackgroundColor"/>
+        <attr name="chocolateBackgroundDisabledColor"/>
+        <attr name="chocolateBackgroundSelectedColor"/>
     </declare-styleable>
 
-    <declare-styleable name="InteractiveLinearLayout">
-        <attr name="interactiveCornerRadius"/>
-        <attr name="interactiveRippleColor"/>
-        <attr name="interactiveScaleRatio"/>
-        <attr name="interactiveApplyBackgroundOrForeground"/>
+    <declare-styleable name="ChocolateLinearLayout">
+        <attr name="chocolatePressEffectEnabled"/>
+        <attr name="chocolatePressEffectScaleRatio"/>
+        <attr name="chocolatePressEffectStrengthLevel"/>
+        <attr name="chocolateCornerRadius"/>
+        <attr name="chocolateRippleColor"/>
+        <attr name="chocolateRippleSelectedColor"/>
+        <attr name="chocolateRippleApplyTo"/>
+        <attr name="chocolateStrokeWidth"/>
+        <attr name="chocolateStrokeColor"/>
+        <attr name="chocolateStrokeDisabledColor"/>
+        <attr name="chocolateStrokeSelectedColor"/>
+        <attr name="chocolateBackgroundColor"/>
+        <attr name="chocolateBackgroundDisabledColor"/>
+        <attr name="chocolateBackgroundSelectedColor"/>
     </declare-styleable>
 
-    <declare-styleable name="InteractiveFrameLayout">
-        <attr name="interactiveCornerRadius"/>
-        <attr name="interactiveRippleColor"/>
-        <attr name="interactiveScaleRatio"/>
-        <attr name="interactiveApplyBackgroundOrForeground"/>
+    <declare-styleable name="ChocolateFrameLayout">
+        <attr name="chocolatePressEffectEnabled"/>
+        <attr name="chocolatePressEffectScaleRatio"/>
+        <attr name="chocolatePressEffectStrengthLevel"/>
+        <attr name="chocolateCornerRadius"/>
+        <attr name="chocolateRippleColor"/>
+        <attr name="chocolateRippleSelectedColor"/>
+        <attr name="chocolateRippleApplyTo"/>
+        <attr name="chocolateStrokeWidth"/>
+        <attr name="chocolateStrokeColor"/>
+        <attr name="chocolateStrokeDisabledColor"/>
+        <attr name="chocolateStrokeSelectedColor"/>
+        <attr name="chocolateBackgroundColor"/>
+        <attr name="chocolateBackgroundDisabledColor"/>
+        <attr name="chocolateBackgroundSelectedColor"/>
     </declare-styleable>
 
-    <declare-styleable name="InteractiveCardView">
-        <attr name="interactiveCornerRadius"/>
-        <attr name="interactiveRippleColor"/>
-        <attr name="interactiveScaleRatio"/>
-        <attr name="interactiveApplyBackgroundOrForeground"/>
+    <declare-styleable name="ChocolateCardView">
+        <attr name="chocolatePressEffectEnabled"/>
+        <attr name="chocolatePressEffectScaleRatio"/>
+        <attr name="chocolatePressEffectStrengthLevel"/>
+        <attr name="chocolateCornerRadius"/>
+        <attr name="chocolateRippleColor"/>
+        <attr name="chocolateRippleSelectedColor"/>
+        <attr name="chocolateRippleApplyTo"/>
+        <attr name="chocolateStrokeWidth"/>
+        <attr name="chocolateStrokeColor"/>
+        <attr name="chocolateStrokeDisabledColor"/>
+        <attr name="chocolateStrokeSelectedColor"/>
+        <attr name="chocolateBackgroundColor"/>
+        <attr name="chocolateBackgroundDisabledColor"/>
+        <attr name="chocolateBackgroundSelectedColor"/>
     </declare-styleable>
 
-    <declare-styleable name="InteractiveMaterialCardView">
-        <attr name="interactiveCornerRadius"/>
-        <attr name="interactiveRippleColor"/>
-        <attr name="interactiveScaleRatio"/>
-        <attr name="interactiveApplyBackgroundOrForeground"/>
+    <declare-styleable name="ChocolateMaterialCardView">
+        <attr name="chocolatePressEffectEnabled"/>
+        <attr name="chocolatePressEffectScaleRatio"/>
+        <attr name="chocolatePressEffectStrengthLevel"/>
+        <attr name="chocolateCornerRadius"/>
+        <attr name="chocolateRippleColor"/>
+        <attr name="chocolateRippleSelectedColor"/>
+        <attr name="chocolateRippleApplyTo"/>
+        <attr name="chocolateStrokeWidth"/>
+        <attr name="chocolateStrokeColor"/>
+        <attr name="chocolateStrokeDisabledColor"/>
+        <attr name="chocolateStrokeSelectedColor"/>
+        <attr name="chocolateBackgroundColor"/>
+        <attr name="chocolateBackgroundDisabledColor"/>
+        <attr name="chocolateBackgroundSelectedColor"/>
     </declare-styleable>
 
-    <declare-styleable name="InteractiveImageView">
-        <attr name="interactiveCornerRadius"/>
-        <attr name="interactiveRippleColor"/>
-        <attr name="interactiveScaleRatio"/>
-        <attr name="interactiveApplyBackgroundOrForeground"/>
+    <declare-styleable name="ChocolateImageView">
+        <attr name="chocolatePressEffectEnabled"/>
+        <attr name="chocolatePressEffectScaleRatio"/>
+        <attr name="chocolatePressEffectStrengthLevel"/>
+        <attr name="chocolateCornerRadius"/>
+        <attr name="chocolateRippleColor"/>
+        <attr name="chocolateRippleSelectedColor"/>
+        <attr name="chocolateRippleApplyTo"/>
+        <attr name="chocolateStrokeWidth"/>
+        <attr name="chocolateStrokeColor"/>
+        <attr name="chocolateStrokeDisabledColor"/>
+        <attr name="chocolateStrokeSelectedColor"/>
+        <attr name="chocolateBackgroundColor"/>
+        <attr name="chocolateBackgroundDisabledColor"/>
+        <attr name="chocolateBackgroundSelectedColor"/>
     </declare-styleable>
 
-    <declare-styleable name="InteractiveShapeableImageView">
-        <attr name="interactiveCornerRadius"/>
-        <attr name="interactiveRippleColor"/>
-        <attr name="interactiveScaleRatio"/>
-        <attr name="interactiveApplyBackgroundOrForeground"/>
+    <declare-styleable name="ChocolateShapeableImageView">
+        <!-- ChocolateView Common attributes -->
+        <attr name="chocolatePressEffectEnabled"/>
+        <attr name="chocolatePressEffectScaleRatio"/>
+        <attr name="chocolatePressEffectStrengthLevel"/>
+        <attr name="chocolateCornerRadius"/>
+        <attr name="chocolateRippleColor"/>
+        <attr name="chocolateRippleSelectedColor"/>
+        <attr name="chocolateRippleApplyTo"/>
+        <attr name="chocolateStrokeWidth"/>
+        <attr name="chocolateStrokeColor"/>
+        <attr name="chocolateStrokeDisabledColor"/>
+        <attr name="chocolateStrokeSelectedColor"/>
+        <attr name="chocolateBackgroundColor"/>
+        <attr name="chocolateBackgroundDisabledColor"/>
+        <attr name="chocolateBackgroundSelectedColor"/>
+
+        <!-- ChocolateShapeableImageView's attributes -->
+        <attr name="chocolateImageCornerRadius" format="dimension"/>
+        <attr name="chocolateImageCornerRadiusDpList" format="string"/>
+        <attr name="chocolateImageCornerRadiusTop" format="dimension"/>
+        <attr name="chocolateImageCornerRadiusBottom" format="dimension"/>
+        <attr name="chocolateImageCornerRadiusLeft" format="dimension"/>
+        <attr name="chocolateImageCornerRadiusRight" format="dimension"/>
+        <attr name="chocolateImageCornerRadiusTopLeft" format="dimension"/>
+        <attr name="chocolateImageCornerRadiusTopRight" format="dimension"/>
+        <attr name="chocolateImageCornerRadiusBottomLeft" format="dimension"/>
+        <attr name="chocolateImageCornerRadiusBottomRight" format="dimension"/>
+        <attr name="chocolateImageCornerShape" format="enum">
+            <enum name="rounded" value="0"/> <!-- 둥근 사각형 (Default) -->
+            <enum name="circle" value="1"/> <!-- 원형 (위의 dimensions 속성들이 모두 무시됨) -->
+            <enum name="cut" value="2"/> <!-- 직선 커팅 모양 -->
+            <enum name="diamond" value="3"/> <!-- 다이어몬드 모양 (50% 직선 커팅 모양, 위의 dimensions 속성들이 모두 무시됨) -->
+            <enum name="none" value="4"/>
+        </attr>
     </declare-styleable>
 
-    <declare-styleable name="InteractiveShapeableTextView">
-        <attr name="interactiveCornerRadius"/>
-        <attr name="interactiveRippleColor"/>
-        <attr name="interactiveScaleRatio"/>
-        <attr name="interactiveApplyBackgroundOrForeground"/>
+    <declare-styleable name="ChocolateTextView">
+        <!-- Common Chocolate View attributes -->
+        <attr name="chocolatePressEffectEnabled"/>
+        <attr name="chocolatePressEffectScaleRatio"/>
+        <attr name="chocolatePressEffectStrengthLevel"/>
+        <attr name="chocolateCornerRadius"/>
+        <attr name="chocolateRippleColor"/>
+        <attr name="chocolateRippleSelectedColor"/>
+        <attr name="chocolateRippleApplyTo"/>
+        <attr name="chocolateStrokeWidth"/>
+        <attr name="chocolateStrokeColor"/>
+        <attr name="chocolateStrokeDisabledColor"/>
+        <attr name="chocolateStrokeSelectedColor"/>
+        <attr name="chocolateBackgroundColor"/>
+        <attr name="chocolateBackgroundDisabledColor"/>
+        <attr name="chocolateBackgroundSelectedColor"/>
+
+        <!-- ChocolateTextView's attributes -->
+        <attr name="chocolateTextSelectedColor" format="color"/>
+        <attr name="chocolateTextDisabledColor" format="color"/>
     </declare-styleable>
 
-    <declare-styleable name="InteractiveFloatingActionButton">
-        <attr name="interactiveCornerRadius"/>
-        <attr name="interactiveRippleColor"/>
-        <attr name="interactiveScaleRatio"/>
-        <attr name="interactiveApplyBackgroundOrForeground"/>
+    <declare-styleable name="ChocolateFloatingActionButton">
+        <attr name="chocolatePressEffectEnabled"/>
+        <attr name="chocolatePressEffectScaleRatio"/>
+        <attr name="chocolatePressEffectStrengthLevel"/>
+        <attr name="chocolateCornerRadius"/>
+        <attr name="chocolateRippleColor"/>
+        <attr name="chocolateRippleSelectedColor"/>
+        <attr name="chocolateRippleApplyTo"/>
+        <attr name="chocolateStrokeWidth"/>
+        <attr name="chocolateStrokeColor"/>
+        <attr name="chocolateStrokeDisabledColor"/>
+        <attr name="chocolateStrokeSelectedColor"/>
+        <attr name="chocolateBackgroundColor"/>
+        <attr name="chocolateBackgroundDisabledColor"/>
+        <attr name="chocolateBackgroundSelectedColor"/>
     </declare-styleable>
 
     <!-- LoadingIndicatorView -->

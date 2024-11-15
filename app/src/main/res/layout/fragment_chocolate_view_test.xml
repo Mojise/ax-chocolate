@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/button_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="24dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:clipChildren="false"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <com.mojise.library.chocolate.view.ChocolateShapeableImageView
+                    android:id="@+id/shapeable_image_view"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:padding="4dp"
+                    android:src="@drawable/sample_cooking_2132874_1920"
+                    android:scaleType="centerCrop"
+                    app:chocolateCornerRadius="100dp"
+                    app:chocolateRippleColor="#99000000"
+                    app:chocolateImageCornerShape="circle"
+                    app:strokeWidth="8dp"
+                    app:strokeColor="@color/black"/>
+
+                <com.mojise.library.chocolate.view.ChocolateShapeableImageView
+                    android:id="@+id/shapeable_image_view_2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:padding="2dp"
+                    android:src="@drawable/sample_cooking_2132874_1920"
+                    android:scaleType="centerCrop"
+                    app:chocolateImageCornerShape="diamond"
+                    app:strokeWidth="4dp"
+                    app:strokeColor="@color/black"/>
+
+                <com.mojise.library.chocolate.view.ChocolateShapeableImageView
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/sample_cooking_2132874_1920"
+                    android:scaleType="centerCrop"
+                    android:padding="1dp"
+                    app:chocolateImageCornerShape="rounded"
+                    app:chocolateImageCornerRadiusDpList="0,24,0,24"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/black"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+            <com.mojise.library.chocolate.view.ChocolateTextView
+                android:id="@+id/btn_text_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="24dp"
+                android:text="테스트 버튼"
+                android:textSize="18sp"
+                android:textColor="@color/selector_text_color"
+                android:textStyle="bold"
+                app:chocolateCornerRadius="12dp"
+                app:chocolateStrokeWidth="1dp"
+                app:chocolateStrokeColor="@color/chocolate_green400"
+                app:chocolateStrokeSelectedColor="@color/chocolate_red400"
+                app:chocolateStrokeDisabledColor="@color/chocolate_disabled_color_dark"
+                app:chocolateBackgroundColor="@color/chocolate_blue400"
+                app:chocolateBackgroundSelectedColor="@color/chocolate_orange400"
+                app:chocolatePressEffectStrengthLevel="heavy"/>
+
+            <com.mojise.library.chocolate.view.ChocolateTextView
+                android:id="@+id/btn_text_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="24dp"
+                android:text="테스트 버튼 2"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:chocolateCornerRadius="12dp"
+                app:chocolateBackgroundColor="@color/chocolate_blue400"
+                app:chocolateBackgroundSelectedColor="@color/chocolate_orange400"
+                app:chocolatePressEffectStrengthLevel="heavy_strong"/>
+
+            <com.mojise.library.chocolate.view.ChocolateTextView
+                android:id="@+id/btn_text_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="24dp"
+                android:text="테스트 버튼 3"
+                android:textColor="@color/chocolate_text_color_black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:chocolateCornerRadius="12dp"
+                app:chocolatePressEffectStrengthLevel="normal"/>
+
+            <com.mojise.library.chocolate.view.ChocolateTextView
+                android:id="@+id/btn_text_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:paddingVertical="16dp"
+                android:paddingHorizontal="24dp"
+                android:gravity="center"
+                android:text="리플 효과 백그라운드"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:chocolateCornerRadius="16dp"
+                app:chocolateRippleApplyTo="background"
+                app:chocolateBackgroundColor="@color/chocolate_blue400"
+                app:chocolatePressEffectStrengthLevel="normal"/>
+
+            <com.mojise.library.chocolate.view.ChocolateTextView
+                android:id="@+id/btn_text_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:paddingVertical="16dp"
+                android:paddingHorizontal="24dp"
+                android:gravity="center"
+                android:text="리플 효과 포그라운드"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:chocolateBackgroundColor="@color/chocolate_blue400"/>
+
+            <com.mojise.library.chocolate.view.ChocolateTextView
+                android:id="@+id/btn_all_enabled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:paddingVertical="16dp"
+                android:paddingHorizontal="24dp"
+                android:gravity="center"
+                android:text="모든 버튼 Enabled 하기"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@color/chocolate_red400"/>
+
+<!--            <com.mojise.library.chocolate.view.ChocolateTextView-->
+<!--                android:id="@+id/btn_text_2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginVertical="6dp"-->
+<!--                android:paddingVertical="12dp"-->
+<!--                android:paddingHorizontal="24dp"-->
+<!--                android:text="hello"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textStyle="bold"/>-->
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

@@ -2,7 +2,7 @@ package com.mojise.library.ax_chocolate.app;
 
 import android.app.Application;
 
-import com.mojise.library.ax_chocolate.loading.modal.AxModalLoadingDialog;
+import com.mojise.library.chocolate.modal.AxModalLoadingDialog;
 
 public class ApplicationJava extends Application {
 

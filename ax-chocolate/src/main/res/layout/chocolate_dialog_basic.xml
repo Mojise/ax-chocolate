@@ -56,7 +56,7 @@ s
         app:barrierMargin="-20dp"/>
 
     <!-- Negative Button -->
-    <com.mojise.library.ax_chocolate.interactive.ChocolateInteractiveTextView
+    <com.mojise.library.ax_chocolate.view.ChocolateTextView
         android:id="@+id/btn_negative"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@ s
         app:layout_constraintEnd_toStartOf="@id/btn_positive"/>
 
     <!-- Positive Button -->
-    <com.mojise.library.ax_chocolate.interactive.ChocolateInteractiveConstraintLayout
+    <com.mojise.library.ax_chocolate.view.ChocolateConstraintLayout
         android:id="@+id/btn_positive"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -116,6 +116,6 @@ s
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-    </com.mojise.library.ax_chocolate.interactive.ChocolateInteractiveConstraintLayout>
+    </com.mojise.library.ax_chocolate.view.ChocolateConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

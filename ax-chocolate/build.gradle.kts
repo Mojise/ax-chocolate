@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.mojise.library.ax_chocolate"
+    namespace = "com.mojise.library.chocolate"
     compileSdk = 34
 
     defaultConfig {
@@ -44,7 +44,7 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    implementation(libs.google.material)
 
     implementation(libs.thirdparty.airbnb.lottie)
 }
