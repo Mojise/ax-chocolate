@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_mainFragment_to_chocolateViewTestFragment"
             app:destination="@id/chocolateViewTestFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_floatingBottomSheetTestFragment"
+            app:destination="@id/floatingBottomSheetTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/chocolateViewTestFragment"
         android:name="com.mojise.library.ax_chocolate.app.test.view.ChocolateViewTestFragment"
         android:label="ChocolateViewTestFragment"
         tools:layout="@layout/fragment_chocolate_view_test"/>
+    <fragment
+        android:id="@+id/floatingBottomSheetTestFragment"
+        android:name="com.mojise.library.ax_chocolate.app.test.bottomsheet.FloatingBottomSheetTestFragment"
+        android:label="FloatingBottomSheetTestFragment"
+        tools:layout="@layout/fragment_bottom_sheet_test"/>
 </navigation>

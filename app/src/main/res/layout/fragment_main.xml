@@ -13,64 +13,71 @@
             android:id="@+id/button_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btn_show_loading_1"
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_navigate_to_chocolate_view_test"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:text="show loading style 1"/>
+                android:text="Open ChocolateView Test"/>
 
             <Button
-                android:id="@+id/btn_show_loading_2"
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_navigate_to_floating_bottom_sheet_test"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:text="show loading style 2"/>
+                android:text="Open FloatingBottomSheet Test"/>
 
             <Button
                 android:id="@+id/btn_show_loading_3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:text="show loading style 3"/>
+                android:text="show loading style 3"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_show_loading_4"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:text="show loading style 4"/>
+                android:text="show loading style 4"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_show_loading_5"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:text="show loading style 5"/>
+                android:text="show loading style 5"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_show_loading_6"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:text="show loading style 6"/>
+                android:text="show loading style 6"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_show_loading_7"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:text="show loading style 7"/>
+                android:text="show loading style 7"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_show_loading_8"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:text="show loading style 8"/>
+                android:text="show loading style 8"
+                android:visibility="gone"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -11,8 +11,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnShowLoading1.setOnClickListener {
+        binding.btnNavigateToChocolateViewTest.setOnClickListener {
             navController.navigate(R.id.action_mainFragment_to_chocolateViewTestFragment)
+        }
+        binding.btnNavigateToFloatingBottomSheetTest.setOnClickListener {
+            navController.navigate(R.id.action_mainFragment_to_floatingBottomSheetTestFragment)
         }
     }
 }

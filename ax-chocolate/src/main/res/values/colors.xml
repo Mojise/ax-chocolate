@@ -23,6 +23,9 @@
     <color name="chocolate_dialog_negative_button_background">#F2F3F6</color>
     <color name="chocolate_dialog_positive_button_background">?attr/colorAccent</color>
 
+    <!-- BottomSheet -->
+    <color name="chocolate_modal_bottom_sheet_outside_color">#AEAEAE</color>
+
     <!-- 2014 Material Design color palettes -->
     <color name="chocolate_transparent">#00000000</color>
     <color name="chocolate_white">#FFFFFF</color>
