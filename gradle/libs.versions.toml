@@ -11,8 +11,11 @@ material = "1.12.0"
 activity = "1.9.1"
 constraintlayout = "2.2.0"
 
-#Androidx versions
+# Androidx Library versions
 navigation = "2.8.3"
+
+# Google Library versions
+hilt = "2.51"
 
 [libraries]
 # Androidx Libraries
@@ -25,6 +28,8 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 
 # Google Libraries
 google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+google-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+google-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 thirdparty-airbnb-lottie = { group = "com.airbnb.android", name = "lottie", version = "6.5.2" }
 
 # Test Libraries
@@ -38,3 +43,4 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidx-navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

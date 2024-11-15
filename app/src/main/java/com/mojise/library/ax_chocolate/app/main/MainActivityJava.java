@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.mojise.library.ax_chocolate.app.R;
 import com.mojise.library.chocolate.modal.AxModalLoadingDialog;
 
+
 public class MainActivityJava extends AppCompatActivity {
 
     private final AxModalLoadingDialog loadingDialog = new AxModalLoadingDialog(this);

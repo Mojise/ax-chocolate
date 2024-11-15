@@ -1,6 +1,7 @@
 package com.mojise.library.ax_chocolate.app.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -29,6 +30,7 @@ class MainActivityKotlin : BaseActivity<ActivityMainBinding>(R.layout.activity_m
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setFullScreen()
+        Log.e(TAG, "onCreate!! context=$baseContext")
 
         initView()
         initNavigation()

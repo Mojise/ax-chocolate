@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="chocolate_primary_color">@color/chocolate_blue400</color>
-    <color name="chocolate_secondary_color">@color/chocolate_gray200</color>
-    <color name="chocolate_tertiary_color">@color/chocolate_blue600</color>
-
     <color name="chocolate_ripple_color_black">#66000000</color>
     <color name="chocolate_ripple_color_gray">@color/chocolate_gray400</color>
     <color name="chocolate_ripple_color_light_gray">@color/chocolate_gray300</color>
@@ -28,9 +24,9 @@
     <color name="chocolate_dialog_positive_button_background">?attr/colorAccent</color>
 
     <!-- BottomSheet -->
-    <color name="chocolate_bottom_sheet_background">#FFFFFF</color>
-    <color name="chocolate_bottom_sheet_grip_bar">#E4E8EB</color>
-    <color name="chocolate_modal_bottom_sheet_outside_color">#AEAEAE</color>
+    <color name="chocolate_bottom_sheet_background">#202126</color>
+    <color name="chocolate_bottom_sheet_grip_bar">#3C3C46</color>
+    <color name="chocolate_modal_bottom_sheet_outside_color">#0E0C10</color>
 
     <!-- 2014 Material Design color palettes -->
     <color name="chocolate_transparent">#00000000</color>

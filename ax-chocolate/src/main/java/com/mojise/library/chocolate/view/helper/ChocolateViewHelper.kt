@@ -8,7 +8,6 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.view.View.NO_ID
 import android.view.animation.DecelerateInterpolator
 import com.mojise.library.chocolate.R
 import com.mojise.library.chocolate.ext.dp
@@ -27,7 +26,7 @@ internal class ChocolateViewHelper @JvmOverloads constructor(
     val attributes: ChocolateAttribute
 
     init {
-        Log.d(TAG, "ChocolateViewManager init")
+        //Log.d(TAG, "ChocolateViewManager init")
 
         // Android(android.R.attr.xxx) 속성을 가져오기 위한 TypedArray
         val androidTypedArray = context.obtainStyledAttributes(attrs, intArrayOf(android.R.attr.background, android.R.attr.clickable), defStyleAttr, defStyleRes)
@@ -93,7 +92,7 @@ internal class ChocolateViewHelper @JvmOverloads constructor(
             chocolateTypedArray.recycle()
         }
 
-        Log.e(TAG, "attributes: $attributes")
+        //Log.e(TAG, "attributes: $attributes")
 
         when (attributes.ripplePosition) {
             DrawablePosition.Foreground -> {
