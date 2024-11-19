@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.text.HtmlCompat
 import com.mojise.library.chocolate.R
 import com.mojise.library.chocolate.util.TAG
 import com.mojise.library.chocolate.view.helper.ChocolateViewHelper
@@ -22,8 +23,12 @@ open class ChocolateTextView @JvmOverloads constructor(
         get() = helper.attributes.isPressEffectEnabled
         set(value) { helper.attributes.isPressEffectEnabled = value }
 
-    private val attributes = ChocolateTextViewAttributes()
+    /**
+     * HTML 텍스트 사용 여부
+     */
+    var isHtmlTextEnabled: Boolean = false
 
+    private val attributes = ChocolateTextViewAttributes()
     private val helper: ChocolateViewHelper = ChocolateViewHelper(this, context, attrs, defStyleAttr)
 
     init {
@@ -33,6 +38,8 @@ open class ChocolateTextView @JvmOverloads constructor(
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ChocolateTextView, defStyleAttr, 0)
 
         try {
+            isHtmlTextEnabled = typedArray.getBoolean(R.styleable.ChocolateTextView_chocolateHtmlTextEnabled, false)
+
             var textColorStateList: ColorStateList? = androidTypedArray
                 .getColorStateList(0)
 
@@ -77,6 +84,14 @@ open class ChocolateTextView @JvmOverloads constructor(
         // 터치 이벤트가 빠르게 연속적으로 발생하는 것을 방지하거나, 이미 파괴된 뷰에 이벤트가 전달되었을 경우 등을 위한 예외 처리
         Log.w(TAG, "dispatchTouchEvent error", e)
         false
+    }
+
+    override fun setText(text: CharSequence?, type: BufferType?) {
+        if (isHtmlTextEnabled && text.isNullOrBlank().not()) {
+            super.setText(HtmlCompat.fromHtml(text.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY), type)
+        } else {
+            super.setText(text, type)
+        }
     }
 
     private data class ChocolateTextViewAttributes(

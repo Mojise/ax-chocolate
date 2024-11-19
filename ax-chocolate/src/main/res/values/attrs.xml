@@ -208,6 +208,7 @@
         <!-- ChocolateTextView's attributes -->
         <attr name="chocolateTextSelectedColor" format="color"/>
         <attr name="chocolateTextDisabledColor" format="color"/>
+        <attr name="chocolateHtmlTextEnabled" format="boolean"/> <!-- default=false -->
     </declare-styleable>
 
     <declare-styleable name="ChocolateFloatingActionButton">
