@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="chocolate_primary_color">@color/chocolate_blue800</color>
+    <color name="chocolate_secondary_color">@color/chocolate_gray200</color>
+    <color name="chocolate_tertiary_color">@color/chocolate_blue600</color>
+
     <color name="chocolate_ripple_color_black">#66000000</color>
     <color name="chocolate_ripple_color_gray">@color/chocolate_gray400</color>
     <color name="chocolate_ripple_color_light_gray">@color/chocolate_gray300</color>
@@ -9,13 +13,14 @@
     <color name="chocolate_text_color_dark_gray">#5D6166</color>
 
     <!-- Disabled Gray Scale Colors -->
-    <color name="chocolate_disabled_color_very_light">#eeeeee</color>
-    <color name="chocolate_disabled_color_light">#dddddd</color>
+    <color name="chocolate_disabled_color_very_light">#a3a3a3</color>
+    <color name="chocolate_disabled_color_light">#bbbbbb</color>
     <color name="chocolate_disabled_color">#cccccc</color>
-    <color name="chocolate_disabled_color_dark">#bbbbbb</color>
-    <color name="chocolate_disabled_color_very_dark">#a3a3a3</color>
-    <color name="chocolate_button_text_disabled">#AEB2BB</color>
-    <color name="chocolate_button_background_disabled">#DCDEE3</color>
+    <color name="chocolate_disabled_color_dark">#dddddd</color>
+    <color name="chocolate_disabled_color_very_dark">#eeeeee</color>
+    <color name="chocolate_button_text">#FFFFFF</color>
+    <color name="chocolate_button_text_disabled">#3b3b3b</color>
+    <color name="chocolate_button_background_disabled">#1f1f1f</color>
 
     <color name="chocolate_dialog_basic_container_background">#FFFFFF</color>
     <color name="chocolate_dialog_basic_title">@color/chocolate_text_color_black</color>

@@ -2,6 +2,7 @@ package com.mojise.library.chocolate.app
 
 import androidx.annotation.ColorRes
 import com.mojise.library.chocolate.R
+import com.mojise.library.chocolate.ext.sp
 
 object AxChocolateDesignSystem {
 
@@ -19,4 +20,10 @@ object AxChocolateDesignSystem {
     var secondaryColor: Int = R.color.chocolate_primary_color
     @ColorRes
     var tertiaryColor: Int = R.color.chocolate_primary_color
+
+    object BoxButton {
+        var textSize: Float = 18f.sp
+        @ColorRes
+        var textColor: Int = R.color.chocolate_white
+    }
 }

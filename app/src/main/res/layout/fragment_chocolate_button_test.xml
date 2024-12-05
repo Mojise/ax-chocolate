@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <com.mojise.library.chocolate.button.box.ChocolateBoxButton
+                android:id="@+id/box_button_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                app:chocolate_BoxButton_Text="초콜릿 버튼 입니다 1"/>
+
+            <com.mojise.library.chocolate.button.box.ChocolateBoxButton
+                android:id="@+id/box_button_simple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:padding="16dp"
+                app:chocolate_BackgroundColor="@color/my_box_button_background_color"
+                app:chocolate_CornerRadius="16dp"
+                app:chocolate_BoxButton_Text="초콜릿 버튼 입니다 2"
+                app:chocolate_BoxButton_TextSize="20sp"
+                app:chocolate_BoxButton_TextStyle="bold"
+                app:chocolate_BoxButton_TextColor="@color/white"
+                app:chocolate_BoxButton_TextPaddingBottom="1dp"
+                app:chocolate_BoxButton_LeftIconPadding="2dp"
+                app:chocolate_BoxButton_LeftIconDrawable="@drawable/chocolate_icon_shield"
+                app:chocolate_BoxButton_LeftIconTint="@color/white"/>
+
+            <com.mojise.library.chocolate.button.box.ChocolateBoxButton
+                android:id="@+id/box_button_simple2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                app:chocolate_BoxButton_Text="초콜릿 버튼 입니다!!"
+                app:chocolate_BoxButton_TextColor="@color/black"
+                app:chocolate_BoxButton_FontFamily="@font/chocolate_s_core_dream_6_bold"
+                app:chocolate_BoxButton_LeftIconDrawable="@drawable/chocolate_icon_shield"
+                app:chocolate_BoxButton_LeftIconTint="@color/chocolate_black"
+                app:chocolate_BoxButton_LeftIconPadding="2dp"
+                app:chocolate_PressEffectStrengthLevel="light"
+                app:chocolate_BackgroundColor="@color/chocolate_green400" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

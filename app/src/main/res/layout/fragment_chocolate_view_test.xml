@@ -30,9 +30,9 @@
                     android:padding="4dp"
                     android:src="@drawable/sample_cooking_2132874_1920"
                     android:scaleType="centerCrop"
-                    app:chocolateCornerRadius="100dp"
-                    app:chocolateRippleColor="#99000000"
-                    app:chocolateImageCornerShape="circle"
+                    app:chocolate_RippleColor="#99000000"
+                    app:chocolate_ShapeableImage_CornerRadius="100dp"
+                    app:chocolate_ShapeableImage_CornerShape="circle"
                     app:strokeWidth="8dp"
                     app:strokeColor="@color/black"/>
 
@@ -43,7 +43,7 @@
                     android:padding="2dp"
                     android:src="@drawable/sample_cooking_2132874_1920"
                     android:scaleType="centerCrop"
-                    app:chocolateImageCornerShape="diamond"
+                    app:chocolate_ShapeableImage_CornerShape="diamond"
                     app:strokeWidth="4dp"
                     app:strokeColor="@color/black"/>
 
@@ -53,8 +53,8 @@
                     android:src="@drawable/sample_cooking_2132874_1920"
                     android:scaleType="centerCrop"
                     android:padding="1dp"
-                    app:chocolateImageCornerShape="rounded"
-                    app:chocolateImageCornerRadiusDpList="0,24,0,24"
+                    app:chocolate_ShapeableImage_CornerShape="rounded"
+                    app:chocolate_ShapeableImage_CornerRadiusDpList="0,24,0,24"
                     app:strokeWidth="2dp"
                     app:strokeColor="@color/black"/>
 
@@ -73,14 +73,14 @@
                 android:textSize="18sp"
                 android:textColor="@color/selector_text_color"
                 android:textStyle="bold"
-                app:chocolateCornerRadius="12dp"
-                app:chocolateStrokeWidth="1dp"
-                app:chocolateStrokeColor="@color/chocolate_green400"
-                app:chocolateStrokeSelectedColor="@color/chocolate_red400"
-                app:chocolateStrokeDisabledColor="@color/chocolate_disabled_color_dark"
-                app:chocolateBackgroundColor="@color/chocolate_blue400"
-                app:chocolateBackgroundSelectedColor="@color/chocolate_orange400"
-                app:chocolatePressEffectStrengthLevel="heavy"/>
+                app:chocolate_CornerRadius="12dp"
+                app:chocolate_StrokeWidth="1dp"
+                app:chocolate_StrokeColor="@color/chocolate_green400"
+                app:chocolate_StrokeSelectedColor="@color/chocolate_red400"
+                app:chocolate_StrokeDisabledColor="@color/chocolate_disabled_color_dark"
+                app:chocolate_BackgroundColor="@color/chocolate_blue400"
+                app:chocolate_BackgroundSelectedColor="@color/chocolate_orange400"
+                app:chocolate_PressEffectStrengthLevel="heavy"/>
 
             <com.mojise.library.chocolate.view.ChocolateTextView
                 android:id="@+id/btn_text_2"
@@ -93,10 +93,10 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:chocolateCornerRadius="12dp"
-                app:chocolateBackgroundColor="@color/chocolate_blue400"
-                app:chocolateBackgroundSelectedColor="@color/chocolate_orange400"
-                app:chocolatePressEffectStrengthLevel="heavy_strong"/>
+                app:chocolate_CornerRadius="12dp"
+                app:chocolate_BackgroundColor="@color/chocolate_blue400"
+                app:chocolate_BackgroundSelectedColor="@color/chocolate_orange400"
+                app:chocolate_PressEffectStrengthLevel="heavy_strong"/>
 
             <com.mojise.library.chocolate.view.ChocolateTextView
                 android:id="@+id/btn_text_3"
@@ -109,8 +109,8 @@
                 android:textColor="@color/chocolate_text_color_black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:chocolateCornerRadius="12dp"
-                app:chocolatePressEffectStrengthLevel="normal"/>
+                app:chocolate_CornerRadius="12dp"
+                app:chocolate_PressEffectStrengthLevel="normal"/>
 
             <com.mojise.library.chocolate.view.ChocolateTextView
                 android:id="@+id/btn_text_4"
@@ -124,10 +124,10 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:chocolateCornerRadius="16dp"
-                app:chocolateRippleApplyTo="background"
-                app:chocolateBackgroundColor="@color/chocolate_blue400"
-                app:chocolatePressEffectStrengthLevel="normal"/>
+                app:chocolate_CornerRadius="16dp"
+                app:chocolate_RippleApplyTo="background"
+                app:chocolate_BackgroundColor="@color/chocolate_blue400"
+                app:chocolate_PressEffectStrengthLevel="normal"/>
 
             <com.mojise.library.chocolate.view.ChocolateTextView
                 android:id="@+id/btn_text_5"
@@ -141,7 +141,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:chocolateBackgroundColor="@color/chocolate_blue400"/>
+                app:chocolate_BackgroundColor="@color/chocolate_blue400"/>
 
             <com.mojise.library.chocolate.view.ChocolateTextView
                 android:id="@+id/btn_all_enabled"

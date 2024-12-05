@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainFragment_to_floatingBottomSheetTestFragment"
             app:destination="@id/floatingBottomSheetTestFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_boxButtonTestFragment"
+            app:destination="@id/boxButtonTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/chocolateViewTestFragment"
@@ -27,4 +30,9 @@
         android:name="com.mojise.library.ax_chocolate.app.test.bottomsheet.FloatingBottomSheetTestFragment"
         android:label="FloatingBottomSheetTestFragment"
         tools:layout="@layout/fragment_bottom_sheet_test"/>
+    <fragment
+        android:id="@+id/boxButtonTestFragment"
+        android:name="com.mojise.library.ax_chocolate.app.test.button.BoxButtonTestFragment"
+        android:label="BoxButtonTestFragment"
+        tools:layout="@layout/fragment_chocolate_button_test"/>
 </navigation>

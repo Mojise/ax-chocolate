@@ -30,8 +30,8 @@
                 android:text="Floating Bottom Sheet Test 1"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:chocolatePressEffectStrengthLevel="light"
-                app:chocolateBackgroundColor="@color/chocolate_blue400" />
+                app:chocolate_PressEffectStrengthLevel="light"
+                app:chocolate_BackgroundColor="@color/chocolate_blue400" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

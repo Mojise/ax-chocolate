@@ -22,12 +22,12 @@ val Float.dp: Float
     )
 
 /** return integer sp value from the integer px value. */
-val Int.sp: Int
+val Int.sp: Float
     @JvmSynthetic inline get() = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_SP,
         this.toFloat(),
         Resources.getSystem().displayMetrics,
-    ).roundToInt()
+    )
 
 /** return float sp value from the float px value */
 val Float.sp: Float

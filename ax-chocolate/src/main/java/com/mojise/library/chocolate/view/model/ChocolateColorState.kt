@@ -4,10 +4,10 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.annotation.ColorInt
 
-data class ChocolateColorState(
-    @ColorInt var selectedColor: Int = Color.TRANSPARENT,
-    @ColorInt var enabledColor: Int = Color.TRANSPARENT,
-    @ColorInt var disabledColor: Int = Color.TRANSPARENT,
+data class ChocolateColorState constructor(
+    @ColorInt var selectedColor: Int? = null,
+    @ColorInt var enabledColor: Int? = null,
+    @ColorInt var disabledColor: Int? = null,
 ) {
 
     val isAllTransparent: Boolean
@@ -20,9 +20,9 @@ data class ChocolateColorState(
             intArrayOf(-android.R.attr.state_enabled),
         ),
         intArrayOf(
-            selectedColor,
-            enabledColor,
-            disabledColor,
+            selectedColor ?: Color.TRANSPARENT,
+            enabledColor ?: Color.TRANSPARENT,
+            disabledColor ?: Color.TRANSPARENT,
         )
     )
 
@@ -31,17 +31,17 @@ data class ChocolateColorState(
         val states = mutableListOf<IntArray>()
         val colors = mutableListOf<Int>()
 
-        if (selectedColor != Color.TRANSPARENT) {
+        if (selectedColor != null && selectedColor != Color.TRANSPARENT) {
             states.add(intArrayOf(android.R.attr.state_selected))
-            colors.add(selectedColor)
+            colors.add(selectedColor!!)
         }
-        if (enabledColor != Color.TRANSPARENT) {
+        if (enabledColor != null && enabledColor != Color.TRANSPARENT) {
             states.add(intArrayOf(android.R.attr.state_enabled))
-            colors.add(enabledColor)
+            colors.add(enabledColor!!)
         }
-        if (disabledColor != Color.TRANSPARENT) {
+        if (disabledColor != null && disabledColor != Color.TRANSPARENT) {
             states.add(intArrayOf(-android.R.attr.state_enabled))
-            colors.add(disabledColor)
+            colors.add(disabledColor!!)
         }
         if (states.isEmpty() || colors.isEmpty()) {
             return null
@@ -51,9 +51,9 @@ data class ChocolateColorState(
 
     override fun toString(): String = buildString {
         append("ChocolateColorState(")
-        append("selectedColor=#${selectedColor.toString(16).uppercase()}, ")
-        append("enabledColor=#${enabledColor.toString(16).uppercase()}, ")
-        append("disabledColor=#${disabledColor.toString(16).uppercase()})")
+        append("selectedColor=#${selectedColor?.toString(16)?.uppercase()}, ")
+        append("enabledColor=#${enabledColor?.toString(16)?.uppercase()}, ")
+        append("disabledColor=#${disabledColor?.toString(16)?.uppercase()})")
     }
 
     companion object {

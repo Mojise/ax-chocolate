@@ -2,6 +2,8 @@ package com.mojise.library.ax_chocolate.app.main
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import androidx.annotation.IdRes
 import com.google.android.material.transition.MaterialSharedAxis
 import com.mojise.library.ax_chocolate.app.R
 import com.mojise.library.ax_chocolate.app.base.BaseFragment
@@ -12,11 +14,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnNavigateToChocolateViewTest.setOnClickListener {
-            navController.navigate(R.id.action_mainFragment_to_chocolateViewTestFragment)
+        with (binding) {
+            btnNavigateToChocolateViewTest.onClickedTo(R.id.action_mainFragment_to_chocolateViewTestFragment)
+            btnNavigateToFloatingBottomSheetTest.onClickedTo(R.id.action_mainFragment_to_floatingBottomSheetTestFragment)
+            btnNavigateToButtonTest.onClickedTo(R.id.action_mainFragment_to_boxButtonTestFragment)
         }
-        binding.btnNavigateToFloatingBottomSheetTest.setOnClickListener {
-            navController.navigate(R.id.action_mainFragment_to_floatingBottomSheetTestFragment)
-        }
+    }
+
+    private fun Button.onClickedTo(@IdRes resId: Int) = setOnClickListener {
+        navController.navigate(resId)
     }
 }

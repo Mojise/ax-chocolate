@@ -60,7 +60,6 @@
         android:textSize="14sp"
         android:textColor="@color/chocolate_white"
         android:background="@drawable/chocolate_modal_loading_loading_message_background"
-        android:fontFamily="@font/chocolate_s_core_dream_4_regular"
         app:layout_constrainedWidth="true"
         app:layout_constraintTop_toBottomOf="@id/guideline_center_horizontal"
         app:layout_constraintStart_toStartOf="parent"

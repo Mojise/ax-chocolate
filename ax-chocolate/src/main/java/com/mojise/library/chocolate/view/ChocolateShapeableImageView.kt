@@ -4,13 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
-import androidx.core.view.setPadding
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.mojise.library.chocolate.R
 import com.mojise.library.chocolate.ext.dp
 import com.mojise.library.chocolate.util.TAG
 import com.mojise.library.chocolate.view.helper.ChocolateViewHelper
+import com.mojise.library.chocolate.view.model.Attributes
 import kotlin.math.min
 
 open class ChocolateShapeableImageView @JvmOverloads constructor(
@@ -21,12 +21,13 @@ open class ChocolateShapeableImageView @JvmOverloads constructor(
      * 터치 시 눌림 효과 사용 여부
      */
     override var isPressEffectEnabled: Boolean
-        get() = helper.attributes.isPressEffectEnabled
-        set(value) { helper.attributes.isPressEffectEnabled = value }
+        get() = attributes.chocolate.isPressEffectEnabled
+        set(value) { attributes.chocolate.isPressEffectEnabled = value }
 
-    private val helper: ChocolateViewHelper = ChocolateViewHelper(this, context, attrs, defStyleAttr)
+    protected val attributes: Attributes = ChocolateViewHelper
+        .initAttributes(context, attrs, defStyleAttr)
 
-    private val attributes: Attributes = Attributes(
+    private val shapeableAttributes: ShapeableAttributes = ShapeableAttributes(
         cornerShape = CornerShape.None,
         cornerRadius = CornerRadius(0f, 0f, 0f, 0f),
     )
@@ -37,65 +38,65 @@ open class ChocolateShapeableImageView @JvmOverloads constructor(
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ChocolateShapeableImageView, defStyleAttr, 0)
 
         try {
-            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolateImageCornerRadius, NONE)
+            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolate_ShapeableImage_CornerRadius, NONE)
                 .takeIf { it != NONE }
                 ?.let { radius ->
-                    attributes.cornerRadius.topLeft = radius
-                    attributes.cornerRadius.topRight = radius
-                    attributes.cornerRadius.bottomRight = radius
-                    attributes.cornerRadius.bottomLeft = radius
+                    shapeableAttributes.cornerRadius.topLeft = radius
+                    shapeableAttributes.cornerRadius.topRight = radius
+                    shapeableAttributes.cornerRadius.bottomRight = radius
+                    shapeableAttributes.cornerRadius.bottomLeft = radius
                 }
-            typedArray.getString(R.styleable.ChocolateShapeableImageView_chocolateImageCornerRadiusDpList)
+            typedArray.getString(R.styleable.ChocolateShapeableImageView_chocolate_ShapeableImage_CornerRadiusDpList)
                 ?.split(",")
                 ?.mapNotNull(String::toFloatOrNull)
                 ?.takeIf { it.size == 4 }
                 ?.let { (topLeft, topRight, bottomLeft, bottomRight) ->
-                    attributes.cornerRadius.topLeft = topLeft.dp
-                    attributes.cornerRadius.topRight = topRight.dp
-                    attributes.cornerRadius.bottomLeft = bottomLeft.dp
-                    attributes.cornerRadius.bottomRight = bottomRight.dp
+                    shapeableAttributes.cornerRadius.topLeft = topLeft.dp
+                    shapeableAttributes.cornerRadius.topRight = topRight.dp
+                    shapeableAttributes.cornerRadius.bottomLeft = bottomLeft.dp
+                    shapeableAttributes.cornerRadius.bottomRight = bottomRight.dp
                 }
-            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolateImageCornerRadiusTop, NONE)
+            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolate_ShapeableImage_CornerRadiusTop, NONE)
                 .takeIf { it != NONE }
                 ?.let { top ->
-                    attributes.cornerRadius.topLeft = top
-                    attributes.cornerRadius.topRight = top
+                    shapeableAttributes.cornerRadius.topLeft = top
+                    shapeableAttributes.cornerRadius.topRight = top
                 }
-            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolateImageCornerRadiusBottom, NONE)
+            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolate_ShapeableImage_CornerRadiusBottom, NONE)
                 .takeIf { it != NONE }
                 ?.let { bottom ->
-                    attributes.cornerRadius.bottomRight = bottom
-                    attributes.cornerRadius.bottomLeft = bottom
+                    shapeableAttributes.cornerRadius.bottomRight = bottom
+                    shapeableAttributes.cornerRadius.bottomLeft = bottom
                 }
-            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolateImageCornerRadiusTopLeft, NONE)
+            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolate_ShapeableImage_CornerRadiusTopLeft, NONE)
                 .takeIf { it != NONE }
                 ?.let { topLeft ->
-                    attributes.cornerRadius.topLeft = topLeft
+                    shapeableAttributes.cornerRadius.topLeft = topLeft
                 }
-            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolateImageCornerRadiusTopRight, NONE)
+            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolate_ShapeableImage_CornerRadiusTopRight, NONE)
                 .takeIf { it != NONE }
                 ?.let { topRight ->
-                    attributes.cornerRadius.topRight = topRight
+                    shapeableAttributes.cornerRadius.topRight = topRight
                 }
-            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolateImageCornerRadiusBottomLeft, NONE)
+            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolate_ShapeableImage_CornerRadiusBottomLeft, NONE)
                 .takeIf { it != NONE }
                 ?.let { bottomLeft ->
-                    attributes.cornerRadius.bottomLeft = bottomLeft
+                    shapeableAttributes.cornerRadius.bottomLeft = bottomLeft
                 }
-            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolateImageCornerRadiusBottomRight, NONE)
+            typedArray.getDimension(R.styleable.ChocolateShapeableImageView_chocolate_ShapeableImage_CornerRadiusBottomRight, NONE)
                 .takeIf { it != NONE }
                 ?.let { bottomRight ->
-                    attributes.cornerRadius.bottomRight = bottomRight
+                    shapeableAttributes.cornerRadius.bottomRight = bottomRight
                 }
 
             // CornerShape의 Default 값은
             // CornerRadius가 모두 0이면 CornerShape.None, 아니면 CornerShape.Rounded
-            val defaultCornerShape = if (attributes.cornerRadius.noSize())
+            val defaultCornerShape = if (shapeableAttributes.cornerRadius.noSize())
                 CornerShape.None
                 else CornerShape.Rounded
 
-            typedArray.getInt(R.styleable.ChocolateShapeableImageView_chocolateImageCornerShape, defaultCornerShape.value).let { shape ->
-                attributes.cornerShape = CornerShape.entries.getOrNull(shape) ?: defaultCornerShape
+            typedArray.getInt(R.styleable.ChocolateShapeableImageView_chocolate_ShapeableImage_CornerShape, defaultCornerShape.value).let { shape ->
+                shapeableAttributes.cornerShape = CornerShape.entries.getOrNull(shape) ?: defaultCornerShape
             }
         } catch (e: Exception) {
             Log.w(TAG, "ChocolateShapeableImageView error", e)
@@ -105,13 +106,13 @@ open class ChocolateShapeableImageView @JvmOverloads constructor(
 
         //Log.d(TAG, "ChocolateShapeableImageView attributes=$attributes")
 
-        when (attributes.cornerShape) {
+        when (shapeableAttributes.cornerShape) {
             CornerShape.Rounded -> {
                 shapeAppearanceModel = shapeAppearanceModel.toBuilder()
-                    .setTopLeftCorner(CornerFamily.ROUNDED, attributes.cornerRadius.topLeft)
-                    .setTopRightCorner(CornerFamily.ROUNDED, attributes.cornerRadius.topRight)
-                    .setBottomLeftCorner(CornerFamily.ROUNDED, attributes.cornerRadius.bottomLeft)
-                    .setBottomRightCorner(CornerFamily.ROUNDED, attributes.cornerRadius.bottomRight)
+                    .setTopLeftCorner(CornerFamily.ROUNDED, shapeableAttributes.cornerRadius.topLeft)
+                    .setTopRightCorner(CornerFamily.ROUNDED, shapeableAttributes.cornerRadius.topRight)
+                    .setBottomLeftCorner(CornerFamily.ROUNDED, shapeableAttributes.cornerRadius.bottomLeft)
+                    .setBottomRightCorner(CornerFamily.ROUNDED, shapeableAttributes.cornerRadius.bottomRight)
                     .build()
             }
             CornerShape.Circle -> {
@@ -119,10 +120,10 @@ open class ChocolateShapeableImageView @JvmOverloads constructor(
             }
             CornerShape.Cut -> {
                 shapeAppearanceModel = shapeAppearanceModel.toBuilder()
-                    .setTopLeftCorner(CornerFamily.CUT, attributes.cornerRadius.topLeft)
-                    .setTopRightCorner(CornerFamily.CUT, attributes.cornerRadius.topRight)
-                    .setBottomLeftCorner(CornerFamily.CUT, attributes.cornerRadius.bottomLeft)
-                    .setBottomRightCorner(CornerFamily.CUT, attributes.cornerRadius.bottomRight)
+                    .setTopLeftCorner(CornerFamily.CUT, shapeableAttributes.cornerRadius.topLeft)
+                    .setTopRightCorner(CornerFamily.CUT, shapeableAttributes.cornerRadius.topRight)
+                    .setBottomLeftCorner(CornerFamily.CUT, shapeableAttributes.cornerRadius.bottomLeft)
+                    .setBottomRightCorner(CornerFamily.CUT, shapeableAttributes.cornerRadius.bottomRight)
                     .build()
             }
             CornerShape.Diamond -> {
@@ -145,7 +146,7 @@ open class ChocolateShapeableImageView @JvmOverloads constructor(
         val radius = min(widthWithPadding, heightWithPadding) / 2f
 
         // Circle, Diamond 모양은 width, height가 변경될 때마다 적용
-        when (attributes.cornerShape) {
+        when (shapeableAttributes.cornerShape) {
             CornerShape.Circle -> {
                 shapeAppearanceModel = shapeAppearanceModel.toBuilder()
                     .setAllCorners(CornerFamily.ROUNDED, radius)
@@ -162,7 +163,7 @@ open class ChocolateShapeableImageView @JvmOverloads constructor(
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean = try {
         if (isEnabled && isPressEffectEnabled) {
-            helper.showPressEffectOnTouch(this, event)
+            ChocolateViewHelper.showPressEffectOnTouch(this, event, attributes.chocolate.pressEffectScaleRatio)
         }
         super.dispatchTouchEvent(event)
     } catch (e: Exception) {
@@ -171,7 +172,7 @@ open class ChocolateShapeableImageView @JvmOverloads constructor(
         false
     }
 
-    private data class Attributes(
+    private data class ShapeableAttributes(
         var cornerShape: CornerShape,
         val cornerRadius: CornerRadius,
     )

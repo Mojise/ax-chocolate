@@ -32,12 +32,11 @@
                 android:text="Open FloatingBottomSheet Test"/>
 
             <Button
-                android:id="@+id/btn_show_loading_3"
+                android:id="@+id/btn_navigate_to_button_test"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:text="show loading style 3"
-                android:visibility="gone"/>
+                android:text="Open Button Test"/>
 
             <Button
                 android:id="@+id/btn_show_loading_4"

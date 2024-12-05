@@ -16,10 +16,10 @@ class ApplicationKotlin : Application() {
         // Ax-Chocolate 디자인 시스템 설정
         with (AxChocolateDesignSystem) {
             // 테마 모드 설정
-            themeMode = ChocolateThemeMode.Night
+            themeMode = ChocolateThemeMode.DayNight
 
             // 컬러 설정
-            primaryColor = R.color.my_primary_color
+            //primaryColor = R.color.my_primary_color
             secondaryColor = R.color.my_secondary_color
             tertiaryColor = R.color.my_tertiary_color
         }

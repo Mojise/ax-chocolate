@@ -21,7 +21,7 @@
         tools:text="알림"
         android:textSize="18sp"
         android:textColor="@color/chocolate_dialog_basic_title"
-        android:fontFamily="@font/chocolate_s_core_dream_6_bold"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -42,8 +42,7 @@
         tools:text="내 위치 확인을 위해 [권한] 설정에서 위치 정보 사용을 허용해주세요."
         android:textSize="15sp"
         android:textColor="@color/chocolate_dialog_basic_content"
-        android:fontFamily="@font/chocolate_s_core_dream_4_regular"
-        android:lineSpacingExtra="3dp"
+        android:lineSpacingExtra="0dp"
         app:layout_constraintTop_toBottomOf="@id/barrier_title"
         app:layout_constraintBottom_toTopOf="@id/barrier_buttons"/>
 s
@@ -65,7 +64,6 @@ s
         tools:text="취소"
         android:textSize="15.5sp"
         android:textColor="@color/chocolate_text_color_black"
-        android:fontFamily="@font/chocolate_s_core_dream_5_medium"
         android:background="@drawable/chocolate_basic_dialog_negative_button_background"
         tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -94,7 +92,6 @@ s
             tools:text="확인"
             android:textSize="15.5sp"
             android:textColor="@color/chocolate_white"
-            android:fontFamily="@font/chocolate_s_core_dream_5_medium"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

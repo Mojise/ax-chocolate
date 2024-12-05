@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatImageView
 import com.mojise.library.chocolate.util.TAG
 import com.mojise.library.chocolate.view.helper.ChocolateViewHelper
+import com.mojise.library.chocolate.view.model.Attributes
 
 open class ChocolateImageView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -16,14 +17,19 @@ open class ChocolateImageView @JvmOverloads constructor(
      * 터치 시 눌림 효과 사용 여부
      */
     override var isPressEffectEnabled: Boolean
-        get() = helper.attributes.isPressEffectEnabled
-        set(value) { helper.attributes.isPressEffectEnabled = value }
+        get() = attributes.chocolate.isPressEffectEnabled
+        set(value) { attributes.chocolate.isPressEffectEnabled = value }
 
-    private val helper: ChocolateViewHelper = ChocolateViewHelper(this, context, attrs, defStyleAttr)
+    protected val attributes: Attributes = ChocolateViewHelper
+        .initAttributes(context, attrs, defStyleAttr)
+
+    init {
+        ChocolateViewHelper.setRippleBackgroundOrForeground(this, attributes)
+    }
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean = try {
         if (isEnabled && isPressEffectEnabled) {
-            helper.showPressEffectOnTouch(this, event)
+            ChocolateViewHelper.showPressEffectOnTouch(this, event, attributes.chocolate.pressEffectScaleRatio)
         }
         super.dispatchTouchEvent(event)
     } catch (e: Exception) {

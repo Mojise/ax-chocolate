@@ -5,9 +5,9 @@
     <color name="colorAccent">#288cef</color>
     <color name="my_color">#ffffff</color>
 
-    <color name="my_primary_color">@color/chocolate_orange400</color>
+    <color name="my_primary_color">@color/chocolate_orange800</color>
     <color name="my_secondary_color">@color/chocolate_gray200</color>
     <color name="my_tertiary_color">@color/chocolate_gray400</color>
 
-    <color name="my_box_button_background_color">@color/chocolate_blue400</color>
+    <color name="my_box_button_background_color">@color/chocolate_blue800</color>
 </resources>
