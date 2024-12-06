@@ -1,23 +1,22 @@
-package com.mojise.library.chocolate.view.helper
+package com.mojise.library.chocolate.view.util
 
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
-import com.mojise.library.chocolate.ext.dp
 import com.mojise.library.chocolate.view.model.ChocolateColorState
 
-object ChocolateViewUtil {
+internal object ChocolateViewUtil {
 
     fun generateDrawable(
         cornerRadius: Float,
         strokeWidth: Int,
         strokeColors: ChocolateColorState?,
-        backgroundColors: ChocolateColorState,
+        backgroundColors: ChocolateColorState?,
     ) = GradientDrawable().also {
         it.shape = GradientDrawable.RECTANGLE
-        it.color = backgroundColors.toColorStateList()
         it.cornerRadius = cornerRadius
+        it.color = backgroundColors?.toColorStateList()
 
-        if (strokeColors != null) {
+        if (strokeWidth >= 0 && strokeColors != null) {
             it.setStroke(strokeWidth, strokeColors.toColorStateList())
         }
     }
@@ -34,7 +33,7 @@ object ChocolateViewUtil {
             it.color = rippleColors.toColorStateList()
             it.cornerRadius = cornerRadius
 
-            if (strokeColors != null) {
+            if (strokeWidth >= 0 && strokeColors != null) {
                 it.setStroke(strokeWidth, strokeColors.toColorStateList())
             }
         }
@@ -44,7 +43,7 @@ object ChocolateViewUtil {
                 it.color = backgroundColors.toColorStateList()
                 it.cornerRadius = cornerRadius
 
-                if (strokeColors != null) {
+                if (strokeWidth >= 0 && strokeColors != null) {
                     it.setStroke(strokeWidth, strokeColors.toColorStateList())
                 }
             }

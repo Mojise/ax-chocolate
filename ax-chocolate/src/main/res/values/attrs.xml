@@ -285,7 +285,7 @@
         <!-- [ChocolateBoxButton] 오른쪽 아이콘 Padding -->
         <attr name="chocolate_BoxButton_RightIconPadding" format="dimension"/>
         <!-- [ChocolateBoxButton] 오른쪽 아이콘 텍스트와의 마진 -->
-        a<attr name="chocolate_BoxButton_RightIconMarginWithText" format="dimension"/>
+        <attr name="chocolate_BoxButton_RightIconMarginWithText" format="dimension"/>
     </declare-styleable>
 
     <!-- LoadingIndicatorView -->

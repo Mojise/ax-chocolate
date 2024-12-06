@@ -18,7 +18,10 @@ class ChocolateViewTestFragment : BaseFragment<FragmentChocolateViewTestBinding>
         binding.btnAllEnabled.setOnClickListener {
             binding.buttonContainer.children
                 .filterNot(View::isEnabled)
-                .forEach { it.isEnabled = true }
+                .forEach {
+                    it.isSelected = false
+                    it.isEnabled = true
+                }
         }
     }
 

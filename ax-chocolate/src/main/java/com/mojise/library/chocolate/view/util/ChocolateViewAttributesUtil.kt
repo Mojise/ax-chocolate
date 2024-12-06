@@ -1,15 +1,15 @@
-package com.mojise.library.chocolate.view.helper
+package com.mojise.library.chocolate.view.util
 
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
-import com.mojise.library.chocolate.util.TAG
+import com.mojise.library.chocolate._internal.TAG
 import com.mojise.library.chocolate.view.model.ChocolatePadding
 
-object ChocolateViewAttributesUtil {
+internal object ChocolateViewAttributesUtil {
 
     /**
-     * Android 속성을 가져와서 Padding 값을 반환합니다.
+     * Android 속성을 가져와서 Padding 값을 반환.
      */
     fun obtainAndroidPaddings(
         context: Context,

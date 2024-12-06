@@ -29,7 +29,8 @@ import androidx.databinding.ViewDataBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mojise.library.chocolate.R
-import com.mojise.library.chocolate.app.getChocolateThemeColor
+import com.mojise.library.chocolate._internal.chocolate_bottom_sheet_outside_color
+import com.mojise.library.chocolate._internal.exts.getColor
 import com.mojise.library.chocolate.ext.dp
 import com.mojise.library.chocolate.ext.toRoundedBitmapDrawable
 import com.mojise.library.chocolate.ext.toRoundedCornerDrawable
@@ -138,7 +139,7 @@ abstract class ChocolateBottomSheetDialogFragment<T : ViewDataBinding> : BottomS
         val contentPaddingTopGuideline = contentRootLayout.findViewById<Guideline>(R.id.guideline_content_padding_top)
         val contentPaddingBottomGuideline = contentRootLayout.findViewById<Guideline>(R.id.guideline_content_padding_bottom)
 
-        val gripBarColor = getChocolateThemeColor(R.color.chocolate_bottom_sheet_grip_bar)
+        val gripBarColor = getColor(gripBarColorResId)
         gripBar.backgroundTintList = ColorStateList.valueOf(gripBarColor)
         gripBar.isVisible = isGripBarVisible
 
@@ -188,7 +189,7 @@ abstract class ChocolateBottomSheetDialogFragment<T : ViewDataBinding> : BottomS
         if (backgroundDrawableResId == null) {
             contentRootLayout.background = GradientDrawable().also { drawable ->
                 drawable.shape = GradientDrawable.RECTANGLE
-                drawable.setColor(getChocolateThemeColor(backgroundColorResId))
+                drawable.setColor(getColor(backgroundColorResId))
 
                 if (isOuterMarginEnabled) {
                     drawable.cornerRadius = cornerRadius.toFloat()
@@ -218,7 +219,7 @@ abstract class ChocolateBottomSheetDialogFragment<T : ViewDataBinding> : BottomS
     private fun updateNavigationBarColor() {
         if (isOuterMarginEnabled) {
             dialog?.window?.let {
-                it.navigationBarColor = getChocolateThemeColor(R.color.chocolate_modal_bottom_sheet_outside_color)
+                it.navigationBarColor = requireContext().chocolate_bottom_sheet_outside_color
                 WindowInsetsControllerCompat(it, it.decorView).isAppearanceLightNavigationBars = false
             }
         }

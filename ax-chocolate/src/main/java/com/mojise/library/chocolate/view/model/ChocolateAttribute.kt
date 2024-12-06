@@ -10,8 +10,8 @@ data class ChocolateAttribute constructor(
     var rippleColors: ChocolateColorState,
     var ripplePosition: DrawablePosition,
     var strokeWidth: Float,
-    var strokeColors: ChocolateColorState,
-    var backgroundColors: ChocolateColorState,
+    var strokeColors: ChocolateColorState?,
+    var backgroundColors: ChocolateColorState?,
 ) {
 
     override fun toString(): String = buildString {
@@ -30,11 +30,11 @@ data class ChocolateAttribute constructor(
             isPressEffectEnabled = true,
             pressEffectScaleRatio = PressEffectStrength.Normal.value,
             cornerRadius = CORNER_RADIUS_NORMAL_PIXEL.dp,
-            rippleColors = ChocolateColorState.transparent(),
+            rippleColors = ChocolateColorState.Transparent,
             ripplePosition = DrawablePosition.Background,
             strokeWidth = 0f,
-            strokeColors = ChocolateColorState.transparent(),
-            backgroundColors = ChocolateColorState.transparent(),
+            strokeColors = ChocolateColorState.Transparent,
+            backgroundColors = ChocolateColorState.Transparent,
         )
     }
 }

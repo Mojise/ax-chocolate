@@ -9,5 +9,8 @@
     <color name="my_secondary_color">@color/chocolate_gray200</color>
     <color name="my_tertiary_color">@color/chocolate_gray400</color>
 
+    <color name="my_box_button_text_color">@color/white</color>
+    <color name="my_box_button_text_disabled_color">@color/chocolate_gray900</color>
     <color name="my_box_button_background_color">@color/chocolate_blue800</color>
+    <color name="my_box_button_background_disabled_color">@color/chocolate_gray800</color>
 </resources>

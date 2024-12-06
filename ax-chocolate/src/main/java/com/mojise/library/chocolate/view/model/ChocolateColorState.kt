@@ -5,9 +5,9 @@ import android.graphics.Color
 import androidx.annotation.ColorInt
 
 data class ChocolateColorState constructor(
-    @ColorInt var selectedColor: Int? = null,
-    @ColorInt var enabledColor: Int? = null,
-    @ColorInt var disabledColor: Int? = null,
+    @ColorInt var selectedColor: Int,
+    @ColorInt var enabledColor: Int,
+    @ColorInt var disabledColor: Int,
 ) {
 
     val isAllTransparent: Boolean
@@ -20,9 +20,9 @@ data class ChocolateColorState constructor(
             intArrayOf(-android.R.attr.state_enabled),
         ),
         intArrayOf(
-            selectedColor ?: Color.TRANSPARENT,
-            enabledColor ?: Color.TRANSPARENT,
-            disabledColor ?: Color.TRANSPARENT,
+            selectedColor,
+            enabledColor,
+            disabledColor,
         )
     )
 
@@ -31,17 +31,17 @@ data class ChocolateColorState constructor(
         val states = mutableListOf<IntArray>()
         val colors = mutableListOf<Int>()
 
-        if (selectedColor != null && selectedColor != Color.TRANSPARENT) {
+        if (selectedColor != Color.TRANSPARENT) {
             states.add(intArrayOf(android.R.attr.state_selected))
-            colors.add(selectedColor!!)
+            colors.add(selectedColor)
         }
-        if (enabledColor != null && enabledColor != Color.TRANSPARENT) {
+        if (enabledColor != Color.TRANSPARENT) {
             states.add(intArrayOf(android.R.attr.state_enabled))
-            colors.add(enabledColor!!)
+            colors.add(enabledColor)
         }
-        if (disabledColor != null && disabledColor != Color.TRANSPARENT) {
+        if (disabledColor != Color.TRANSPARENT) {
             states.add(intArrayOf(-android.R.attr.state_enabled))
-            colors.add(disabledColor!!)
+            colors.add(disabledColor)
         }
         if (states.isEmpty() || colors.isEmpty()) {
             return null
@@ -51,13 +51,15 @@ data class ChocolateColorState constructor(
 
     override fun toString(): String = buildString {
         append("ChocolateColorState(")
-        append("selectedColor=#${selectedColor?.toString(16)?.uppercase()}, ")
-        append("enabledColor=#${enabledColor?.toString(16)?.uppercase()}, ")
-        append("disabledColor=#${disabledColor?.toString(16)?.uppercase()})")
+        append("selectedColor=#${selectedColor.toString(16).uppercase()}, ")
+        append("enabledColor=#${enabledColor.toString(16).uppercase()}, ")
+        append("disabledColor=#${disabledColor.toString(16).uppercase()})")
     }
 
     companion object {
+        val Transparent: ChocolateColorState
+            get() = singleColor(Color.TRANSPARENT)
+
         fun singleColor(@ColorInt color: Int) = ChocolateColorState(color, color, color)
-        fun transparent() = singleColor(Color.TRANSPARENT)
     }
 }

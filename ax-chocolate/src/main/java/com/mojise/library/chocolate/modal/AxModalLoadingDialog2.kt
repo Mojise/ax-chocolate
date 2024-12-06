@@ -6,7 +6,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.mojise.library.chocolate.util.TAG
+import com.mojise.library.chocolate._internal.TAG
 
 class AxModalLoadingDialog2(
     private val fragmentActivity: FragmentActivity,

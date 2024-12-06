@@ -1,4 +1,4 @@
-package com.mojise.library.chocolate.view.helper
+package com.mojise.library.chocolate._internal.exts
 
 import android.view.View
 

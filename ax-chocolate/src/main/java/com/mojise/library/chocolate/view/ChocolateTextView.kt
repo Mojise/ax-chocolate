@@ -8,8 +8,8 @@ import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.HtmlCompat
 import com.mojise.library.chocolate.R
-import com.mojise.library.chocolate.app.chocolateButtonTextDisabledColor
-import com.mojise.library.chocolate.util.TAG
+import com.mojise.library.chocolate._internal.TAG
+import com.mojise.library.chocolate._internal.chocolate_button_text_disabled_color
 import com.mojise.library.chocolate.view.helper.ChocolateViewHelper
 import com.mojise.library.chocolate.view.model.Attributes
 import com.mojise.library.chocolate.view.model.ChocolateColorState
@@ -31,13 +31,11 @@ open class ChocolateTextView @JvmOverloads constructor(
     var isHtmlTextEnabled: Boolean = false
 
     protected val attributes: Attributes = ChocolateViewHelper
-        .initAttributes(context, attrs, defStyleAttr)
+        .initAttributes(this, context, attrs, defStyleAttr)
 
     private val textViewAttributes = ChocolateTextViewAttributes()
 
     init {
-        Log.d(TAG, "ChocolateTextView init")
-
         val androidTypedArray = context.obtainStyledAttributes(attrs, intArrayOf(android.R.attr.textColor), defStyleAttr, 0)
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ChocolateTextView, defStyleAttr, 0)
 
@@ -55,7 +53,7 @@ open class ChocolateTextView @JvmOverloads constructor(
                         selectedColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextSelectedColor, NO_ID)
                             .takeIf { it != NO_ID }
                             ?: context.getColor(R.color.chocolate_text_color_black),
-                        disabledColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextDisabledColor, chocolateButtonTextDisabledColor)
+                        disabledColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextDisabledColor, chocolate_button_text_disabled_color)
                     ).toColorStateList()
                 }
                 // android:text 기본 색상만 있고 상태는 없는 경우, ChocolateTextView 속성을 사용
@@ -65,7 +63,7 @@ open class ChocolateTextView @JvmOverloads constructor(
                         selectedColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextSelectedColor, NO_ID)
                             .takeIf { it != NO_ID }
                             ?: textColorStateList.defaultColor,
-                        disabledColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextDisabledColor, chocolateButtonTextDisabledColor)
+                        disabledColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextDisabledColor, chocolate_button_text_disabled_color)
                     ).toColorStateList()
                 }
             }
@@ -77,10 +75,12 @@ open class ChocolateTextView @JvmOverloads constructor(
             androidTypedArray.recycle()
             typedArray.recycle()
         }
+
+        ChocolateViewHelper.setRippleBackgroundOrForeground(this, attributes)
     }
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean = try {
-        if (isEnabled && isPressEffectEnabled) {
+        if (isEnabled && isClickable && isPressEffectEnabled) {
             ChocolateViewHelper.showPressEffectOnTouch(this, event, attributes.chocolate.pressEffectScaleRatio)
         }
         super.dispatchTouchEvent(event)

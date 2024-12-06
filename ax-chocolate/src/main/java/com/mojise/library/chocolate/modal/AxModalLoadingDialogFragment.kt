@@ -24,8 +24,7 @@ import com.airbnb.lottie.LottieProperty
 import com.airbnb.lottie.model.KeyPath
 import com.mojise.library.chocolate.R
 import com.mojise.library.chocolate.ext.getColorFromTheme
-import com.mojise.library.chocolate.modal.customview.LoadingIndicatorView
-import com.mojise.library.chocolate.util.TAG
+import com.mojise.library.chocolate._internal.TAG
 import java.io.Serializable
 
 class AxModalLoadingDialogFragment : DialogFragment() {

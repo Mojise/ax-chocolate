@@ -4,5 +4,5 @@ import android.graphics.drawable.Drawable
 
 data class ChocolateAndroidAttribute(
     val isClickable: Boolean,
-    val background: Drawable?,
+    var background: Drawable?,
 )

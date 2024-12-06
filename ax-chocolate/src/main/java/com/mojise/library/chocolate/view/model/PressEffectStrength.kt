@@ -9,6 +9,6 @@ internal enum class PressEffectStrength(val level: Int, val value: Float) {
     HeavyExtreme (level = 5, value = 0.85f);
 
     companion object {
-        fun valueOf(level: Int): PressEffectStrength? = entries.firstOrNull { it.level == level }
+        fun valueOf(level: Int): PressEffectStrength = entries.first { it.level == level }
     }
 }

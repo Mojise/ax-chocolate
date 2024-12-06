@@ -6,6 +6,7 @@
         android:fillViewport="true">
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/button_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="24dp"
@@ -17,7 +18,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
+                android:animateLayoutChanges="false"
                 app:chocolate_BoxButton_Text="초콜릿 버튼 입니다 1"/>
+
+            <com.mojise.library.chocolate.button.box.ChocolateBoxButton
+                android:id="@+id/box_button_test_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                app:chocolate_BoxButton_Text="누르면 disabled"/>
 
             <com.mojise.library.chocolate.button.box.ChocolateBoxButton
                 android:id="@+id/box_button_simple"
@@ -41,14 +50,57 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
+                app:chocolate_PressEffectStrengthLevel="light"
+                app:chocolate_BackgroundColor="@color/chocolate_green400"
                 app:chocolate_BoxButton_Text="초콜릿 버튼 입니다!!"
                 app:chocolate_BoxButton_TextColor="@color/black"
                 app:chocolate_BoxButton_FontFamily="@font/chocolate_s_core_dream_6_bold"
                 app:chocolate_BoxButton_LeftIconDrawable="@drawable/chocolate_icon_shield"
                 app:chocolate_BoxButton_LeftIconTint="@color/chocolate_black"
-                app:chocolate_BoxButton_LeftIconPadding="2dp"
-                app:chocolate_PressEffectStrengthLevel="light"
-                app:chocolate_BackgroundColor="@color/chocolate_green400" />
+                app:chocolate_BoxButton_LeftIconPadding="2dp" />
+
+            <com.mojise.library.chocolate.button.box.ChocolateBoxButton
+                android:id="@+id/box_button_gradient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:background="@drawable/bg_gradient"
+                app:chocolate_BoxButton_Text="그라디언트 버튼"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <com.mojise.library.chocolate.button.box.ChocolateBoxButton
+                    android:id="@+id/btn_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="6dp"
+                    android:paddingHorizontal="12dp"
+                    app:chocolate_BoxButton_Text="전송"
+                    app:chocolate_BoxButton_TextSize="14sp"
+                    app:chocolate_CornerRadius="8dp"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+            <com.mojise.library.chocolate.button.box.ChocolateBoxButton
+                android:id="@+id/box_button_enabled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                app:chocolate_BoxButton_Text="버튼 disabled 모두 해제"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

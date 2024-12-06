@@ -8,7 +8,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.mojise.library.chocolate.R
 import com.mojise.library.chocolate.ext.dp
-import com.mojise.library.chocolate.util.TAG
+import com.mojise.library.chocolate._internal.TAG
 import com.mojise.library.chocolate.view.helper.ChocolateViewHelper
 import com.mojise.library.chocolate.view.model.Attributes
 import kotlin.math.min
@@ -25,7 +25,7 @@ open class ChocolateShapeableImageView @JvmOverloads constructor(
         set(value) { attributes.chocolate.isPressEffectEnabled = value }
 
     protected val attributes: Attributes = ChocolateViewHelper
-        .initAttributes(context, attrs, defStyleAttr)
+        .initAttributes(this, context, attrs, defStyleAttr)
 
     private val shapeableAttributes: ShapeableAttributes = ShapeableAttributes(
         cornerShape = CornerShape.None,
@@ -33,8 +33,6 @@ open class ChocolateShapeableImageView @JvmOverloads constructor(
     )
 
     init {
-        Log.d(TAG, "ChocolateShapeableImageView init")
-
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ChocolateShapeableImageView, defStyleAttr, 0)
 
         try {
@@ -162,7 +160,7 @@ open class ChocolateShapeableImageView @JvmOverloads constructor(
     }
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean = try {
-        if (isEnabled && isPressEffectEnabled) {
+        if (isEnabled && isClickable && isPressEffectEnabled) {
             ChocolateViewHelper.showPressEffectOnTouch(this, event, attributes.chocolate.pressEffectScaleRatio)
         }
         super.dispatchTouchEvent(event)
