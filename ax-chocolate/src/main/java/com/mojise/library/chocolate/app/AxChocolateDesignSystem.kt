@@ -9,7 +9,8 @@ import com.mojise.library.chocolate.R
 import com.mojise.library.chocolate.button.box.ChocolateBoxButton
 import com.mojise.library.chocolate.ext.sp
 
-object AxChocolateDesignSystem {
+@Deprecated("Not used")
+internal object AxChocolateDesignSystem {
 
     private enum class UiMode {
         Day, Night, DayNight
@@ -31,19 +32,19 @@ object AxChocolateDesignSystem {
 
         /** [ChocolateBoxButton]의 텍스크 색상 Resource ID */
         @ColorRes
-        var textColorResId: Int = R.color.chocolate_button_text
+        var textColorResId: Int = R.color.chocolate_box_button_text
 
         /** [ChocolateBoxButton]의 비활성화된 텍스크 색상 Resource ID */
         @ColorRes
-        var textDisabledColorResId: Int = R.color.chocolate_button_text_disabled
+        var textDisabledColorResId: Int = R.color.chocolate_box_button_text_disabled
 
         /** [ChocolateBoxButton]의 배경 색상 Resource ID */
         @ColorRes
-        var backgroundColorResId: Int = R.color.chocolate_button_background
+        var backgroundColorResId: Int = R.color.chocolate_box_button_background
 
         /** [ChocolateBoxButton]의 비활성화된 배경 색상 Resource ID */
         @ColorRes
-        var backgroundDisabledColorResId: Int = R.color.chocolate_button_background_disabled
+        var backgroundDisabledColorResId: Int = R.color.chocolate_box_button_background_disabled
     }
 
     /** Application 수준에서 Day UI 모드로 설정 */

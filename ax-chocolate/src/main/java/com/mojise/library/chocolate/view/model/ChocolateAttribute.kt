@@ -28,7 +28,7 @@ data class ChocolateAttribute constructor(
     companion object {
         val Default = ChocolateAttribute(
             isPressEffectEnabled = true,
-            pressEffectScaleRatio = PressEffectStrength.Normal.value,
+            pressEffectScaleRatio = PressEffectStrength.Deep.value,
             cornerRadius = CORNER_RADIUS_NORMAL_PIXEL.dp,
             rippleColors = ChocolateColorState.Transparent,
             ripplePosition = DrawablePosition.Background,

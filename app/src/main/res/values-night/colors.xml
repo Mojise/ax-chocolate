@@ -5,12 +5,12 @@
     <color name="colorAccent">#288cef</color>
     <color name="my_color">#ffffff</color>
 
-    <color name="my_primary_color">@color/chocolate_orange800</color>
-    <color name="my_secondary_color">@color/chocolate_gray200</color>
-    <color name="my_tertiary_color">@color/chocolate_gray400</color>
+    <color name="my_primary_color">@color/chocolate_orange400_day</color>
+    <color name="my_secondary_color">@color/chocolate_gray200_day</color>
+    <color name="my_tertiary_color">@color/chocolate_gray400_day</color>
 
     <color name="my_box_button_text_color">@color/white</color>
-    <color name="my_box_button_text_disabled_color">@color/chocolate_gray900</color>
-    <color name="my_box_button_background_color">@color/chocolate_blue800</color>
-    <color name="my_box_button_background_disabled_color">@color/chocolate_gray800</color>
+    <color name="my_box_button_text_disabled_color">@color/chocolate_gray900_day</color>
+    <color name="my_box_button_background_color">@color/chocolate_blue800_day</color>
+    <color name="my_box_button_background_disabled_color">@color/chocolate_gray800_day</color>
 </resources>

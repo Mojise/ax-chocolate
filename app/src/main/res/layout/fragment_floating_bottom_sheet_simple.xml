@@ -24,35 +24,35 @@
             tools:text="테스트"
             android:text="@{text}"/>
 
-        <com.mojise.library.chocolate.view.ChocolateTextView
+        <com.mojise.library.chocolate.button.box.ChocolateBoxButton
             android:id="@+id/btn_test_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="3dp"
-            android:paddingVertical="10dp"
-            android:gravity="center"
-            android:text="버튼 테스트 1"
-            android:textSize="18sp"/>
+            android:paddingVertical="8dp"
+            app:chocolate_BoxButton_Text="버튼 테스트 1"
+            app:chocolate_BoxButton_TextSize="16sp"
+            app:chocolate_BoxButton_BackgroundCornerRadius="8dp"/>
 
-        <com.mojise.library.chocolate.view.ChocolateTextView
+        <com.mojise.library.chocolate.button.box.ChocolateBoxButton
             android:id="@+id/btn_test_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="3dp"
-            android:paddingVertical="10dp"
-            android:gravity="center"
-            android:text="버튼 테스트 2"
-            android:textSize="18sp"/>
+            android:paddingVertical="8dp"
+            app:chocolate_BoxButton_Text="버튼 테스트 2"
+            app:chocolate_BoxButton_TextSize="16sp"
+            app:chocolate_BoxButton_BackgroundCornerRadius="8dp"/>
 
-        <com.mojise.library.chocolate.view.ChocolateTextView
+        <com.mojise.library.chocolate.button.box.ChocolateBoxButton
             android:id="@+id/btn_test_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="3dp"
-            android:paddingVertical="10dp"
-            android:gravity="center"
-            android:text="버튼 테스트 3"
-            android:textSize="18sp"/>
+            android:paddingVertical="8dp"
+            app:chocolate_BoxButton_Text="버튼 테스트 3"
+            app:chocolate_BoxButton_TextSize="16sp"
+            app:chocolate_BoxButton_BackgroundCornerRadius="8dp"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import com.mojise.library.chocolate._internal.TAG
+import com.mojise.library.chocolate.ext.useCompat
 import com.mojise.library.chocolate.view.model.ChocolatePadding
 
 internal object ChocolateViewAttributesUtil {
@@ -29,11 +30,11 @@ internal object ChocolateViewAttributesUtil {
                 android.R.attr.paddingHorizontal,
                 android.R.attr.paddingTop,
                 android.R.attr.paddingBottom,
-                android.R.attr.paddingLeft,
-                android.R.attr.paddingRight,
                 android.R.attr.paddingStart,
                 android.R.attr.paddingEnd,
-            )).use { array ->
+                android.R.attr.paddingLeft,
+                android.R.attr.paddingRight,
+            )).useCompat { array ->
                 array.getDimensionPixelSize(0, -1).takeIf { it >= 0 }?.let { padding ->
                     paddingTop = padding
                     paddingBottom = padding
@@ -58,6 +59,12 @@ internal object ChocolateViewAttributesUtil {
                     paddingStart = padding
                 }
                 array.getDimensionPixelSize(6, -1).takeIf { it >= 0 }?.let { padding ->
+                    paddingEnd = padding
+                }
+                array.getDimensionPixelSize(7, -1).takeIf { it >= 0 }?.let { padding ->
+                    paddingStart = padding
+                }
+                array.getDimensionPixelSize(8, -1).takeIf { it >= 0 }?.let { padding ->
                     paddingEnd = padding
                 }
             }

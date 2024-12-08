@@ -21,17 +21,19 @@
                 android:textSize="20sp"
                 android:gravity="center"/>
 
-            <com.mojise.library.chocolate.view.ChocolateTextView
+            <com.mojise.library.chocolate.button.box.ChocolateBoxButton
+                android:id="@+id/btn_bottom_sheet_test_simple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                app:chocolate_BoxButton_Text="Floating Bottom Sheet Simple Test"/>
+
+            <com.mojise.library.chocolate.button.box.ChocolateBoxButton
                 android:id="@+id/btn_bottom_sheet_test_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="12dp"
-                android:gravity="center"
-                android:text="Floating Bottom Sheet Test 1"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:chocolate_PressEffectStrengthLevel="light"
-                app:chocolate_BackgroundColor="@color/chocolate_blue400" />
+                android:layout_marginVertical="8dp"
+                app:chocolate_BoxButton_Text="Floating Bottom Sheet Test Custom"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

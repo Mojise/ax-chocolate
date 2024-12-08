@@ -29,8 +29,8 @@ import androidx.databinding.ViewDataBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mojise.library.chocolate.R
-import com.mojise.library.chocolate._internal.chocolate_bottom_sheet_outside_color
 import com.mojise.library.chocolate._internal.exts.getColor
+import com.mojise.library.chocolate._internal.theme.*
 import com.mojise.library.chocolate.ext.dp
 import com.mojise.library.chocolate.ext.toRoundedBitmapDrawable
 import com.mojise.library.chocolate.ext.toRoundedCornerDrawable
@@ -84,24 +84,22 @@ abstract class ChocolateBottomSheetDialogFragment<T : ViewDataBinding> : BottomS
     protected abstract val layoutResId: Int
 
     /** BottomSheet Outer Margins 사용 여부 (default=true) */
-    protected open val isOuterMarginEnabled: Boolean = true
+    protected open val isOuterMarginEnabled: Boolean get() = theme_chocolate_bottom_sheet_outer_margin_enabled
 
     /** BottomSheet Outer Margins (단위:px. default="10dp") */
-    protected open val outerMargin: Int = 10.dp
+    protected open val outerMargin: Int get() = theme_chocolate_bottom_sheet_outer_margin.toInt()
 
-    /** BottomSheet Corner Radius Size (단위:Px. default="24dp", "16dp" or "24dp" 추천) */
-    protected open val cornerRadius: Int = 24.dp
+    /** BottomSheet Corner Radius Size (단위:Px. default="16dp", "16dp" or "24dp" 추천) */
+    protected open val cornerRadius: Int get() = theme_chocolate_bottom_sheet_corner_radius.toInt()
 
     /** 상단 회색 가로 줄의 GripBar 표시 여부 (false 일 경우, 상/하단의 Padding([innerContentPaddingVertical]) 영역도 같이 없어짐) */
-    protected open val isGripBarVisible: Boolean = true
+    protected open val isGripBarVisible: Boolean get() = theme_chocolate_bottom_sheet_grip_bar_visible
 
     /** GripBar의 색상 Resource ID */
-    @ColorRes
-    protected open val gripBarColorResId: Int = R.color.chocolate_bottom_sheet_grip_bar
+    protected open val gripBarColorResId: Int get() = theme_chocolate_bottom_sheet_grip_bar_color
 
     /** 바텀시트 배경 색상 Resource ID */
-    @ColorRes
-    protected open val backgroundColorResId: Int = R.color.chocolate_bottom_sheet_background
+    protected open val backgroundColorResId: Int get() = theme_chocolate_bottom_sheet_background_color
 
     /** 바텀시트 배경 Drawable Resource ID */
     @DrawableRes
@@ -219,7 +217,7 @@ abstract class ChocolateBottomSheetDialogFragment<T : ViewDataBinding> : BottomS
     private fun updateNavigationBarColor() {
         if (isOuterMarginEnabled) {
             dialog?.window?.let {
-                it.navigationBarColor = requireContext().chocolate_bottom_sheet_outside_color
+                it.navigationBarColor = getColor(R.color.chocolate_bottom_sheet_outside_color)
                 WindowInsetsControllerCompat(it, it.decorView).isAppearanceLightNavigationBars = false
             }
         }

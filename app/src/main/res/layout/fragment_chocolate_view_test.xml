@@ -80,7 +80,7 @@
                 app:chocolate_StrokeDisabledColor="@color/chocolate_disabled_color_dark"
                 app:chocolate_BackgroundColor="@color/chocolate_blue400"
                 app:chocolate_BackgroundSelectedColor="@color/chocolate_orange400"
-                app:chocolate_PressEffectStrengthLevel="heavy"/>
+                app:chocolate_PressEffectStrengthLevel="deep"/>
 
             <com.mojise.library.chocolate.view.ChocolateTextView
                 android:id="@+id/btn_text_2"
@@ -97,7 +97,7 @@
                 app:chocolate_BackgroundColor="@color/chocolate_blue400"
                 app:chocolate_BackgroundSelectedColor="@color/chocolate_orange400"
                 app:chocolate_BackgroundDisabledColor="@color/chocolate_disabled_color"
-                app:chocolate_PressEffectStrengthLevel="heavy_strong"/>
+                app:chocolate_PressEffectStrengthLevel="deep_strong"/>
 
             <com.mojise.library.chocolate.view.ChocolateTextView
                 android:id="@+id/btn_text_3"
@@ -107,7 +107,7 @@
                 android:paddingVertical="12dp"
                 android:paddingHorizontal="24dp"
                 android:text="테스트 버튼 3"
-                android:textColor="@color/chocolate_text_color_black"
+                android:textColor="@color/chocolate_text_color_scale_1"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:chocolate_CornerRadius="12dp"

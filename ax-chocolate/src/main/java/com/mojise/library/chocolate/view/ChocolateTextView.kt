@@ -9,7 +9,8 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.HtmlCompat
 import com.mojise.library.chocolate.R
 import com.mojise.library.chocolate._internal.TAG
-import com.mojise.library.chocolate._internal.chocolate_button_text_disabled_color
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_text_view_text_color
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_text_view_text_disabled_color
 import com.mojise.library.chocolate.view.helper.ChocolateViewHelper
 import com.mojise.library.chocolate.view.model.Attributes
 import com.mojise.library.chocolate.view.model.ChocolateColorState
@@ -46,24 +47,24 @@ open class ChocolateTextView @JvmOverloads constructor(
                 .getColorStateList(0)
 
             when {
-                // android:text 색상이 지정되어 있지 않은 경우, ChocolateTextView 속성을 사용
+                // android:textColor 색상이 지정되어 있지 않은 경우, ChocolateTextView 속성을 사용
                 textColorStateList == null -> {
                     textColorStateList = ChocolateColorState(
-                        enabledColor = context.getColor(R.color.chocolate_text_color_black),
+                        enabledColor = theme_chocolate_text_view_text_color,
                         selectedColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextSelectedColor, NO_ID)
                             .takeIf { it != NO_ID }
-                            ?: context.getColor(R.color.chocolate_text_color_black),
-                        disabledColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextDisabledColor, chocolate_button_text_disabled_color)
+                            ?: theme_chocolate_text_view_text_color,
+                        disabledColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextDisabledColor, theme_chocolate_text_view_text_disabled_color)
                     ).toColorStateList()
                 }
-                // android:text 기본 색상만 있고 상태는 없는 경우, ChocolateTextView 속성을 사용
+                // android:textColor 기본 색상만 있고 상태는 없는 경우, ChocolateTextView 속성을 사용
                 textColorStateList.isStateful.not() -> {
                     textColorStateList = ChocolateColorState(
                         enabledColor = textColorStateList.defaultColor,
                         selectedColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextSelectedColor, NO_ID)
                             .takeIf { it != NO_ID }
                             ?: textColorStateList.defaultColor,
-                        disabledColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextDisabledColor, chocolate_button_text_disabled_color)
+                        disabledColor = typedArray.getColor(R.styleable.ChocolateTextView_chocolate_TextView_TextDisabledColor, theme_chocolate_text_view_text_disabled_color)
                     ).toColorStateList()
                 }
             }
@@ -81,7 +82,7 @@ open class ChocolateTextView @JvmOverloads constructor(
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean = try {
         if (isEnabled && isClickable && isPressEffectEnabled) {
-            ChocolateViewHelper.showPressEffectOnTouch(this, event, attributes.chocolate.pressEffectScaleRatio)
+            ChocolateViewHelper.animatePressEffectOnTouch(this, event, attributes.chocolate.pressEffectScaleRatio)
         }
         super.dispatchTouchEvent(event)
     } catch (e: Exception) {

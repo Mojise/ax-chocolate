@@ -1,16 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Chocolate 디자인 시스템 First 메인 컬러 -->
+    <color name="chocolate_primary_color">@color/chocolate_primary_color_day</color>
+    <color name="chocolate_primary_color_day">@color/chocolate_blue400</color>
+    <color name="chocolate_primary_color_night">@color/chocolate_blue800</color>
+    <!-- Chocolate 디자인 시스템 Second 메인 컬러 (아직 사용 안 함) -->
+    <color name="chocolate_secondary_color">@color/chocolate_secondary_color_day</color>
+    <color name="chocolate_secondary_color_day">@color/chocolate_transparent</color>
+    <color name="chocolate_secondary_color_night">@color/chocolate_transparent</color>
+    <!-- Chocolate 디자인 시스템 Third 메인 컬러 (아직 사용 안 함) -->
+    <color name="chocolate_tertiary_color">@color/chocolate_tertiary_color_day</color>
+    <color name="chocolate_tertiary_color_day">@color/chocolate_transparent</color>
+    <color name="chocolate_tertiary_color_night">@color/chocolate_transparent</color>
 
-    <color name="chocolate_primary_color">@color/chocolate_blue400</color>
-    <color name="chocolate_secondary_color">@color/chocolate_gray200</color>
-    <color name="chocolate_tertiary_color">@color/chocolate_blue600</color>
+    <!-- Ripple Color (Opaque Black) -->
+    <color name="chocolate_ripple_color_black">@color/chocolate_ripple_color_black_day</color>
+    <color name="chocolate_ripple_color_black_day">#80000000</color>
+    <color name="chocolate_ripple_color_black_night">#CC000000</color>
+    <!-- Ripple Color (Opaque Gray) -->
+    <color name="chocolate_ripple_color_gray">@color/chocolate_ripple_color_gray_day</color>
+    <color name="chocolate_ripple_color_gray_day">@color/chocolate_gray400</color>
+    <color name="chocolate_ripple_color_gray_night">@color/chocolate_gray800</color>
+    <!-- Ripple Color (Opaque Light Gray) -->
+    <color name="chocolate_ripple_color_light_gray">@color/chocolate_ripple_color_light_gray_day</color>
+    <color name="chocolate_ripple_color_light_gray_day">@color/chocolate_gray300</color>
+    <color name="chocolate_ripple_color_light_gray_night">@color/chocolate_gray700</color>
 
-    <color name="chocolate_ripple_color_black">#80000000</color>
-    <color name="chocolate_ripple_color_gray">@color/chocolate_gray400</color>
-    <color name="chocolate_ripple_color_light_gray">@color/chocolate_gray300</color>
+    <!-- Text Colors -->
+    <color name="chocolate_text_color_scale_1">@color/chocolate_text_color_scale_1_day</color>
+    <color name="chocolate_text_color_scale_1_day">@color/chocolate_gray900</color>
+    <color name="chocolate_text_color_scale_1_night">@color/chocolate_gray50</color>
+    <color name="chocolate_text_color_scale_2">@color/chocolate_text_color_scale_2_day</color>
+    <color name="chocolate_text_color_scale_2_day">@color/chocolate_gray800</color>
+    <color name="chocolate_text_color_scale_2_night">@color/chocolate_gray100</color>
+    <color name="chocolate_text_color_scale_3">@color/chocolate_text_color_scale_3_day</color>
+    <color name="chocolate_text_color_scale_3_day">@color/chocolate_gray700</color>
+    <color name="chocolate_text_color_scale_3_night">@color/chocolate_gray200</color>
+    <color name="chocolate_text_color_scale_4">@color/chocolate_text_color_scale_4_day</color>
+    <color name="chocolate_text_color_scale_4_day">@color/chocolate_gray600</color>
+    <color name="chocolate_text_color_scale_4_night">@color/chocolate_gray300</color>
 
-    <color name="chocolate_text_color_black">#212124</color>
-    <color name="chocolate_text_color_dark_gray">#5D6166</color>
+    <!-- ChocolateBoxButton 텍스트 색상 -->
+    <color name="chocolate_box_button_text">@color/chocolate_box_button_text_day</color>
+    <color name="chocolate_box_button_text_day">#FFFFFF</color>
+    <color name="chocolate_box_button_text_night">#FFFFFF</color>
+    <!-- ChocolateBoxButton 텍스트 색상 (disabled) -->
+    <color name="chocolate_box_button_text_disabled">@color/chocolate_box_button_text_disabled_day</color>
+    <color name="chocolate_box_button_text_disabled_day">#AEB2BB</color>
+    <color name="chocolate_box_button_text_disabled_night">#3B3B3B</color>
+    <!-- ChocolateBoxButton 배경 색상 -->
+    <color name="chocolate_box_button_background">@color/chocolate_primary_color</color>
+    <color name="chocolate_box_button_background_disabled">@color/chocolate_box_button_background_disabled_day</color>
+    <color name="chocolate_box_button_background_disabled_day">#DCDEE3</color>
+    <color name="chocolate_box_button_background_disabled_night">#1f1f1f</color>
+
+    <color name="chocolate_dialog_basic_container_background">#FFFFFF</color>
+    <color name="chocolate_dialog_basic_title">@color/chocolate_text_color_scale_1</color>
+    <color name="chocolate_dialog_basic_content">@color/chocolate_text_color_scale_3</color>
+    <color name="chocolate_dialog_negative_button_background">#F2F3F6</color>
+    <color name="chocolate_dialog_positive_button_background">?attr/colorAccent</color>
+
+    <!-- BottomSheet -->
+    <color name="chocolate_bottom_sheet_background">@color/chocolate_bottom_sheet_background_day</color>
+    <color name="chocolate_bottom_sheet_background_day">#FFFFFF</color>
+    <color name="chocolate_bottom_sheet_background_night">#202126</color>
+    <color name="chocolate_bottom_sheet_grip_bar">@color/chocolate_bottom_sheet_grip_bar_day</color>
+    <color name="chocolate_bottom_sheet_grip_bar_day">#E4E8EB</color>
+    <color name="chocolate_bottom_sheet_grip_bar_night">#3C3C46</color>
+    <color name="chocolate_bottom_sheet_outside_color">@color/chocolate_bottom_sheet_outside_color_day</color>
+    <color name="chocolate_bottom_sheet_outside_color_day">#AEAEAE</color>
+    <color name="chocolate_bottom_sheet_outside_color_night">#0E0C10</color>
 
     <!-- Disabled Gray Scale Colors -->
     <color name="chocolate_disabled_color_very_light">#eeeeee</color>
@@ -19,132 +78,257 @@
     <color name="chocolate_disabled_color_dark">#bbbbbb</color>
     <color name="chocolate_disabled_color_very_dark">#a3a3a3</color>
 
-    <color name="chocolate_button_text">#FFFFFF</color>
-    <color name="chocolate_button_text_disabled">#AEB2BB</color>
-    <color name="chocolate_button_background">@color/chocolate_primary_color</color>
-    <color name="chocolate_button_background_disabled">#DCDEE3</color>
-
-    <color name="chocolate_dialog_basic_container_background">#FFFFFF</color>
-    <color name="chocolate_dialog_basic_title">@color/chocolate_text_color_black</color>
-    <color name="chocolate_dialog_basic_content">@color/chocolate_text_color_dark_gray</color>
-    <color name="chocolate_dialog_negative_button_background">#F2F3F6</color>
-    <color name="chocolate_dialog_positive_button_background">?attr/colorAccent</color>
-
-    <!-- BottomSheet -->
-    <color name="chocolate_bottom_sheet_background">#FFFFFF</color>
-    <color name="chocolate_bottom_sheet_grip_bar">#E4E8EB</color>
-    <color name="chocolate_bottom_sheet_outside_color">#AEAEAE</color>
-
-    <!-- 2014 Material Design color palettes -->
+    <!-- 기본 컬러 -->
     <color name="chocolate_transparent">#00000000</color>
     <color name="chocolate_white">#FFFFFF</color>
     <color name="chocolate_black">#000000</color>
-
-    <color name="chocolate_gray50">#FAFAFA</color>
-    <color name="chocolate_gray100">#F5F5F5</color>
-    <color name="chocolate_gray200">#EEEEEE</color>
-    <color name="chocolate_gray250">#EAEAEA</color>
-    <color name="chocolate_gray300">#E0E0E0</color>
-    <color name="chocolate_gray400">#BDBDBD</color>
-    <color name="chocolate_gray450">#AEAEAE</color>
-    <color name="chocolate_gray500">#9E9E9E</color>
-    <color name="chocolate_gray600">#757575</color>
-    <color name="chocolate_gray600_a20">#33757575</color>
-    <color name="chocolate_gray700">#616161</color>
-    <color name="chocolate_gray800">#424242</color>
-    <color name="chocolate_gray900">#212121</color>
-    <color name="chocolate_grayA900">#99212121</color>
-
-    <color name="chocolate_blue50">#E3F2FD</color>
-    <color name="chocolate_blue100">#BBDEFB</color>
-    <color name="chocolate_blue200">#90CAF9</color>
-    <color name="chocolate_blue300">#64B5F6</color>
-    <color name="chocolate_blue400">#42A5F5</color>
-    <color name="chocolate_blue400A">#8042A5F5</color>
-    <color name="chocolate_blue500">#2196F3</color>
-    <color name="chocolate_blue600">#1E88E5</color>
-    <color name="chocolate_blue700">#1976D2</color>
-    <color name="chocolate_blue800">#1565C0</color>
-    <color name="chocolate_blue900">#0D47A1</color>
-    <color name="chocolate_blueA100">#82B1FF</color>
-    <color name="chocolate_blueA200">#448AFF</color>
-    <color name="chocolate_blueA300">#2979FF</color>
-    <color name="chocolate_blueA400">#2962FF</color>
-
     <color name="chocolate_red">#FF0000</color>
-    <color name="chocolate_red50">#FFEBEE</color>
-    <color name="chocolate_red100">#FFCDD2</color>
-    <color name="chocolate_red200">#EF9A9A</color>
-    <color name="chocolate_red300">#E57373</color>
-    <color name="chocolate_red400">#EF5350</color>
-    <color name="chocolate_red500">#F44336</color>
-    <color name="chocolate_red600">#E53935</color>
-    <color name="chocolate_red700">#D32F2F</color>
-    <color name="chocolate_red800">#C62828</color>
-    <color name="chocolate_red900">#B71C1C</color>
-    <color name="chocolate_redA100">#FF8A80</color>
-    <color name="chocolate_redA200">#FF5252</color>
-    <color name="chocolate_redA400">#FF1744</color>
-    <color name="chocolate_redA700">#D50000</color>
+    <color name="chocolate_green">#00FF00</color>
+    <color name="chocolate_blue">#0000FF</color>
 
-    <color name="chocolate_yellow50">#FFFDE7</color>
-    <color name="chocolate_yellow100">#FFF9C4</color>
-    <color name="chocolate_yellow200">#FFF59D</color>
-    <color name="chocolate_yellow300">#FFF176</color>
-    <color name="chocolate_yellow400">#FFEE58</color>
-    <color name="chocolate_yellow500">#FFEB3B</color>
-    <color name="chocolate_yellow600">#FDD835</color>
-    <color name="chocolate_yellow700">#FBC02D</color>
-    <color name="chocolate_yellow800">#F9A825</color>
-    <color name="chocolate_yellow900">#F57F17</color>
-    <color name="chocolate_yellowA100">#FFFF8D</color>
-    <color name="chocolate_yellowA200">#FFFF00</color>
-    <color name="chocolate_yellowA400">#FFEA00</color>
-    <color name="chocolate_yellowA700">#FFD600</color>
+    <!-- Solid Scale Color Palettes 색상 (DayNight 테마) -->
+    <color name="chocolate_gray50">@color/chocolate_gray50_day</color>
+    <color name="chocolate_gray100">@color/chocolate_gray100_day</color>
+    <color name="chocolate_gray200">@color/chocolate_gray200_day</color>
+    <color name="chocolate_gray300">@color/chocolate_gray300_day</color>
+    <color name="chocolate_gray400">@color/chocolate_gray400_day</color>
+    <color name="chocolate_gray500">@color/chocolate_gray500_day</color>
+    <color name="chocolate_gray600">@color/chocolate_gray600_day</color>
+    <color name="chocolate_gray700">@color/chocolate_gray700_day</color>
+    <color name="chocolate_gray800">@color/chocolate_gray800_day</color>
+    <color name="chocolate_gray900">@color/chocolate_gray900_day</color>
 
-    <color name="chocolate_green50">#E8F5E9</color>
-    <color name="chocolate_green100">#C8E6C9</color>
-    <color name="chocolate_green200">#A5D6A7</color>
-    <color name="chocolate_green300">#81C784</color>
-    <color name="chocolate_green400">#66BB6A</color>
-    <color name="chocolate_green500">#4CAF50</color>
-    <color name="chocolate_green600">#43A047</color>
-    <color name="chocolate_green700">#388E3C</color>
-    <color name="chocolate_green800">#2E7D32</color>
-    <color name="chocolate_green900">#1B5E20</color>
-    <color name="chocolate_greenA100">#B9F6CA</color>
-    <color name="chocolate_greenA200">#69F0AE</color>
-    <color name="chocolate_greenA400">#00E676</color>
-    <color name="chocolate_greenA700">#00C853</color>
+    <color name="chocolate_red50">@color/chocolate_red50_day</color>
+    <color name="chocolate_red100">@color/chocolate_red100_day</color>
+    <color name="chocolate_red200">@color/chocolate_red200_day</color>
+    <color name="chocolate_red300">@color/chocolate_red300_day</color>
+    <color name="chocolate_red400">@color/chocolate_red400_day</color>
+    <color name="chocolate_red500">@color/chocolate_red500_day</color>
+    <color name="chocolate_red600">@color/chocolate_red600_day</color>
+    <color name="chocolate_red700">@color/chocolate_red700_day</color>
+    <color name="chocolate_red800">@color/chocolate_red800_day</color>
+    <color name="chocolate_red900">@color/chocolate_red900_day</color>
 
-    <color name="chocolate_teal50">#E0F2F1</color>
-    <color name="chocolate_teal100">#B2DFDB</color>
-    <color name="chocolate_teal200">#80CBC4</color>
-    <color name="chocolate_teal300">#4DB6AC</color>
-    <color name="chocolate_teal400">#26A69A</color>
-    <color name="chocolate_teal500">#009688</color>
-    <color name="chocolate_teal600">#00897B</color>
-    <color name="chocolate_teal700">#00796B</color>
-    <color name="chocolate_teal800">#00695C</color>
-    <color name="chocolate_teal900">#004D40</color>
-    <color name="chocolate_tealA100">#A7FFEB</color>
-    <color name="chocolate_tealA200">#64FFDA</color>
-    <color name="chocolate_tealA400">#1DE9B6</color>
-    <color name="chocolate_tealA700">#00BFA5</color>
+    <color name="chocolate_yellow50">@color/chocolate_yellow50_day</color>
+    <color name="chocolate_yellow100">@color/chocolate_yellow100_day</color>
+    <color name="chocolate_yellow200">@color/chocolate_yellow200_day</color>
+    <color name="chocolate_yellow300">@color/chocolate_yellow300_day</color>
+    <color name="chocolate_yellow400">@color/chocolate_yellow400_day</color>
+    <color name="chocolate_yellow500">@color/chocolate_yellow500_day</color>
+    <color name="chocolate_yellow600">@color/chocolate_yellow600_day</color>
+    <color name="chocolate_yellow700">@color/chocolate_yellow700_day</color>
+    <color name="chocolate_yellow800">@color/chocolate_yellow800_day</color>
+    <color name="chocolate_yellow900">@color/chocolate_yellow900_day</color>
 
-    <color name="chocolate_orange50">#FFF3E0</color>
-    <color name="chocolate_orange100">#FFE0B2</color>
-    <color name="chocolate_orange200">#FFCC80</color>
-    <color name="chocolate_orange300">#FFB74D</color>
-    <color name="chocolate_orange400">#FFA726</color>
-    <color name="chocolate_orange500">#FF9800</color>
-    <color name="chocolate_orange600">#FB8C00</color>
-    <color name="chocolate_orange700">#F57C00</color>
-    <color name="chocolate_orange800">#EF6C00</color>
-    <color name="chocolate_orange900">#E65100</color>
-    <color name="chocolate_orangeA100">#FFD180</color>
-    <color name="chocolate_orangeA200">#FFAB40</color>
-    <color name="chocolate_orangeA400">#FF9100</color>
-    <color name="chocolate_orangeA700">#FF6D00</color>
+    <color name="chocolate_green50">@color/chocolate_green50_day</color>
+    <color name="chocolate_green100">@color/chocolate_green100_day</color>
+    <color name="chocolate_green200">@color/chocolate_green200_day</color>
+    <color name="chocolate_green300">@color/chocolate_green300_day</color>
+    <color name="chocolate_green400">@color/chocolate_green400_day</color>
+    <color name="chocolate_green500">@color/chocolate_green500_day</color>
+    <color name="chocolate_green600">@color/chocolate_green600_day</color>
+    <color name="chocolate_green700">@color/chocolate_green700_day</color>
+    <color name="chocolate_green800">@color/chocolate_green800_day</color>
+    <color name="chocolate_green900">@color/chocolate_green900_day</color>
 
+    <color name="chocolate_blue50">@color/chocolate_blue50_day</color>
+    <color name="chocolate_blue100">@color/chocolate_blue100_day</color>
+    <color name="chocolate_blue200">@color/chocolate_blue200_day</color>
+    <color name="chocolate_blue300">@color/chocolate_blue300_day</color>
+    <color name="chocolate_blue400">@color/chocolate_blue400_day</color>
+    <color name="chocolate_blue500">@color/chocolate_blue500_day</color>
+    <color name="chocolate_blue600">@color/chocolate_blue600_day</color>
+    <color name="chocolate_blue700">@color/chocolate_blue700_day</color>
+    <color name="chocolate_blue800">@color/chocolate_blue800_day</color>
+    <color name="chocolate_blue900">@color/chocolate_blue900_day</color>
+
+    <color name="chocolate_orange50">@color/chocolate_orange50_day</color>
+    <color name="chocolate_orange100">@color/chocolate_orange100_day</color>
+    <color name="chocolate_orange200">@color/chocolate_orange200_day</color>
+    <color name="chocolate_orange300">@color/chocolate_orange300_day</color>
+    <color name="chocolate_orange400">@color/chocolate_orange400_day</color>
+    <color name="chocolate_orange500">@color/chocolate_orange500_day</color>
+    <color name="chocolate_orange600">@color/chocolate_orange600_day</color>
+    <color name="chocolate_orange700">@color/chocolate_orange700_day</color>
+    <color name="chocolate_orange800">@color/chocolate_orange800_day</color>
+    <color name="chocolate_orange900">@color/chocolate_orange900_day</color>
+
+    <color name="chocolate_teal50">@color/chocolate_teal50_day</color>
+    <color name="chocolate_teal100">@color/chocolate_teal100_day</color>
+    <color name="chocolate_teal200">@color/chocolate_teal200_day</color>
+    <color name="chocolate_teal300">@color/chocolate_teal300_day</color>
+    <color name="chocolate_teal400">@color/chocolate_teal400_day</color>
+    <color name="chocolate_teal500">@color/chocolate_teal500_day</color>
+    <color name="chocolate_teal600">@color/chocolate_teal600_day</color>
+    <color name="chocolate_teal700">@color/chocolate_teal700_day</color>
+    <color name="chocolate_teal800">@color/chocolate_teal800_day</color>
+    <color name="chocolate_teal900">@color/chocolate_teal900_day</color>
+
+    <!-- Solid Scale Color Palettes 색상 (Day 테마) -->
+    <color name="chocolate_gray50_day">#F7F8FA</color>
+    <color name="chocolate_gray100_day">#F2F3F6</color>
+    <color name="chocolate_gray200_day">#EAEBEE</color>
+    <color name="chocolate_gray300_day">#DCDEE3</color>
+    <color name="chocolate_gray400_day">#D1D3D8</color>
+    <color name="chocolate_gray500_day">#ADB1BA</color>
+    <color name="chocolate_gray600_day">#868B94</color>
+    <color name="chocolate_gray700_day">#4D5159</color>
+    <color name="chocolate_gray800_day">#393A40</color>
+    <color name="chocolate_gray900_day">#212124</color>
+
+    <color name="chocolate_red50_day">#FFEBEE</color>
+    <color name="chocolate_red100_day">#FFCDD2</color>
+    <color name="chocolate_red200_day">#EF9A9A</color>
+    <color name="chocolate_red300_day">#E57373</color>
+    <color name="chocolate_red400_day">#EF5350</color>
+    <color name="chocolate_red500_day">#F44336</color>
+    <color name="chocolate_red600_day">#E53935</color>
+    <color name="chocolate_red700_day">#D32F2F</color>
+    <color name="chocolate_red800_day">#C62828</color>
+    <color name="chocolate_red900_day">#B71C1C</color>
+
+    <color name="chocolate_yellow50_day">#FFFDE7</color>
+    <color name="chocolate_yellow100_day">#FFF9C4</color>
+    <color name="chocolate_yellow200_day">#FFF59D</color>
+    <color name="chocolate_yellow300_day">#FFF176</color>
+    <color name="chocolate_yellow400_day">#FFEE58</color>
+    <color name="chocolate_yellow500_day">#FFEB3B</color>
+    <color name="chocolate_yellow600_day">#FDD835</color>
+    <color name="chocolate_yellow700_day">#FBC02D</color>
+    <color name="chocolate_yellow800_day">#F9A825</color>
+    <color name="chocolate_yellow900_day">#F57F17</color>
+
+    <color name="chocolate_green50_day">#E8F5E9</color>
+    <color name="chocolate_green100_day">#C8E6C9</color>
+    <color name="chocolate_green200_day">#A5D6A7</color>
+    <color name="chocolate_green300_day">#81C784</color>
+    <color name="chocolate_green400_day">#66BB6A</color>
+    <color name="chocolate_green500_day">#4CAF50</color>
+    <color name="chocolate_green600_day">#43A047</color>
+    <color name="chocolate_green700_day">#388E3C</color>
+    <color name="chocolate_green800_day">#2E7D32</color>
+    <color name="chocolate_green900_day">#1B5E20</color>
+
+    <color name="chocolate_blue50_day">#E3F2FD</color>
+    <color name="chocolate_blue100_day">#BBDEFB</color>
+    <color name="chocolate_blue200_day">#90CAF9</color>
+    <color name="chocolate_blue300_day">#64B5F6</color>
+    <color name="chocolate_blue400_day">#42A5F5</color>
+    <color name="chocolate_blue500_day">#2196F3</color>
+    <color name="chocolate_blue600_day">#1E88E5</color>
+    <color name="chocolate_blue700_day">#1976D2</color>
+    <color name="chocolate_blue800_day">#1565C0</color>
+    <color name="chocolate_blue900_day">#0D47A1</color>
+
+    <color name="chocolate_orange50_day">#FFF3E0</color>
+    <color name="chocolate_orange100_day">#FFE0B2</color>
+    <color name="chocolate_orange200_day">#FFCC80</color>
+    <color name="chocolate_orange300_day">#FFB74D</color>
+    <color name="chocolate_orange400_day">#FFA726</color>
+    <color name="chocolate_orange500_day">#FF9800</color>
+    <color name="chocolate_orange600_day">#FB8C00</color>
+    <color name="chocolate_orange700_day">#F57C00</color>
+    <color name="chocolate_orange800_day">#EF6C00</color>
+    <color name="chocolate_orange900_day">#E65100</color>
+
+    <color name="chocolate_teal50_day">#E0F2F1</color>
+    <color name="chocolate_teal100_day">#B2DFDB</color>
+    <color name="chocolate_teal200_day">#80CBC4</color>
+    <color name="chocolate_teal300_day">#4DB6AC</color>
+    <color name="chocolate_teal400_day">#26A69A</color>
+    <color name="chocolate_teal500_day">#009688</color>
+    <color name="chocolate_teal600_day">#00897B</color>
+    <color name="chocolate_teal700_day">#00796B</color>
+    <color name="chocolate_teal800_day">#00695C</color>
+    <color name="chocolate_teal900_day">#004D40</color>
+
+    <!-- Solid Scale Color Palettes 색상 (Night 테마) -->
+    <color name="chocolate_gray50_night">#212124</color>
+    <color name="chocolate_gray100_night">#393A40</color>
+    <color name="chocolate_gray200_night">#4D5159</color>
+    <color name="chocolate_gray300_night">#868B94</color>
+    <color name="chocolate_gray400_night">#ADB1BA</color>
+    <color name="chocolate_gray500_night">#D1D3D8</color>
+    <color name="chocolate_gray600_night">#DCDEE3</color>
+    <color name="chocolate_gray700_night">#EAEBEE</color>
+    <color name="chocolate_gray800_night">#F2F3F6</color>
+    <color name="chocolate_gray900_night">#F7F8FA</color>
+
+    <color name="chocolate_red50_night">#B71C1C</color>
+    <color name="chocolate_red100_night">#C62828</color>
+    <color name="chocolate_red200_night">#D32F2F</color>
+    <color name="chocolate_red300_night">#E53935</color>
+    <color name="chocolate_red400_night">#F44336</color>
+    <color name="chocolate_red500_night">#EF5350</color>
+    <color name="chocolate_red600_night">#E57373</color>
+    <color name="chocolate_red700_night">#EF9A9A</color>
+    <color name="chocolate_red800_night">#FFCDD2</color>
+    <color name="chocolate_red900_night">#FFEBEE</color>
+
+    <color name="chocolate_yellow50_night">#F57F17</color>
+    <color name="chocolate_yellow100_night">#F9A825</color>
+    <color name="chocolate_yellow200_night">#FBC02D</color>
+    <color name="chocolate_yellow300_night">#FDD835</color>
+    <color name="chocolate_yellow400_night">#FFEB3B</color>
+    <color name="chocolate_yellow500_night">#FFEE58</color>
+    <color name="chocolate_yellow600_night">#FFF176</color>
+    <color name="chocolate_yellow700_night">#FFF59D</color>
+    <color name="chocolate_yellow800_night">#FFF9C4</color>
+    <color name="chocolate_yellow900_night">#FFFDE7</color>
+
+    <color name="chocolate_green50_night">#1B5E20</color>
+    <color name="chocolate_green100_night">#2E7D32</color>
+    <color name="chocolate_green200_night">#388E3C</color>
+    <color name="chocolate_green300_night">#43A047</color>
+    <color name="chocolate_green400_night">#4CAF50</color>
+    <color name="chocolate_green500_night">#66BB6A</color>
+    <color name="chocolate_green600_night">#81C784</color>
+    <color name="chocolate_green700_night">#A5D6A7</color>
+    <color name="chocolate_green800_night">#C8E6C9</color>
+    <color name="chocolate_green900_night">#E8F5E9</color>
+
+    <color name="chocolate_blue50_night">#0D47A1</color>
+    <color name="chocolate_blue100_night">#1565C0</color>
+    <color name="chocolate_blue200_night">#1976D2</color>
+    <color name="chocolate_blue300_night">#1E88E5</color>
+    <color name="chocolate_blue400_night">#2196F3</color>
+    <color name="chocolate_blue500_night">#42A5F5</color>
+    <color name="chocolate_blue600_night">#64B5F6</color>
+    <color name="chocolate_blue700_night">#90CAF9</color>
+    <color name="chocolate_blue800_night">#BBDEFB</color>
+    <color name="chocolate_blue900_night">#E3F2FD</color>
+
+    <color name="chocolate_orange50_night">#E65100</color>
+    <color name="chocolate_orange100_night">#EF6C00</color>
+    <color name="chocolate_orange200_night">#F57C00</color>
+    <color name="chocolate_orange300_night">#FB8C00</color>
+    <color name="chocolate_orange400_night">#FF9800</color>
+    <color name="chocolate_orange500_night">#FFA726</color>
+    <color name="chocolate_orange600_night">#FFB74D</color>
+    <color name="chocolate_orange700_night">#FFCC80</color>
+    <color name="chocolate_orange800_night">#FFE0B2</color>
+    <color name="chocolate_orange900_night">#FFF3E0</color>
+
+    <color name="chocolate_teal50_night">#004D40</color>
+    <color name="chocolate_teal100_night">#00695C</color>
+    <color name="chocolate_teal200_night">#00796B</color>
+    <color name="chocolate_teal300_night">#00897B</color>
+    <color name="chocolate_teal400_night">#009688</color>
+    <color name="chocolate_teal500_night">#26A69A</color>
+    <color name="chocolate_teal600_night">#4DB6AC</color>
+    <color name="chocolate_teal700_night">#80CBC4</color>
+    <color name="chocolate_teal800_night">#B2DFDB</color>
+    <color name="chocolate_teal900_night">#E0F2F1</color>
+
+
+<!--    <color name="chocolate_gray50">#FAFAFA</color>-->
+<!--    <color name="chocolate_gray100">#F5F5F5</color>-->
+<!--    <color name="chocolate_gray200">#EEEEEE</color>-->
+<!--    <color name="chocolate_gray300">#E0E0E0</color>-->
+<!--    <color name="chocolate_gray400">#BDBDBD</color>-->
+<!--    <color name="chocolate_gray500">#9E9E9E</color>-->
+<!--    <color name="chocolate_gray600">#757575</color>-->
+<!--    <color name="chocolate_gray700">#616161</color>-->
+<!--    <color name="chocolate_gray800">#424242</color>-->
+<!--    <color name="chocolate_gray900">#212121</color>-->
 </resources>

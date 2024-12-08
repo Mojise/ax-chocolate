@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="chocolatePrimaryColor" format="color"/>
+    <attr name="chocolateSecondaryColor" format="color"/>
+    <attr name="chocolateTertiaryColor" format="color"/>
+
+    <!-- ChocolateBottomSheetDialogFragment 관련 attributes -->
+    <attr name="chocolate_BottomSheet_OuterMarginEnabled" format="boolean"/>
+    <attr name="chocolate_BottomSheet_OuterMargin" format="dimension"/>
+    <attr name="chocolate_BottomSheet_CornerRadius" format="dimension"/>
+    <attr name="chocolate_BottomSheet_GripBarVisible" format="boolean"/>
+    <attr name="chocolate_BottomSheet_GripBarColor" format="color"/>
+    <attr name="chocolate_BottomSheet_BackgroundColor" format="color"/>
+
     <!-- 모서리 둥근 정도 크기 -->
     <attr name="chocolate_CornerRadius" format="dimension"/>
     <!-- Ripple 색상 -->
@@ -29,12 +41,11 @@
     <attr name="chocolate_PressEffectEnabled" format="boolean"/> <!-- 눌림 효과 사용 여부 (default=true) -->
     <attr name="chocolate_PressEffectScaleRatio" format="float"/>
     <attr name="chocolate_PressEffectStrengthLevel" format="enum">
-        <enum name="light_tiny"    value="0"/> <!-- scale=0.98 : 눌림 효과 매우 작음 -->
-        <enum name="light"         value="1"/> <!-- scale=0.96 : 눌림 효과 작음 -->
-        <enum name="normal"        value="2"/> <!-- scale=0.94 : 눌림 효과 적당함 (default) -->
-        <enum name="heavy"         value="3"/> <!-- scale=0.92 : 눌림 효과 큼 -->
-        <enum name="heavy_strong"  value="4"/> <!-- scale=0.90 : 눌림 효과 매우 큼 -->
-        <enum name="heavy_extreme" value="5"/> <!-- scale=0.85 : 눌림 효과 매우 상당히 큼 -->
+        <enum name="soft"         value="0"/> <!-- scale=0.98 : 눌림 효과 작음 -->
+        <enum name="normal"       value="1"/> <!-- scale=0.96 : 눌림 효과 적당함 -->
+        <enum name="deep"         value="2"/> <!-- scale=0.94 : 눌림 효과 큼 -->
+        <enum name="deep_strong"  value="3"/> <!-- scale=0.92 : 눌림 효과 매우 큼 -->
+        <enum name="deep_extreme" value="4"/> <!-- scale=0.90 : 눌림 효과 상당히 큼 -->
     </attr>
 
     <!-- Chocolate Common Attributes -->
@@ -51,8 +62,8 @@
         <attr name="chocolate_StrokeDisabledColor"/>
         <attr name="chocolate_StrokeSelectedColor"/>
         <attr name="chocolate_BackgroundColor"/>
-        <attr name="chocolate_BackgroundDisabledColor"/>
         <attr name="chocolate_BackgroundSelectedColor"/>
+        <attr name="chocolate_BackgroundDisabledColor"/>
     </declare-styleable>
 
     <declare-styleable name="ChocolateConstraintLayout">
@@ -212,9 +223,10 @@
         <attr name="chocolate_BackgroundSelectedColor"/>
 
         <!-- ChocolateTextView's attributes -->
+        <attr name="chocolate_TextView_HtmlTextEnabled" format="boolean"/> <!-- default=false -->
+        <attr name="chocolate_TextView_TextColor" format="color"/>
         <attr name="chocolate_TextView_TextSelectedColor" format="color"/>
         <attr name="chocolate_TextView_TextDisabledColor" format="color"/>
-        <attr name="chocolate_TextView_HtmlTextEnabled" format="boolean"/> <!-- default=false -->
     </declare-styleable>
 
     <declare-styleable name="ChocolateFloatingActionButton">
@@ -240,17 +252,6 @@
         <attr name="chocolate_PressEffectEnabled"/>
         <attr name="chocolate_PressEffectScaleRatio"/>
         <attr name="chocolate_PressEffectStrengthLevel"/>
-        <attr name="chocolate_CornerRadius"/>
-        <attr name="chocolate_RippleColor"/>
-        <attr name="chocolate_RippleSelectedColor"/>
-        <attr name="chocolate_RippleApplyTo"/>
-        <attr name="chocolate_StrokeWidth"/>
-        <attr name="chocolate_StrokeColor"/>
-        <attr name="chocolate_StrokeDisabledColor"/>
-        <attr name="chocolate_StrokeSelectedColor"/>
-        <attr name="chocolate_BackgroundColor"/>
-        <attr name="chocolate_BackgroundDisabledColor"/>
-        <attr name="chocolate_BackgroundSelectedColor"/>
 
         <!-- ChocolateBoxButton's attributes -->
 
@@ -260,6 +261,7 @@
         <attr name="chocolate_BoxButton_TextSize" format="dimension"/>
         <!-- [ChocolateBoxButton] 텍스트 색상 -->
         <attr name="chocolate_BoxButton_TextColor" format="color"/>
+        <attr name="chocolate_BoxButton_TextDisabledColor" format="color"/>
         <attr name="chocolate_BoxButton_TextStyle" format="enum">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
@@ -286,6 +288,17 @@
         <attr name="chocolate_BoxButton_RightIconPadding" format="dimension"/>
         <!-- [ChocolateBoxButton] 오른쪽 아이콘 텍스트와의 마진 -->
         <attr name="chocolate_BoxButton_RightIconMarginWithText" format="dimension"/>
+
+        <attr name="chocolate_BoxButton_RippleColor" format="color"/>
+        <attr name="chocolate_BoxButton_RippleSelectedColor" format="color"/>
+        <attr name="chocolate_BoxButton_StrokeWidth" format="dimension"/>
+        <attr name="chocolate_BoxButton_StrokeColor" format="color"/>
+        <attr name="chocolate_BoxButton_StrokeDisabledColor" format="color"/>
+        <attr name="chocolate_BoxButton_StrokeSelectedColor" format="color"/>
+        <attr name="chocolate_BoxButton_BackgroundColor" format="color"/>
+        <attr name="chocolate_BoxButton_BackgroundSelectedColor" format="color"/>
+        <attr name="chocolate_BoxButton_BackgroundDisabledColor" format="color"/>
+        <attr name="chocolate_BoxButton_BackgroundCornerRadius" format="dimension"/>
     </declare-styleable>
 
     <!-- LoadingIndicatorView -->

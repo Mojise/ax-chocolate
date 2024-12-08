@@ -1,5 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Ax-Chocolate DayNight Theme -->
+    <style name="AxChocolateTheme.DayNight" parent="AxChocolateTheme.Day"/>
+    <!-- Ax-Chocolate Day Theme -->
+    <style name="AxChocolateTheme.Day" parent="Theme.Material3.Light.NoActionBar">
+        <item name="chocolatePrimaryColor">@color/chocolate_primary_color_day</item>
+        <item name="chocolateSecondaryColor">@color/chocolate_secondary_color_day</item>
+        <item name="chocolateTertiaryColor">@color/chocolate_tertiary_color_day</item>
+
+        <item name="chocolate_PressEffectEnabled">true</item>
+        <item name="chocolate_PressEffectStrengthLevel">normal</item>
+
+        <item name="chocolate_CornerRadius">16dp</item>
+        <item name="chocolate_RippleColor">@color/chocolate_ripple_color_black_day</item>
+        <item name="chocolate_RippleApplyTo">foreground</item>
+        <item name="chocolate_BackgroundDisabledColor">@color/chocolate_box_button_background_disabled_day</item>
+
+        <!-- ChocolateTextView's attributes -->
+        <item name="chocolate_TextView_HtmlTextEnabled">false</item>
+        <item name="chocolate_TextView_TextColor">@color/chocolate_box_button_text_day</item>
+        <item name="chocolate_TextView_TextDisabledColor">@color/chocolate_box_button_text_disabled_day</item>
+
+        <!-- ChocolateBoxButton's attributes -->
+        <item name="chocolate_BoxButton_TextSize">18sp</item>
+        <item name="chocolate_BoxButton_TextColor">@color/chocolate_box_button_text_day</item>
+        <item name="chocolate_BoxButton_TextDisabledColor">@color/chocolate_box_button_text_disabled_day</item>
+        <item name="chocolate_BoxButton_TextStyle">normal</item>
+        <item name="chocolate_BoxButton_FontFamily">@null</item>
+        <item name="chocolate_BoxButton_TextPaddingTop">0dp</item>
+        <item name="chocolate_BoxButton_TextPaddingBottom">0dp</item>
+        <item name="chocolate_BoxButton_LeftIconMarginWithText">4dp</item>
+        <item name="chocolate_BoxButton_LeftIconPadding">1dp</item>
+        <item name="chocolate_BoxButton_RightIconMarginWithText">0dp</item>
+        <item name="chocolate_BoxButton_RightIconPadding">1dp</item>
+        <item name="chocolate_BoxButton_RippleColor">@color/chocolate_ripple_color_black_day</item>
+        <item name="chocolate_BoxButton_BackgroundColor">@color/chocolate_primary_color_day</item>
+        <item name="chocolate_BoxButton_BackgroundDisabledColor">@color/chocolate_box_button_background_disabled_day</item>
+        <item name="chocolate_BoxButton_BackgroundCornerRadius">16dp</item>
+
+        <!-- ChocolateBottomSheetDialogFragment's attributes -->
+        <item name="chocolate_BottomSheet_OuterMarginEnabled">true</item>
+        <item name="chocolate_BottomSheet_OuterMargin">10dp</item>
+        <item name="chocolate_BottomSheet_CornerRadius">16dp</item>
+        <item name="chocolate_BottomSheet_GripBarVisible">true</item>
+        <item name="chocolate_BottomSheet_GripBarColor">@color/chocolate_bottom_sheet_grip_bar_day</item>
+        <item name="chocolate_BottomSheet_BackgroundColor">@color/chocolate_bottom_sheet_background_day</item>
+    </style>
+    <!-- Ax-Chocolate Night Theme -->
+    <style name="AxChocolateTheme.Night" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="chocolatePrimaryColor">@color/chocolate_primary_color_night</item>
+        <item name="chocolateSecondaryColor">@color/chocolate_secondary_color_night</item>
+        <item name="chocolateTertiaryColor">@color/chocolate_tertiary_color_night</item>
+
+        <item name="chocolate_PressEffectEnabled">true</item>
+        <item name="chocolate_PressEffectStrengthLevel">normal</item>
+
+        <item name="chocolate_CornerRadius">16dp</item>
+        <item name="chocolate_RippleColor">@color/chocolate_ripple_color_black_night</item>
+        <item name="chocolate_RippleApplyTo">foreground</item>
+        <item name="chocolate_BackgroundDisabledColor">@color/chocolate_box_button_background_disabled_night</item>
+
+        <!-- ChocolateTextView's attributes -->
+        <item name="chocolate_TextView_HtmlTextEnabled">false</item>
+        <item name="chocolate_TextView_TextColor">@color/chocolate_box_button_text_night</item>
+        <item name="chocolate_TextView_TextDisabledColor">@color/chocolate_box_button_text_disabled_night</item>
+
+        <!-- ChocolateBoxButton's attributes -->
+        <item name="chocolate_BoxButton_TextSize">18sp</item>
+        <item name="chocolate_BoxButton_TextColor">@color/chocolate_box_button_text_night</item>
+        <item name="chocolate_BoxButton_TextDisabledColor">@color/chocolate_box_button_text_disabled_night</item>
+        <item name="chocolate_BoxButton_TextStyle">normal</item>
+        <item name="chocolate_BoxButton_FontFamily">@null</item>
+        <item name="chocolate_BoxButton_TextPaddingTop">0dp</item>
+        <item name="chocolate_BoxButton_TextPaddingBottom">0dp</item>
+        <item name="chocolate_BoxButton_LeftIconMarginWithText">4dp</item>
+        <item name="chocolate_BoxButton_LeftIconPadding">1dp</item>
+        <item name="chocolate_BoxButton_RightIconMarginWithText">0dp</item>
+        <item name="chocolate_BoxButton_RightIconPadding">1dp</item>
+        <item name="chocolate_BoxButton_RippleColor">@color/chocolate_ripple_color_black_night</item>
+        <item name="chocolate_BoxButton_BackgroundColor">@color/chocolate_primary_color_night</item>
+        <item name="chocolate_BoxButton_BackgroundDisabledColor">@color/chocolate_box_button_background_disabled_night</item>
+        <item name="chocolate_BoxButton_BackgroundCornerRadius">16dp</item>
+
+        <!-- ChocolateBottomSheetDialogFragment's attributes -->
+        <item name="chocolate_BottomSheet_OuterMarginEnabled">true</item>
+        <item name="chocolate_BottomSheet_OuterMargin">10dp</item>
+        <item name="chocolate_BottomSheet_CornerRadius">16dp</item>
+        <item name="chocolate_BottomSheet_GripBarVisible">true</item>
+        <item name="chocolate_BottomSheet_GripBarColor">@color/chocolate_bottom_sheet_grip_bar_night</item>
+        <item name="chocolate_BottomSheet_BackgroundColor">@color/chocolate_bottom_sheet_background_night</item>
+    </style>
+
     <style name="LoadingIndicatorView">
         <item name="minWidth">48dip</item>
         <item name="maxWidth">48dip</item>
@@ -23,4 +114,48 @@
         <item name="maxHeight">24dip</item>
         <item name="indicatorName">BallPulseIndicator</item>
     </style>
+
+    <!--&lt;!&ndash;<style name="AxChocolateTheme.DayNight" parent="Theme.Material3.DayNight.NoActionBar">
+    <item name="chocolatePrimaryColor">@color/chocolate_primary_color</item>
+    <item name="chocolateSecondaryColor">@color/chocolate_secondary_color</item>
+    <item name="chocolateTertiaryColor">@color/chocolate_tertiary_color</item>
+
+    <item name="chocolate_PressEffectEnabled">true</item>
+    <item name="chocolate_PressEffectStrengthLevel">normal</item>
+    <item name="chocolate_PressEffectScaleRatio">0.96</item>
+
+    <item name="chocolate_CornerRadius">16dp</item>
+    <item name="chocolate_RippleColor">@color/chocolate_ripple_color_black</item>
+    <item name="chocolate_RippleApplyTo">foreground</item>
+    <item name="chocolate_BackgroundColor">@color/chocolate_transparent</item>
+    <item name="chocolate_BackgroundSelectedColor">@color/chocolate_transparent</item>
+    <item name="chocolate_BackgroundDisabledColor">@color/chocolate_button_background_disabled</item>
+
+    <item name="chocolate_BoxButton_TextSize">18sp</item>
+    <item name="chocolate_BoxButton_TextColor">@color/chocolate_button_text</item>
+    <item name="chocolate_BoxButton_TextDisabledColor">@color/chocolate_button_text_disabled</item>
+    <item name="chocolate_BoxButton_TextStyle">normal</item>
+    <item name="chocolate_BoxButton_FontFamily">@null</item>
+    <item name="chocolate_BoxButton_TextPaddingTop">0dp</item>
+    <item name="chocolate_BoxButton_TextPaddingBottom">0dp</item>
+    <item name="chocolate_BoxButton_LeftIconDrawable">@null</item>
+    <item name="chocolate_BoxButton_LeftIconMarginWithText">4dp</item>
+    <item name="chocolate_BoxButton_LeftIconPadding">1dp</item>
+    <item name="chocolate_BoxButton_LeftIconTint">@null</item>
+    <item name="chocolate_BoxButton_RightIconDrawable">@null</item>
+    <item name="chocolate_BoxButton_RightIconTint">@null</item>
+    <item name="chocolate_BoxButton_RightIconPadding">1dp</item>
+    <item name="chocolate_BoxButton_RightIconMarginWithText">0dp</item>
+
+&lt;!&ndash;        <item name="chocolate_BoxButton_RippleColor"></item>&ndash;&gt;
+&lt;!&ndash;        <item name="chocolate_BoxButton_RippleSelectedColor"></item>&ndash;&gt;
+&lt;!&ndash;        <item name="chocolate_BoxButton_StrokeWidth"></item>&ndash;&gt;
+&lt;!&ndash;        <item name="chocolate_BoxButton_StrokeColor"></item>&ndash;&gt;
+&lt;!&ndash;        <item name="chocolate_BoxButton_StrokeDisabledColor"></item>&ndash;&gt;
+&lt;!&ndash;        <item name="chocolate_BoxButton_StrokeSelectedColor"></item>&ndash;&gt;
+&lt;!&ndash;        <item name="chocolate_BoxButton_BackgroundColor"></item>&ndash;&gt;
+&lt;!&ndash;        <item name="chocolate_BoxButton_BackgroundSelectedColor"></item>&ndash;&gt;
+&lt;!&ndash;        <item name="chocolate_BoxButton_BackgroundDisabledColor"></item>&ndash;&gt;
+&lt;!&ndash;        <item name="chocolate_BoxButton_BackgroundCornerRadius"></item>&ndash;&gt;-->
+
 </resources>

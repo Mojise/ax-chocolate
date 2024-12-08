@@ -1,7 +1,6 @@
 package com.mojise.library.chocolate.button.box
 
 import android.animation.AnimatorSet
-import android.animation.LayoutTransition
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.ColorStateList
@@ -23,22 +22,21 @@ import androidx.core.view.setPadding
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.mojise.library.chocolate.R
 import com.mojise.library.chocolate._internal.TAG
-import com.mojise.library.chocolate._internal.chocolate_button_background_color
-import com.mojise.library.chocolate._internal.chocolate_button_background_disabled_color
-import com.mojise.library.chocolate._internal.chocolate_button_text_color
-import com.mojise.library.chocolate._internal.chocolate_button_text_disabled_color
-import com.mojise.library.chocolate._internal.exts.getColorOrNull
+import com.mojise.library.chocolate._internal.theme.*
+import com.mojise.library.chocolate._internal.etc.DecelerateInterpolatorLayoutTransition
+import com.mojise.library.chocolate.ext.getColorOrNull
+import com.mojise.library.chocolate.ext.setPaddingBottom
+import com.mojise.library.chocolate.ext.setPaddingTop
 import com.mojise.library.chocolate.ext.dp
-import com.mojise.library.chocolate.ext.sp
+import com.mojise.library.chocolate.ext.useCompat
 import com.mojise.library.chocolate.view.ChocolateView
-import com.mojise.library.chocolate.view.util.ChocolateViewAttributesUtil
 import com.mojise.library.chocolate.view.helper.ChocolateViewHelper
-import com.mojise.library.chocolate._internal.exts.setPaddingBottom
-import com.mojise.library.chocolate._internal.exts.setPaddingTop
-import com.mojise.library.chocolate.view.model.Attributes
 import com.mojise.library.chocolate.view.model.ChocolateColorState
 import com.mojise.library.chocolate.view.model.ChocolateTextStyle
+import com.mojise.library.chocolate.view.model.DrawablePosition
 import com.mojise.library.chocolate.view.model.PressEffectStrength
+import com.mojise.library.chocolate.view.util.ChocolateViewAttributesUtil
+import com.mojise.library.chocolate.view.util.ChocolateViewUtil
 
 open class ChocolateBoxButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -60,24 +58,21 @@ open class ChocolateBoxButton @JvmOverloads constructor(
      * 터치 시 눌림 효과 사용 여부
      */
     override var isPressEffectEnabled: Boolean
-        get() = attributes.chocolate.isPressEffectEnabled
-        set(value) { attributes.chocolate.isPressEffectEnabled = value }
+        get() = attributes.isPressEffectEnabled
+        set(value) { attributes.isPressEffectEnabled = value }
 
     private val isLayoutTransitionEnabled: Boolean
         get() = layoutTransition != null
 
     protected val binding: ViewBinding
-    protected val attributes: Attributes = ChocolateViewHelper
-        .initAttributes(this, context, attrs, defStyleAttr)
-    protected val boxButtonAttributes: ChocolateBoxButtonAttributes =
-        ChocolateBoxButtonAttributes()
+    protected val attributes: ChocolateBoxButtonAttributes = ChocolateBoxButtonAttributes()
 
     private var animatorSet: AnimatorSet? = null
+    /** android:background로 설정한 것인지, 초콜릿 버튼의 백그라운드 색상 설정 방식으로 설정한 것인지 여부 */
+    private var isUserSetBackground = false
 
     init {
-        //Log.e(TAG, "ChocolateBoxButton init")
         val view = inflate(context, R.layout.chocolate_box_button, this)
-        view.isClickable = true
 
         binding = ViewBinding(
             textView = view.findViewById(R.id.chocolate_box_button_text),
@@ -86,135 +81,159 @@ open class ChocolateBoxButton @JvmOverloads constructor(
             loading = view.findViewById(R.id.chocolate_box_button_loading),
         )
 
-        try {
-            // Android Padding 속성 가져오기
-            ChocolateViewAttributesUtil.obtainAndroidPaddings(
-                context = context,
-                attrs = attrs,
-                defaultVerticalPadding = 14.dp,
-                defaultHorizontalPadding = 28.dp,
-            ).let { padding ->
-                setPadding(padding.start, padding.top, padding.end, padding.bottom)
+        // Android 속성 가져오기
+        context.obtainStyledAttributes(attrs, intArrayOf(
+            android.R.attr.clickable,
+            android.R.attr.background,
+            android.R.attr.animateLayoutChanges,
+        ), defStyleAttr, 0).useCompat {
+            isClickable = it.getBoolean(0, true)
+            val androidBackground = it.getDrawable(1)
+            if (androidBackground != null) {
+                background = androidBackground
             }
 
-            // Android 속성 가져오기
-            context.obtainStyledAttributes(attrs, intArrayOf(
-                android.R.attr.animateLayoutChanges,
-            ), defStyleAttr, 0).use { array ->
-                val animateLayoutChanges = array.getBoolean(0, true)
-
-                layoutTransition = if (animateLayoutChanges) {
-                    LayoutTransition().apply {
-                        setInterpolator(LayoutTransition.APPEARING, DecelerateInterpolator())
-                        setInterpolator(LayoutTransition.DISAPPEARING, DecelerateInterpolator())
-                        setInterpolator(LayoutTransition.CHANGING, DecelerateInterpolator())
-                        setInterpolator(LayoutTransition.CHANGE_APPEARING, DecelerateInterpolator())
-                        setInterpolator(LayoutTransition.CHANGE_DISAPPEARING, DecelerateInterpolator())
-                    }
-                } else {
-                    null
-                }
-            }
-
-            // ChocolateBoxButton 속성 가져오기
-            context.obtainStyledAttributes(attrs, R.styleable.ChocolateBoxButton).use { array ->
-                array.getString(R.styleable.ChocolateBoxButton_chocolate_BoxButton_Text)
-                    ?.let(binding.textView::setText)
-
-                boxButtonAttributes.textSize = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextSize, TEXT_SIZE_DEFAULT)
-                boxButtonAttributes.textColor = array.getColor(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextColor, chocolate_button_text_color)
-
-                // FontFamily 설정
-                array.getResourceId(R.styleable.ChocolateBoxButton_chocolate_BoxButton_FontFamily, NO_ID)
-                    .takeIf { it != NO_ID }
-                    ?.let { resId ->
-                        binding.textView.typeface = ResourcesCompat.getFont(context, resId)
-                    }
-
-                val textStyle = array.getInt(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextStyle, ChocolateTextStyle.Normal.value)
-                    .let(ChocolateTextStyle::valueOf)
-
-                // Typeface(TextStyle) 설정
-                binding.textView.typeface = when (textStyle) {
-                    ChocolateTextStyle.Normal -> Typeface.create(binding.textView.typeface, Typeface.NORMAL)
-                    ChocolateTextStyle.Bold -> Typeface.create(binding.textView.typeface, Typeface.BOLD)
-                    ChocolateTextStyle.Italic -> Typeface.create(binding.textView.typeface, Typeface.ITALIC)
-                    ChocolateTextStyle.BoldItalic -> Typeface.create(binding.textView.typeface, Typeface.BOLD_ITALIC)
-                }
-
-                // TextView Padding(Top/Bottom) 설정
-                array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextPaddingTop, 0f)
-                    .let(Float::toInt)
-                    .let(binding.textView::setPaddingTop)
-                array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextPaddingBottom, 0f)
-                    .let(Float::toInt)
-                    .let(binding.textView::setPaddingBottom)
-
-                boxButtonAttributes.leftIconDrawable = array.getDrawable(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconDrawable)
-                boxButtonAttributes.leftIconTint = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconTint)
-                boxButtonAttributes.leftIconPadding = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconPadding, 0f)
-                boxButtonAttributes.leftIconMarginWithText = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconMarginWithText, ICON_TEXT_MARGIN_DEFAULT)
-
-                boxButtonAttributes.rightIconDrawable = array.getDrawable(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconDrawable)
-                boxButtonAttributes.rightIconTint = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconTint)
-                boxButtonAttributes.rightIconPadding = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconPadding, 0f)
-                boxButtonAttributes.rightIconMarginWithText = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconMarginWithText, ICON_TEXT_MARGIN_DEFAULT)
-            }
-
-            binding.textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, boxButtonAttributes.textSize)
-            binding.textView.setTextColor(boxButtonAttributes.textColor)
-
-            boxButtonAttributes.leftIconDrawable?.let { leftIconDrawable ->
-                binding.iconLeft.setImageDrawable(leftIconDrawable)
-                binding.iconLeft.setPadding(boxButtonAttributes.leftIconPadding.toInt())
-                boxButtonAttributes.leftIconTint?.let(binding.iconLeft::setColorFilter)
-                binding.iconLeft.isVisible = true
-            }
-
-            boxButtonAttributes.rightIconDrawable?.let { rightIconDrawable ->
-                binding.iconRight.setImageDrawable(rightIconDrawable)
-                binding.iconRight.setPadding(boxButtonAttributes.rightIconPadding.toInt())
-                boxButtonAttributes.rightIconTint?.let(binding.iconRight::setColorFilter)
-                binding.iconRight.isVisible = true
-            }
-
-            // Chocolate 속성 가져오기
-            context.obtainStyledAttributes(attrs, R.styleable.chocolateViewAttributes).use { array ->
-                attributes.chocolate.backgroundColors = if (attributes.android.background == null) {
-                    ChocolateColorState.Transparent.apply {
-                        enabledColor = array.getColor(R.styleable.chocolateViewAttributes_chocolate_BackgroundColor, chocolate_button_background_color)
-                        selectedColor = array.getColorOrNull(R.styleable.chocolateViewAttributes_chocolate_BackgroundSelectedColor)
-                            ?: enabledColor
-                        disabledColor = array.getColor(R.styleable.chocolateViewAttributes_chocolate_BackgroundDisabledColor, chocolate_button_background_disabled_color)
-                    }
-                } else {
-                    null
-                }
-
-                val pressEffectStrengthInt = array.getInt(R.styleable.chocolateViewAttributes_chocolate_PressEffectStrengthLevel, PressEffectStrength.Light.level)
-                val pressEffectStrength = PressEffectStrength.valueOf(pressEffectStrengthInt)
-                val pressEffectScaleRatio = array.getFloat(R.styleable.chocolateViewAttributes_chocolate_PressEffectScaleRatio, -1f)
-                    .takeIf { it in 0f..1f }
-                    ?: pressEffectStrength.value
-
-                attributes.chocolate.pressEffectScaleRatio = pressEffectScaleRatio
-            }
-
-            // 로딩바 색상 설정
-            binding.loading.setIndicatorColor(
-                attributes.chocolate.backgroundColors?.enabledColor
-                    ?: chocolate_button_background_color
-            )
-        } catch (e: Exception) {
-            Log.w(TAG, "ChocolateBoxButton error", e)
+            val isAnimateLayoutChanges = it.getBoolean(2, true)
+            layoutTransition = if (isAnimateLayoutChanges) DecelerateInterpolatorLayoutTransition() else null
+        }
+        // Android Padding 속성 가져오기
+        ChocolateViewAttributesUtil.obtainAndroidPaddings(
+            context = context,
+            attrs = attrs,
+            defaultVerticalPadding = 14.dp,
+            defaultHorizontalPadding = 28.dp,
+        ).let { padding ->
+            setPadding(padding.start, padding.top, padding.end, padding.bottom)
         }
 
-        ChocolateViewHelper.setRippleBackgroundOrForeground(this, attributes)
+        // ChocolateBoxButton 속성 가져오기
+        context.obtainStyledAttributes(attrs, R.styleable.ChocolateBoxButton).useCompat { array ->
+            attributes.isPressEffectEnabled = array.getBoolean(R.styleable.ChocolateBoxButton_chocolate_PressEffectEnabled, true)
+
+            // 눌림 효과 속성
+            val pressEffectStrengthInt = array.getInt(R.styleable.ChocolateBoxButton_chocolate_PressEffectStrengthLevel, theme_chocolate_press_effect_strength_level)
+            val pressEffectStrength = PressEffectStrength.valueOf(pressEffectStrengthInt)
+            val pressEffectScaleRatio = array.getFloat(R.styleable.ChocolateBoxButton_chocolate_PressEffectScaleRatio, -1f)
+                .takeIf { it in 0f..1f }
+                ?: pressEffectStrength.value
+
+            attributes.pressEffectScaleRatio = pressEffectScaleRatio
+
+            // 테두리 속성 (width > 0 이고, 색상이 하나 이상 지정된 경우에만 적용)
+            val strokeWidth = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_StrokeWidth, 0f)
+            val strokeEnabledColor = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_StrokeColor)
+            val strokeSelectedColor = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_StrokeSelectedColor)
+            val strokeDisabledColor = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_StrokeDisabledColor)
+            val strokeColors =
+                if (strokeWidth > 0f && (strokeSelectedColor != null || strokeEnabledColor != null || strokeDisabledColor != null))
+                    ChocolateColorState(
+                        enabledColor = strokeEnabledColor ?: Color.TRANSPARENT,
+                        selectedColor = strokeSelectedColor ?: strokeEnabledColor ?: Color.TRANSPARENT,
+                        disabledColor = strokeDisabledColor ?: Color.TRANSPARENT,
+                    )
+                else null
+            attributes.strokeWidth = strokeWidth
+            attributes.strokeColors = strokeColors
+
+            val enabledColor = array.getColor(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RippleColor, theme_chocolate_box_button_ripple_color)
+            val selectedColor = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RippleSelectedColor)
+                ?: enabledColor
+            attributes.rippleColors = ChocolateColorState(
+                enabledColor = enabledColor,
+                selectedColor = selectedColor,
+                disabledColor = Color.TRANSPARENT,
+            )
+
+            // 배경 색상 속성
+            val backgroundCornerRadius = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_BackgroundCornerRadius, theme_chocolate_box_button_background_corner_radius)
+            val backgroundEnabledColor = array.getColor(R.styleable.ChocolateBoxButton_chocolate_BoxButton_BackgroundColor, theme_chocolate_box_button_background_color)
+            val backgroundSelectedColor = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_BackgroundSelectedColor)
+            val backgroundDisabledColor = array.getColor(R.styleable.ChocolateBoxButton_chocolate_BoxButton_BackgroundDisabledColor, theme_chocolate_box_button_background_disabled_color)
+            attributes.backgroundCornerRadius = backgroundCornerRadius
+            attributes.backgroundColors = ChocolateColorState(
+                enabledColor = backgroundEnabledColor,
+                selectedColor = backgroundSelectedColor ?: backgroundEnabledColor,
+                disabledColor = backgroundDisabledColor,
+            )
+
+            foreground = ChocolateViewUtil.generateRippleDrawable(
+                cornerRadius = attributes.backgroundCornerRadius,
+                rippleColors = attributes.rippleColors,
+                strokeWidth = attributes.strokeWidth.toInt(),
+                strokeColors = attributes.strokeColors,
+                backgroundColors = null,
+            )
+            if (isUserSetBackground.not()) {
+                setChocolateBackground(attributes)
+            }
+
+            // 텍스트 속성
+            array.getString(R.styleable.ChocolateBoxButton_chocolate_BoxButton_Text)
+                ?.let(binding.textView::setText)
+            attributes.textSize = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextSize, theme_chocolate_box_button_text_size)
+            attributes.textColor = array.getColor(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextColor, theme_chocolate_box_button_text_color)
+            attributes.textDisabledColor = array.getColor(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextDisabledColor, theme_chocolate_box_button_text_disabled_color)
+            val textStyle = array.getInt(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextStyle, theme_chocolate_box_button_text_style)
+                .let(ChocolateTextStyle::valueOf)
+            array.getResourceId(R.styleable.ChocolateBoxButton_chocolate_BoxButton_FontFamily, theme_chocolate_box_button_font_family_res_id_or_zero)
+                .takeIf { it != 0 }
+                ?.let { resId ->
+                    binding.textView.typeface = ResourcesCompat.getFont(context, resId)
+                }
+            // 텍스트 Typeface(TextStyle) 설정
+            binding.textView.typeface = when (textStyle) {
+                ChocolateTextStyle.Normal -> Typeface.create(binding.textView.typeface, Typeface.NORMAL)
+                ChocolateTextStyle.Bold -> Typeface.create(binding.textView.typeface, Typeface.BOLD)
+                ChocolateTextStyle.Italic -> Typeface.create(binding.textView.typeface, Typeface.ITALIC)
+                ChocolateTextStyle.BoldItalic -> Typeface.create(binding.textView.typeface, Typeface.BOLD_ITALIC)
+            }
+            // TextView Padding(Top/Bottom) 설정
+            array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextPaddingTop, theme_chocolate_box_button_text_padding_top)
+                .let(Float::toInt)
+                .let(binding.textView::setPaddingTop)
+            array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextPaddingBottom, theme_chocolate_box_button_text_padding_bottom)
+                .let(Float::toInt)
+                .let(binding.textView::setPaddingBottom)
+
+            // Left 아이콘 속성
+            attributes.leftIconDrawable = array.getDrawable(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconDrawable)
+            attributes.leftIconTint = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconTint)
+            attributes.leftIconPadding = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconPadding, theme_chocolate_box_button_left_icon_padding)
+            attributes.leftIconMarginWithText = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconMarginWithText, theme_chocolate_box_button_left_icon_margin_with_text)
+
+            // Right 아이콘 속성
+            attributes.rightIconDrawable = array.getDrawable(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconDrawable)
+            attributes.rightIconTint = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconTint)
+            attributes.rightIconPadding = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconPadding, theme_chocolate_box_button_right_icon_padding)
+            attributes.rightIconMarginWithText = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconMarginWithText, theme_chocolate_box_button_right_icon_margin_with_text)
+        }
+
+        binding.textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, attributes.textSize)
+        binding.textView.setTextColor(attributes.textColor)
+
+        attributes.leftIconDrawable?.let { leftIconDrawable ->
+            binding.iconLeft.setImageDrawable(leftIconDrawable)
+            binding.iconLeft.setPadding(attributes.leftIconPadding.toInt())
+            attributes.leftIconTint?.let(binding.iconLeft::setColorFilter)
+            binding.iconLeft.isVisible = true
+        }
+
+        attributes.rightIconDrawable?.let { rightIconDrawable ->
+            binding.iconRight.setImageDrawable(rightIconDrawable)
+            binding.iconRight.setPadding(attributes.rightIconPadding.toInt())
+            attributes.rightIconTint?.let(binding.iconRight::setColorFilter)
+            binding.iconRight.isVisible = true
+        }
+
+        // 로딩바 색상 설정
+        binding.loading.setIndicatorColor(
+            attributes.backgroundColors.enabledColor
+        )
     }
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean = try {
         if (isEnabled && isClickable && isPressEffectEnabled) {
-            ChocolateViewHelper.showPressEffectOnTouch(this, event, attributes.chocolate.pressEffectScaleRatio)
+            ChocolateViewHelper.animatePressEffectOnTouch(this, event, attributes.pressEffectScaleRatio)
         }
         super.dispatchTouchEvent(event)
     } catch (e: Exception) {
@@ -233,15 +252,27 @@ open class ChocolateBoxButton @JvmOverloads constructor(
     }
 
     override fun setBackground(background: Drawable?) {
+        isUserSetBackground = true
         super.setBackground(background)
+    }
 
+    private fun setChocolateBackground(attributes: ChocolateBoxButtonAttributes) {
+        isUserSetBackground = false
+
+        val backgroundDrawable = ChocolateViewUtil.generateDrawable(
+            cornerRadius = attributes.backgroundCornerRadius,
+            strokeWidth = attributes.strokeWidth.toInt(),
+            strokeColors = attributes.strokeColors,
+            backgroundColors = attributes.backgroundColors,
+        )
+        super.setBackground(backgroundDrawable)
     }
 
     /**
      * 버튼의 [enabled] 상태 변경 시 배경 색상, 텍스트 색상, 아이콘 색상을 변경하는 애니메이션을 실행.
      */
     private fun animateButtonEnableStateColorChanged(enabled: Boolean) {
-        if (attributes.chocolate.backgroundColors == null) {
+        if (isUserSetBackground) {
             return
         }
 
@@ -249,13 +280,13 @@ open class ChocolateBoxButton @JvmOverloads constructor(
 
         // 시작 배경 색상
         val startBackgroundColor = if (enabled)
-            attributes.chocolate.backgroundColors?.disabledColor ?: chocolate_button_background_disabled_color
-            else attributes.chocolate.backgroundColors?.enabledColor ?: Color.TRANSPARENT
+            attributes.backgroundColors.disabledColor
+            else attributes.backgroundColors.enabledColor
 
         // 목표 배경 색상
         val targetBackgroundColor = if (enabled)
-            attributes.chocolate.backgroundColors?.enabledColor ?: Color.TRANSPARENT
-            else attributes.chocolate.backgroundColors?.disabledColor ?: chocolate_button_background_disabled_color
+            attributes.backgroundColors.enabledColor
+            else attributes.backgroundColors.disabledColor
 
         // 배경 색상 변경 애니메이션
         val backgroundAnimator = ValueAnimator.ofArgb(startBackgroundColor, targetBackgroundColor).also {
@@ -273,12 +304,12 @@ open class ChocolateBoxButton @JvmOverloads constructor(
 
         // 시작 텍스트 색상
         val startTextColor =
-            if (enabled) chocolate_button_text_disabled_color
-            else boxButtonAttributes.textColor
+            if (enabled) attributes.textDisabledColor
+            else attributes.textColor
         // 목표 텍스트 색상
         val targetTextColor =
-            if (enabled) boxButtonAttributes.textColor
-            else chocolate_button_text_disabled_color
+            if (enabled) attributes.textColor
+            else attributes.textDisabledColor
         // 텍스트 색상 변경 애니메이션
         val textColorAnimator = ValueAnimator.ofArgb(startTextColor, targetTextColor).also {
             it.duration = if (isLayoutTransitionEnabled) ANIMATION_DURATION else 0
@@ -296,12 +327,12 @@ open class ChocolateBoxButton @JvmOverloads constructor(
         if (binding.iconLeft.isVisible && binding.iconLeft.drawable != null) {
             // 시작 Left 아이콘 색상
             val startIconLeftColor =
-                if (enabled) chocolate_button_text_disabled_color
-                else boxButtonAttributes.leftIconTint ?: Color.TRANSPARENT
+                if (enabled) attributes.textDisabledColor
+                else attributes.leftIconTint ?: Color.TRANSPARENT
             // 목표 Left 아이콘 색상
             val targetIconLeftColor =
-                if (enabled) boxButtonAttributes.leftIconTint ?: Color.TRANSPARENT
-                else chocolate_button_text_disabled_color
+                if (enabled) attributes.leftIconTint ?: Color.TRANSPARENT
+                else attributes.textDisabledColor
             // 아이콘 색상 변경 애니메이션
             val iconLeftColorAnimator = ValueAnimator.ofArgb(startIconLeftColor, targetIconLeftColor).also {
                 it.duration = if (isLayoutTransitionEnabled) ANIMATION_DURATION else 0
@@ -320,12 +351,12 @@ open class ChocolateBoxButton @JvmOverloads constructor(
         if (binding.iconRight.isVisible && binding.iconRight.drawable != null) {
             // 시작 Right 아이콘 색상
             val startIconRightColor =
-                if (enabled) chocolate_button_text_disabled_color
-                else boxButtonAttributes.rightIconTint ?: Color.TRANSPARENT
+                if (enabled) attributes.textDisabledColor
+                else attributes.rightIconTint ?: Color.TRANSPARENT
             // 목표 Right 아이콘 색상
             val targetIconRightColor =
-                if (enabled) boxButtonAttributes.rightIconTint ?: Color.TRANSPARENT
-                else chocolate_button_text_disabled_color
+                if (enabled) attributes.rightIconTint ?: Color.TRANSPARENT
+                else attributes.textDisabledColor
             // 아이콘 색상 변경 애니메이션
             val iconRightColorAnimator = ValueAnimator.ofArgb(startIconRightColor, targetIconRightColor).also {
                 it.duration = if (isLayoutTransitionEnabled) ANIMATION_DURATION else 0
@@ -387,22 +418,31 @@ open class ChocolateBoxButton @JvmOverloads constructor(
     )
 
     protected data class ChocolateBoxButtonAttributes(
-        var textSize: Float = TEXT_SIZE_DEFAULT,
-        var textColor: Int = Color.WHITE,
+        var isPressEffectEnabled: Boolean = true,
+        var pressEffectScaleRatio: Float = 1f,
+
+        var rippleColors: ChocolateColorState = ChocolateColorState.Transparent,
+        var ripplePosition: DrawablePosition = DrawablePosition.Foreground,
+        var strokeWidth: Float = 0f,
+        var strokeColors: ChocolateColorState? = null,
+        var backgroundColors: ChocolateColorState = ChocolateColorState.Transparent,
+        var backgroundCornerRadius: Float = 0f,
+
+        var textSize: Float = 0f,
+        var textColor: Int = Color.TRANSPARENT,
+        var textDisabledColor: Int = Color.TRANSPARENT,
         var leftIconDrawable: Drawable? = null,
         var leftIconTint: Int? = null,
         var leftIconPadding: Float = 0f,
-        var leftIconMarginWithText: Float = ICON_TEXT_MARGIN_DEFAULT,
+        var leftIconMarginWithText: Float = 0f,
         var rightIconDrawable: Drawable? = null,
         var rightIconTint: Int? = null,
         var rightIconPadding: Float = 0f,
-        var rightIconMarginWithText: Float = ICON_TEXT_MARGIN_DEFAULT,
+        var rightIconMarginWithText: Float = 0f,
     )
 
     companion object {
         private const val ANIMATION_DURATION = 180L
         private const val ANIMATION_FACTOR = 1f
-        private val TEXT_SIZE_DEFAULT = 18f.sp
-        private val ICON_TEXT_MARGIN_DEFAULT = 4f.dp
     }
 }

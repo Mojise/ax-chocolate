@@ -15,19 +15,20 @@
             android:layout_margin="@dimen/chocolate_action_button_margin"
             android:padding="@dimen/chocolate_action_button_padding"
             android:src="@drawable/icon_arrow_back"
+            android:tint="@color/chocolate_text_color_scale_1"
             android:background="?actionBarItemBackground"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/guideline_top_bar"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             tools:text="Title"
             android:textSize="20sp"
-            android:textColor="@color/black"
+            android:textColor="@color/chocolate_text_color_scale_1"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/guideline_top_bar"

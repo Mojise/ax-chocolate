@@ -29,7 +29,7 @@ open class ChocolateFrameLayout @JvmOverloads constructor(
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean = try {
         if (isEnabled && isClickable && isPressEffectEnabled) {
-            ChocolateViewHelper.showPressEffectOnTouch(this, event, attributes.chocolate.pressEffectScaleRatio)
+            ChocolateViewHelper.animatePressEffectOnTouch(this, event, attributes.chocolate.pressEffectScaleRatio)
         }
         super.dispatchTouchEvent(event)
     } catch (e: Exception) {

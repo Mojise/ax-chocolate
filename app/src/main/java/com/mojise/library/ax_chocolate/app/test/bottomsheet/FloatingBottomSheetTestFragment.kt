@@ -21,11 +21,13 @@ class FloatingBottomSheetTestFragment : BaseFragment<FragmentBottomSheetTestBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnBottomSheetTest1.setOnClickListener(::showBottomSheet)
-    }
-
-    private fun showBottomSheet() {
-        SimpleBottomSheet()
-            .show(childFragmentManager, "TestFloatingBottomSheet")
+        binding.btnBottomSheetTestSimple.setOnClickListener {
+            SimpleBottomSheet()
+                .show(childFragmentManager, "SimpleFloatingBottomSheet")
+        }
+        binding.btnBottomSheetTest1.setOnClickListener {
+            CustomBottomSheet()
+                .show(childFragmentManager, "CustomFloatingBottomSheet")
+        }
     }
 }

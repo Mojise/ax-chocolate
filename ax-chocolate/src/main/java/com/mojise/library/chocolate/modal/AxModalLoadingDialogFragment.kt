@@ -23,7 +23,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieProperty
 import com.airbnb.lottie.model.KeyPath
 import com.mojise.library.chocolate.R
-import com.mojise.library.chocolate.ext.getColorFromTheme
+import com.mojise.library.chocolate._internal.exts.getColorFromTheme
 import com.mojise.library.chocolate._internal.TAG
 import java.io.Serializable
 

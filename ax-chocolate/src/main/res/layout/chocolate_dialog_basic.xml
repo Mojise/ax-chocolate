@@ -63,7 +63,7 @@ s
         android:gravity="center"
         tools:text="취소"
         android:textSize="15.5sp"
-        android:textColor="@color/chocolate_text_color_black"
+        android:textColor="@color/chocolate_text_color_scale_1"
         android:background="@drawable/chocolate_basic_dialog_negative_button_background"
         tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -9,12 +9,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import com.mojise.library.chocolate.R
-import com.mojise.library.chocolate._internal.exts.getColorOrNull
-import com.mojise.library.chocolate.ext.dp
 import com.mojise.library.chocolate._internal.TAG
-import com.mojise.library.chocolate._internal.chocolate_button_background_disabled_color
-import com.mojise.library.chocolate._internal.chocolate_button_text_disabled_color
-import com.mojise.library.chocolate._internal.chocolate_ripple_color_black
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_background_disabled_color
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_press_effect_enabled
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_ripple_color
+import com.mojise.library.chocolate.ext.dp
+import com.mojise.library.chocolate.ext.getColorOrNull
 import com.mojise.library.chocolate.view.ChocolateView
 import com.mojise.library.chocolate.view.model.Attributes
 import com.mojise.library.chocolate.view.model.ChocolateAndroidAttribute
@@ -61,7 +61,7 @@ internal object ChocolateViewHelper {
         val chocolateTypedArray = context.obtainStyledAttributes(attrs, R.styleable.chocolateViewAttributes)
         val chocolateAttribute = try {
             // 눌림 효과 속성
-            val pressEffectStrengthInt = chocolateTypedArray.getInt(R.styleable.chocolateViewAttributes_chocolate_PressEffectStrengthLevel, PressEffectStrength.Normal.level)
+            val pressEffectStrengthInt = chocolateTypedArray.getInt(R.styleable.chocolateViewAttributes_chocolate_PressEffectStrengthLevel, PressEffectStrength.Deep.level)
             val pressEffectStrength = PressEffectStrength.valueOf(pressEffectStrengthInt)
             val pressEffectScaleRatio = chocolateTypedArray.getFloat(R.styleable.chocolateViewAttributes_chocolate_PressEffectScaleRatio, -1f)
                 .takeIf { it in 0f..1f }
@@ -72,38 +72,36 @@ internal object ChocolateViewHelper {
             val strokeEnabledColor = chocolateTypedArray.getColorOrNull(R.styleable.chocolateViewAttributes_chocolate_StrokeColor)
             val strokeSelectedColor = chocolateTypedArray.getColorOrNull(R.styleable.chocolateViewAttributes_chocolate_StrokeSelectedColor)
             val strokeDisabledColor = chocolateTypedArray.getColorOrNull(R.styleable.chocolateViewAttributes_chocolate_StrokeDisabledColor)
-            val strokeColors = if (strokeWidth > 0f && (strokeSelectedColor != null || strokeEnabledColor != null || strokeDisabledColor != null)) {
+            val strokeColors =
+                if (strokeWidth > 0f && (strokeSelectedColor != null || strokeEnabledColor != null || strokeDisabledColor != null))
                 ChocolateColorState(
                     enabledColor = strokeEnabledColor ?: Color.TRANSPARENT,
                     selectedColor = strokeSelectedColor ?: strokeEnabledColor ?: Color.TRANSPARENT,
-                    disabledColor = strokeDisabledColor ?: view.chocolate_button_text_disabled_color,
+                    disabledColor = strokeDisabledColor ?: Color.TRANSPARENT,
                 )
-            } else {
-                null
-            }
+                else null
 
             val backgroundEnabledColor = chocolateTypedArray.getColorOrNull(R.styleable.chocolateViewAttributes_chocolate_BackgroundColor)
             val backgroundSelectedColor = chocolateTypedArray.getColorOrNull(R.styleable.chocolateViewAttributes_chocolate_BackgroundSelectedColor)
             val backgroundDisabledColor = chocolateTypedArray.getColorOrNull(R.styleable.chocolateViewAttributes_chocolate_BackgroundDisabledColor)
-            val backgroundColors = if (backgroundSelectedColor != null || backgroundEnabledColor != null || backgroundDisabledColor != null) {
+            val backgroundColors =
+                if (backgroundSelectedColor != null || backgroundEnabledColor != null || backgroundDisabledColor != null)
                 ChocolateColorState(
                     enabledColor = backgroundEnabledColor ?: Color.TRANSPARENT,
                     selectedColor = backgroundSelectedColor ?: backgroundEnabledColor ?: Color.TRANSPARENT,
-                    disabledColor = backgroundDisabledColor ?: view.chocolate_button_background_disabled_color,
+                    disabledColor = backgroundDisabledColor ?: view.theme_chocolate_background_disabled_color,
                 )
-            } else {
-                null
-            }
+                else null
 
             ChocolateAttribute(
-                isPressEffectEnabled = chocolateTypedArray.getBoolean(R.styleable.chocolateViewAttributes_chocolate_PressEffectEnabled, true),
+                isPressEffectEnabled = chocolateTypedArray.getBoolean(R.styleable.chocolateViewAttributes_chocolate_PressEffectEnabled, view.theme_chocolate_press_effect_enabled),
                 pressEffectScaleRatio = pressEffectScaleRatio,
                 cornerRadius = chocolateTypedArray.getDimension(R.styleable.chocolateViewAttributes_chocolate_CornerRadius, CORNER_RADIUS_NORMAL_PIXEL.dp),
 
                 ripplePosition = chocolateTypedArray.getInt(R.styleable.chocolateViewAttributes_chocolate_RippleApplyTo, DrawablePosition.Foreground.value)
                     .let(DrawablePosition::valueOf),
                 rippleColors = ChocolateColorState.Transparent.apply {
-                    enabledColor = chocolateTypedArray.getColor(R.styleable.chocolateViewAttributes_chocolate_RippleColor, view.chocolate_ripple_color_black)
+                    enabledColor = chocolateTypedArray.getColor(R.styleable.chocolateViewAttributes_chocolate_RippleColor, view.theme_chocolate_ripple_color)
                     selectedColor = chocolateTypedArray.getColor(R.styleable.chocolateViewAttributes_chocolate_RippleSelectedColor, NO_COLOR)
                         .takeIf { it != NO_COLOR }
                         ?: enabledColor
@@ -163,7 +161,7 @@ internal object ChocolateViewHelper {
     /**
      * [ChocolateView]에서 사용되는 뷰의 터치 이벤트 발생 시, 눌림 효과 애니메이션
      */
-    fun showPressEffectOnTouch(
+    fun animatePressEffectOnTouch(
         view: View,
         event: MotionEvent?,
         pressEffectScaleRatio: Float,
