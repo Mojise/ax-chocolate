@@ -11,23 +11,51 @@ import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.DecelerateInterpolator
+import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.MATCH_CONSTRAINT
+import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.PARENT_ID
 import androidx.core.animation.doOnEnd
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
+import androidx.core.view.marginEnd
+import androidx.core.view.marginStart
+import androidx.core.view.setMargins
 import androidx.core.view.setPadding
+import androidx.core.view.updateLayoutParams
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.mojise.library.chocolate.R
 import com.mojise.library.chocolate._internal.TAG
-import com.mojise.library.chocolate._internal.theme.*
 import com.mojise.library.chocolate._internal.etc.DecelerateInterpolatorLayoutTransition
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_background_color
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_background_corner_radius
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_background_disabled_color
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_box_padding_horizontal
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_box_padding_vertical
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_chain_style
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_font_family_res_id_or_zero
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_gravity
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_icon_margin_with_text
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_icon_padding
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_icon_position
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_ripple_color
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_text_color
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_text_disabled_color
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_text_padding_bottom
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_text_padding_top
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_text_size
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_text_style
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_press_effect_strength_level
+import com.mojise.library.chocolate.ext.dp
 import com.mojise.library.chocolate.ext.getColorOrNull
+import com.mojise.library.chocolate.ext.getDimensionOrNull
 import com.mojise.library.chocolate.ext.setPaddingBottom
 import com.mojise.library.chocolate.ext.setPaddingTop
-import com.mojise.library.chocolate.ext.dp
 import com.mojise.library.chocolate.ext.useCompat
 import com.mojise.library.chocolate.view.ChocolateView
 import com.mojise.library.chocolate.view.helper.ChocolateViewHelper
@@ -37,10 +65,18 @@ import com.mojise.library.chocolate.view.model.DrawablePosition
 import com.mojise.library.chocolate.view.model.PressEffectStrength
 import com.mojise.library.chocolate.view.util.ChocolateViewAttributesUtil
 import com.mojise.library.chocolate.view.util.ChocolateViewUtil
+import kotlin.math.sqrt
 
-open class ChocolateBoxButton @JvmOverloads constructor(
+class ChocolateBoxButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr), ChocolateView {
+
+    /**
+     * 터치 시 눌림 효과 사용 여부
+     */
+    override var isPressEffectEnabled: Boolean
+        get() = attributes.isPressEffectEnabled
+        set(value) { attributes.isPressEffectEnabled = value }
 
     /**
      * ### 로딩 상태 여부
@@ -51,34 +87,78 @@ open class ChocolateBoxButton @JvmOverloads constructor(
         set(loading) {
             field = loading
             binding.loading.isVisible = loading
+            binding.iconContainer.isVisible = if (loading) true else attributes.hasIconDrawable
             isEnabled = loading.not()
+            animateLoading(loading)
         }
 
     /**
-     * 터치 시 눌림 효과 사용 여부
+     * 버튼 텍스트 설정
      */
-    override var isPressEffectEnabled: Boolean
-        get() = attributes.isPressEffectEnabled
-        set(value) { attributes.isPressEffectEnabled = value }
+    var text: CharSequence
+        get() = binding.textView.text
+        set(value) {
+            binding.textView.text = value
+            binding.textView.isVisible = value.isNotBlank()
+        }
 
     private val isLayoutTransitionEnabled: Boolean
         get() = layoutTransition != null
 
-    protected val binding: ViewBinding
-    protected val attributes: ChocolateBoxButtonAttributes = ChocolateBoxButtonAttributes()
+    private val binding: ViewBinding
+    private val attributes: ChocolateBoxButtonAttributes = ChocolateBoxButtonAttributes()
 
-    private var animatorSet: AnimatorSet? = null
+    private var enabledAnimatorSet: AnimatorSet? = null
+    private var loadingAnimatorSet: AnimatorSet? = null
+
     /** android:background로 설정한 것인지, 초콜릿 버튼의 백그라운드 색상 설정 방식으로 설정한 것인지 여부 */
     private var isUserSetBackground = false
 
     init {
-        val view = inflate(context, R.layout.chocolate_box_button, this)
-
         binding = ViewBinding(
-            textView = view.findViewById(R.id.chocolate_box_button_text),
-            iconLeft = view.findViewById(R.id.chocolate_box_button_icon_left),
-            iconRight = view.findViewById(R.id.chocolate_box_button_icon_right),
-            loading = view.findViewById(R.id.chocolate_box_button_loading),
+            loading = CircularProgressIndicator(context, attrs, defStyleAttr).also {
+                it.layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT).also { params ->
+                    params.gravity = android.view.Gravity.CENTER
+                    params.setMargins(0) // 이것도 필요함 (why...?)
+                }
+                it.setPadding(0) // 이것도 필요함 (why...?)
+                it.id = R.id.chocolate_box_button_loading
+                it.indicatorInset = 0
+                it.trackThickness = 2.2f.dp.toInt()
+                it.trackCornerRadius = 10.dp
+                it.setIndicatorColor(theme_chocolate_box_button_text_color)
+                it.isIndeterminate = true
+                it.isVisible = false
+            },
+            icon = AppCompatImageView(context, attrs, defStyleAttr).also {
+                it.layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT).also { params ->
+                    params.gravity = android.view.Gravity.CENTER
+                }
+                it.id = R.id.chocolate_box_button_icon
+                it.adjustViewBounds = true
+                it.isVisible = false
+            },
+            iconContainer = FrameLayout(context, attrs, defStyleAttr).also {
+                it.layoutParams = LayoutParams(MATCH_CONSTRAINT, MATCH_CONSTRAINT).also { params ->
+                    params.matchConstraintPercentHeight = 1f
+                    params.dimensionRatio = "1:1"
+                    params.setMargins(0) // 이것도 필요함 (why...?)
+                }
+                it.id = R.id.chocolate_box_button_icon_container
+                it.setPadding(0) // 이게 있어야 icon=null일 떄, loading이 보임 (원래 0인데 왜...?)
+                it.isVisible = false
+            },
+            textView = AppCompatTextView(context, attrs, defStyleAttr).also {
+                it.layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT).also { params ->
+                    params.constrainedWidth = true
+                    params.constrainedHeight = true
+                    params.goneStartMargin = 0
+                    params.goneEndMargin = 0
+                }
+                it.id = R.id.chocolate_box_button_text
+                it.maxLines = 1
+                it.ellipsize = android.text.TextUtils.TruncateAt.END
+            },
         )
 
         // Android 속성 가져오기
@@ -100,8 +180,8 @@ open class ChocolateBoxButton @JvmOverloads constructor(
         ChocolateViewAttributesUtil.obtainAndroidPaddings(
             context = context,
             attrs = attrs,
-            defaultVerticalPadding = 14.dp,
-            defaultHorizontalPadding = 28.dp,
+            defaultVerticalPadding = theme_chocolate_box_button_box_padding_vertical,
+            defaultHorizontalPadding = theme_chocolate_box_button_box_padding_horizontal,
         ).let { padding ->
             setPadding(padding.start, padding.top, padding.end, padding.bottom)
         }
@@ -118,6 +198,14 @@ open class ChocolateBoxButton @JvmOverloads constructor(
                 ?: pressEffectStrength.value
 
             attributes.pressEffectScaleRatio = pressEffectScaleRatio
+
+            // 아이콘 및 텍스트 위치 관련 속성
+            attributes.iconPosition = array.getInt(R.styleable.ChocolateBoxButton_chocolate_BoxButton_IconPosition, theme_chocolate_box_button_icon_position)
+                .let(IconPosition::fromValue)
+            attributes.chainStyle = array.getInt(R.styleable.ChocolateBoxButton_chocolate_BoxButton_ChainStyle, theme_chocolate_box_button_chain_style)
+                .let(ChainStyle::fromValue)
+            attributes.boxButtonGravity = array.getInt(R.styleable.ChocolateBoxButton_chocolate_BoxButton_Gravity, theme_chocolate_box_button_gravity)
+                .let(Gravity::fromValue)
 
             // 테두리 속성 (width > 0 이고, 색상이 하나 이상 지정된 경우에만 적용)
             val strokeWidth = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_StrokeWidth, 0f)
@@ -168,8 +256,8 @@ open class ChocolateBoxButton @JvmOverloads constructor(
             }
 
             // 텍스트 속성
-            array.getString(R.styleable.ChocolateBoxButton_chocolate_BoxButton_Text)
-                ?.let(binding.textView::setText)
+            text = array.getString(R.styleable.ChocolateBoxButton_chocolate_BoxButton_Text) ?: ""
+
             attributes.textSize = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextSize, theme_chocolate_box_button_text_size)
             attributes.textColor = array.getColor(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextColor, theme_chocolate_box_button_text_color)
             attributes.textDisabledColor = array.getColor(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextDisabledColor, theme_chocolate_box_button_text_disabled_color)
@@ -195,40 +283,222 @@ open class ChocolateBoxButton @JvmOverloads constructor(
                 .let(Float::toInt)
                 .let(binding.textView::setPaddingBottom)
 
-            // Left 아이콘 속성
-            attributes.leftIconDrawable = array.getDrawable(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconDrawable)
-            attributes.leftIconTint = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconTint)
-            attributes.leftIconPadding = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconPadding, theme_chocolate_box_button_left_icon_padding)
-            attributes.leftIconMarginWithText = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_LeftIconMarginWithText, theme_chocolate_box_button_left_icon_margin_with_text)
-
-            // Right 아이콘 속성
-            attributes.rightIconDrawable = array.getDrawable(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconDrawable)
-            attributes.rightIconTint = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconTint)
-            attributes.rightIconPadding = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconPadding, theme_chocolate_box_button_right_icon_padding)
-            attributes.rightIconMarginWithText = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_RightIconMarginWithText, theme_chocolate_box_button_right_icon_margin_with_text)
+            attributes.iconDrawable = array.getDrawable(R.styleable.ChocolateBoxButton_chocolate_BoxButton_Icon)
+            attributes.iconTint = array.getColorOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_IconTint)
+            attributes.iconSize = array.getDimensionOrNull(R.styleable.ChocolateBoxButton_chocolate_BoxButton_IconSize)
+            attributes.iconPadding = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_IconPadding, theme_chocolate_box_button_icon_padding)
+            attributes.iconMarginWithText = array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_IconMarginWithText, theme_chocolate_box_button_icon_margin_with_text)
         }
 
         binding.textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, attributes.textSize)
         binding.textView.setTextColor(attributes.textColor)
 
-        attributes.leftIconDrawable?.let { leftIconDrawable ->
-            binding.iconLeft.setImageDrawable(leftIconDrawable)
-            binding.iconLeft.setPadding(attributes.leftIconPadding.toInt())
-            attributes.leftIconTint?.let(binding.iconLeft::setColorFilter)
-            binding.iconLeft.isVisible = true
+        if (attributes.hasIconDrawable) {
+            if (attributes.isSpecificIconSize) {
+                binding.iconContainer.updateLayoutParams<LayoutParams> {
+                    width = LayoutParams.WRAP_CONTENT
+                    height = LayoutParams.WRAP_CONTENT
+                }
+                binding.icon.updateLayoutParams<FrameLayout.LayoutParams> {
+                    width = attributes.iconSize!!.toInt()
+                    height = attributes.iconSize!!.toInt()
+                }
+                binding.loading.updateLayoutParams<FrameLayout.LayoutParams> {
+                    width = attributes.iconSize!!.toInt()
+                    height = attributes.iconSize!!.toInt()
+                }
+            }
+            binding.icon.setImageDrawable(attributes.iconDrawable)
+            binding.icon.setPadding(attributes.iconPadding.toInt())
+            attributes.iconTint?.let(binding.icon::setColorFilter)
+
+            binding.iconContainer.isVisible = true
+            binding.icon.isVisible = true
+        } else {
+            binding.iconContainer.isVisible = false
+            binding.icon.isVisible = false
+
         }
 
-        attributes.rightIconDrawable?.let { rightIconDrawable ->
-            binding.iconRight.setImageDrawable(rightIconDrawable)
-            binding.iconRight.setPadding(attributes.rightIconPadding.toInt())
-            attributes.rightIconTint?.let(binding.iconRight::setColorFilter)
-            binding.iconRight.isVisible = true
+        when (attributes.iconPosition) {
+            IconPosition.Left -> {
+                when (attributes.chainStyle) {
+                    ChainStyle.Packed -> {
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_PACKED
+                            horizontalBias = when (attributes.boxButtonGravity) {
+                                Gravity.Start -> 0f
+                                Gravity.Center -> 0.5f
+                                Gravity.End -> 1f
+                            }
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            endToStart = binding.textView.id
+                        }
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToEnd = binding.iconContainer.id
+                            endToEnd = PARENT_ID
+                            marginStart = attributes.iconMarginWithText.toInt()
+                        }
+                    }
+                    ChainStyle.Spread -> {
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_SPREAD_INSIDE
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            endToStart = binding.textView.id
+                        }
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToEnd = binding.iconContainer.id
+                            endToEnd = PARENT_ID
+                        }
+                    }
+                    ChainStyle.SpreadInside -> {
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            matchConstraintPercentHeight = 1f
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            //startToEnd = NO_ID
+                        }
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToEnd = binding.iconContainer.id
+                            endToEnd = PARENT_ID
+                        }
+                    }
+                }
+            }
+            IconPosition.Right -> {
+                when (attributes.chainStyle) {
+                    ChainStyle.Packed -> {
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_PACKED
+                            horizontalBias = when (attributes.boxButtonGravity) {
+                                Gravity.Start -> 0f
+                                Gravity.Center -> 0.5f
+                                Gravity.End -> 1f
+                            }
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            endToStart = binding.iconContainer.id
+                            marginEnd = attributes.iconMarginWithText.toInt()
+                        }
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_PACKED
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToEnd = binding.textView.id
+                            endToEnd = PARENT_ID
+                        }
+                    }
+                    ChainStyle.Spread -> {
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_SPREAD_INSIDE
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            endToStart = binding.iconContainer.id
+                        }
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_SPREAD_INSIDE
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToEnd = binding.textView.id
+                            endToEnd = PARENT_ID
+                        }
+                    }
+                    ChainStyle.SpreadInside -> {
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            horizontalBias = 0.5f
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            endToStart = binding.iconContainer.id
+                        }
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            matchConstraintPercentHeight = 1f
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            //startToEnd = NO_ID
+                            endToEnd = PARENT_ID
+                        }
+                    }
+                }
+            }
         }
+
+        updateIconContainer()
 
         // 로딩바 색상 설정
         binding.loading.setIndicatorColor(
             attributes.backgroundColors.enabledColor
         )
+
+        binding.iconContainer.addView(binding.icon)
+        binding.iconContainer.addView(binding.loading)
+        addView(binding.textView)
+        addView(binding.iconContainer)
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+
+        post {
+            when (attributes.iconPosition) {
+                IconPosition.Left -> {
+                    if (attributes.chainStyle == ChainStyle.SpreadInside) {
+                        val iconContainerWidth = binding.iconContainer.width
+                        if (iconContainerWidth != binding.textView.marginEnd) {
+                            binding.textView.updateLayoutParams<MarginLayoutParams> {
+                                marginEnd = binding.iconContainer.width
+                            }
+                        }
+                    }
+                }
+                IconPosition.Right -> {
+                    if (attributes.chainStyle == ChainStyle.SpreadInside) {
+                        val iconContainerWidth = binding.iconContainer.width
+                        if (iconContainerWidth != binding.textView.marginStart) {
+                            binding.textView.updateLayoutParams<MarginLayoutParams> {
+                                marginStart = binding.iconContainer.width
+                            }
+                        }
+                    }
+                }
+            }
+            when {
+                attributes.iconDrawable == null -> {
+                    val indicatorSize = (binding.textView.height * (2/3f)).toInt()
+                    binding.loading.indicatorSize = indicatorSize
+                    binding.loading.trackThickness = calculateLoadingThickness(indicatorSize.toFloat())
+                }
+                attributes.isSpecificIconSize.not() -> {
+                    val indicatorSize = binding.textView.height
+                    binding.loading.indicatorSize = indicatorSize
+                    binding.loading.trackThickness = calculateLoadingThickness(indicatorSize.toFloat())
+                }
+                else -> {
+                    val indicatorSize = attributes.iconSize!!.toInt()
+                    binding.loading.indicatorSize = indicatorSize
+                    binding.loading.trackThickness = calculateLoadingThickness(indicatorSize.toFloat())
+                }
+            }
+        }
+    }
+
+    private fun calculateLoadingThickness(diameterDp: Float): Int {
+        val baseThickness = 2.dp   // 최소 두께
+        val scalingFactor = 0.12f  // 조정 값
+        return (baseThickness + scalingFactor * sqrt(diameterDp)).toInt()
     }
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean = try {
@@ -268,10 +538,30 @@ open class ChocolateBoxButton @JvmOverloads constructor(
         super.setBackground(backgroundDrawable)
     }
 
+    private fun updateIconContainer() {
+        val isTextVisible = binding.textView.isVisible
+        val isSpecificIconSize = attributes.isSpecificIconSize
+
+        binding.iconContainer.updateLayoutParams<LayoutParams> {
+            width =  if (isSpecificIconSize) WRAP_CONTENT else MATCH_CONSTRAINT
+            height = if (isSpecificIconSize) WRAP_CONTENT else MATCH_CONSTRAINT
+        }
+
+        binding.icon.updateLayoutParams<FrameLayout.LayoutParams> {
+            width = when {
+                isSpecificIconSize -> attributes.iconSize!!.toInt()
+                isTextVisible ->      MATCH_PARENT
+                else ->               WRAP_CONTENT
+            }
+            height = width
+        }
+    }
+
     /**
      * 버튼의 [enabled] 상태 변경 시 배경 색상, 텍스트 색상, 아이콘 색상을 변경하는 애니메이션을 실행.
      */
     private fun animateButtonEnableStateColorChanged(enabled: Boolean) {
+        Log.e(TAG, "animateButtonEnableStateColorChanged: ")
         if (isUserSetBackground) {
             return
         }
@@ -324,66 +614,85 @@ open class ChocolateBoxButton @JvmOverloads constructor(
         }
         animators.add(textColorAnimator)
 
-        if (binding.iconLeft.isVisible && binding.iconLeft.drawable != null) {
-            // 시작 Left 아이콘 색상
-            val startIconLeftColor =
+        if (binding.icon.isVisible && binding.icon.drawable != null) {
+            // 시작 아이콘 색상
+            val startIconColor =
                 if (enabled) attributes.textDisabledColor
-                else attributes.leftIconTint ?: Color.TRANSPARENT
-            // 목표 Left 아이콘 색상
-            val targetIconLeftColor =
-                if (enabled) attributes.leftIconTint ?: Color.TRANSPARENT
+                else attributes.iconTint ?: Color.TRANSPARENT
+            // 목표 아이콘 색상
+            val targetIconColor =
+                if (enabled) attributes.iconTint ?: Color.TRANSPARENT
                 else attributes.textDisabledColor
             // 아이콘 색상 변경 애니메이션
-            val iconLeftColorAnimator = ValueAnimator.ofArgb(startIconLeftColor, targetIconLeftColor).also {
+            val iconColorAnimator = ValueAnimator.ofArgb(startIconColor, targetIconColor).also {
                 it.duration = if (isLayoutTransitionEnabled) ANIMATION_DURATION else 0
                 it.interpolator = DecelerateInterpolator(ANIMATION_FACTOR)
                 it.addUpdateListener { animation ->
                     val animatedValue = animation.animatedValue as Int
-                    binding.iconLeft.setColorFilter(animatedValue)
+                    binding.icon.setColorFilter(animatedValue)
                 }
                 it.doOnEnd {
-                    binding.iconLeft.setColorFilter(targetIconLeftColor)
+                    binding.icon.setColorFilter(targetIconColor)
                 }
             }
-            animators.add(iconLeftColorAnimator)
-        }
-
-        if (binding.iconRight.isVisible && binding.iconRight.drawable != null) {
-            // 시작 Right 아이콘 색상
-            val startIconRightColor =
-                if (enabled) attributes.textDisabledColor
-                else attributes.rightIconTint ?: Color.TRANSPARENT
-            // 목표 Right 아이콘 색상
-            val targetIconRightColor =
-                if (enabled) attributes.rightIconTint ?: Color.TRANSPARENT
-                else attributes.textDisabledColor
-            // 아이콘 색상 변경 애니메이션
-            val iconRightColorAnimator = ValueAnimator.ofArgb(startIconRightColor, targetIconRightColor).also {
-                it.duration = if (isLayoutTransitionEnabled) ANIMATION_DURATION else 0
-                it.interpolator = DecelerateInterpolator(ANIMATION_FACTOR)
-                it.addUpdateListener { animation ->
-                    val animatedValue = animation.animatedValue as Int
-                    binding.iconRight.setColorFilter(animatedValue)
-                }
-                it.doOnEnd {
-                    binding.iconRight.setColorFilter(targetIconRightColor)
-                }
-            }
-            animators.add(iconRightColorAnimator)
+            animators.add(iconColorAnimator)
         }
 
         // 애니메이션 실행
-        if (animatorSet?.isRunning == true) {
+        if (enabledAnimatorSet?.isRunning == true) {
             // 아직 이전의 애니메이션이 실행 중일 때, 이전의 애니메이션을 중지한 뒤 새로운 애니메이션을 실행
-            animatorSet?.doOnEnd {
-                animatorSet = AnimatorSet().apply {
+            enabledAnimatorSet?.doOnEnd {
+                enabledAnimatorSet = AnimatorSet().apply {
                     playTogether(animators.toList())
                     start()
                 }
             }
-            animatorSet?.end()
+            enabledAnimatorSet?.end()
         } else {
-            animatorSet = AnimatorSet().apply {
+            enabledAnimatorSet = AnimatorSet().apply {
+                playTogether(animators.toList())
+                start()
+            }
+        }
+    }
+
+    private fun animateLoading(isLoading: Boolean) {
+        Log.e(TAG, "animateLoading: ")
+        if (binding.icon.drawable == null || binding.icon.isVisible.not()) {
+            return
+        }
+
+        val animators = mutableListOf<ValueAnimator>()
+
+        val startScale = if (isLoading) 1f else 0.5f
+        val targetScale = if (isLoading) 0.5f else 1f
+        val iconScaleAnimator = ValueAnimator.ofFloat(startScale, targetScale).also {
+            it.duration = if (isLayoutTransitionEnabled) ANIMATION_DURATION else 0
+            it.interpolator = DecelerateInterpolator(ANIMATION_FACTOR)
+            it.addUpdateListener { animation ->
+                val animatedValue = animation.animatedValue as Float
+                binding.icon.scaleX = animatedValue
+                binding.icon.scaleY = animatedValue
+            }
+            it.doOnEnd {
+                binding.icon.scaleX = targetScale
+                binding.icon.scaleY = targetScale
+            }
+        }
+        animators.add(iconScaleAnimator)
+
+        // 애니메이션 실행
+        if (loadingAnimatorSet?.isRunning == true) {
+            // 아직 이전의 애니메이션이 실행 중일 때, 이전의 애니메이션을 중지한 뒤 새로운 애니메이션을 실행
+            loadingAnimatorSet?.doOnEnd {
+                loadingAnimatorSet = AnimatorSet().apply {
+                    playTogether(animators.toList())
+                    start()
+                }
+            }
+            loadingAnimatorSet?.end()
+        } else {
+            loadingAnimatorSet = AnimatorSet().apply {
                 playTogether(animators.toList())
                 start()
             }
@@ -410,16 +719,49 @@ open class ChocolateBoxButton @JvmOverloads constructor(
         }, timeout)
     }
 
-    protected data class ViewBinding(
-        val iconLeft: AppCompatImageView,
-        val textView: AppCompatTextView,
-        val iconRight: AppCompatImageView,
+    internal enum class IconPosition(val value: Int) {
+        Left(0),
+        Right(1);
+        companion object {
+            val Default = Left
+            fun fromValue(value: Int) = entries.first { it.value == value }
+        }
+    }
+
+    internal enum class ChainStyle(val value: Int) {
+        Packed(0),
+        Spread(1),
+        SpreadInside(2);
+        companion object {
+            val Default = Packed
+            fun fromValue(value: Int) = entries.first { it.value == value }
+        }
+    }
+
+    internal enum class Gravity(val value: Int) {
+        Start(0),
+        Center(1),
+        End(2);
+        companion object {
+            val Default = Center
+            fun fromValue(value: Int) = entries.first { it.value == value }
+        }
+    }
+
+    private data class ViewBinding(
         val loading: CircularProgressIndicator,
+        val icon: AppCompatImageView,
+        val iconContainer: FrameLayout,
+        val textView: AppCompatTextView,
     )
 
-    protected data class ChocolateBoxButtonAttributes(
+    private data class ChocolateBoxButtonAttributes(
         var isPressEffectEnabled: Boolean = true,
         var pressEffectScaleRatio: Float = 1f,
+
+        var iconPosition: IconPosition = IconPosition.Default,
+        var chainStyle: ChainStyle = ChainStyle.Default,
+        var boxButtonGravity: Gravity = Gravity.Default,
 
         var rippleColors: ChocolateColorState = ChocolateColorState.Transparent,
         var ripplePosition: DrawablePosition = DrawablePosition.Foreground,
@@ -431,15 +773,18 @@ open class ChocolateBoxButton @JvmOverloads constructor(
         var textSize: Float = 0f,
         var textColor: Int = Color.TRANSPARENT,
         var textDisabledColor: Int = Color.TRANSPARENT,
-        var leftIconDrawable: Drawable? = null,
-        var leftIconTint: Int? = null,
-        var leftIconPadding: Float = 0f,
-        var leftIconMarginWithText: Float = 0f,
-        var rightIconDrawable: Drawable? = null,
-        var rightIconTint: Int? = null,
-        var rightIconPadding: Float = 0f,
-        var rightIconMarginWithText: Float = 0f,
-    )
+
+        var iconSize: Float? = null,
+        var iconDrawable: Drawable? = null,
+        var iconTint: Int? = null,
+        var iconPadding: Float = 0f,
+        var iconMarginWithText: Float = 0f,
+    ) {
+        val hasIconDrawable: Boolean
+            get() = iconDrawable != null
+        val isSpecificIconSize: Boolean
+            get() = iconSize != null
+    }
 
     companion object {
         private const val ANIMATION_DURATION = 180L

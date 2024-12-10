@@ -7,7 +7,6 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <!-- Ax-Chocolate 디자인 시스템 색상 -->
-        <!--<item name="chocolate_BoxButton_TextDisabledColor">@color/my_box_button_text_disabled_color</item>-->
     </style>
 
     <style name="Theme.AxChocolate" parent="Base.Theme.AxChocolate" />

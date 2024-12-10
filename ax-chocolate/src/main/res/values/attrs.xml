@@ -48,6 +48,10 @@
         <enum name="deep_extreme" value="4"/> <!-- scale=0.90 : 눌림 효과 상당히 큼 -->
     </attr>
 
+    <!-- ChocolateBoxButton 관련 속성 -->
+    <attr name="chocolate_BoxButton_Theme_BoxPaddingVertical" format="dimension"/>
+    <attr name="chocolate_BoxButton_Theme_BoxPaddingHorizontal" format="dimension"/>
+
     <!-- Chocolate Common Attributes -->
     <declare-styleable name="chocolateViewAttributes">
         <attr name="chocolate_PressEffectEnabled"/>
@@ -272,33 +276,37 @@
         <attr name="chocolate_BoxButton_TextPaddingTop" format="dimension"/>
         <attr name="chocolate_BoxButton_TextPaddingBottom" format="dimension"/>
 
-        <!-- [ChocolateBoxButton] 왼쪽 아이콘 Drawable -->
-        <attr name="chocolate_BoxButton_LeftIconDrawable" format="reference"/>
-        <!-- [ChocolateBoxButton] 왼쪽 아이콘 Tint 색상 -->
-        <attr name="chocolate_BoxButton_LeftIconTint" format="color"/>
-        <!-- [ChocolateBoxButton] 왼쪽 아이콘 Padding -->
-        <attr name="chocolate_BoxButton_LeftIconPadding" format="dimension"/>
-        <!-- [ChocolateBoxButton] 왼쪽 아이콘 텍스트와의 마진 -->
-        <attr name="chocolate_BoxButton_LeftIconMarginWithText" format="dimension"/>
-        <!-- [ChocolateBoxButton] 오른쪽 아이콘 Drawable -->
-        <attr name="chocolate_BoxButton_RightIconDrawable" format="reference"/>
-        <!-- [ChocolateBoxButton] 오른쪽 아이콘 Tint 색상 -->
-        <attr name="chocolate_BoxButton_RightIconTint" format="color"/>
-        <!-- [ChocolateBoxButton] 오른쪽 아이콘 Padding -->
-        <attr name="chocolate_BoxButton_RightIconPadding" format="dimension"/>
-        <!-- [ChocolateBoxButton] 오른쪽 아이콘 텍스트와의 마진 -->
-        <attr name="chocolate_BoxButton_RightIconMarginWithText" format="dimension"/>
+        <attr name="chocolate_BoxButton_Icon" format="reference"/>
+        <attr name="chocolate_BoxButton_IconTint" format="color"/>
+        <attr name="chocolate_BoxButton_IconSize" format="dimension"/>
+        <attr name="chocolate_BoxButton_IconPadding" format="dimension"/>
+        <attr name="chocolate_BoxButton_IconMarginWithText" format="dimension"/>
 
-        <attr name="chocolate_BoxButton_RippleColor" format="color"/>
-        <attr name="chocolate_BoxButton_RippleSelectedColor" format="color"/>
         <attr name="chocolate_BoxButton_StrokeWidth" format="dimension"/>
         <attr name="chocolate_BoxButton_StrokeColor" format="color"/>
         <attr name="chocolate_BoxButton_StrokeDisabledColor" format="color"/>
         <attr name="chocolate_BoxButton_StrokeSelectedColor" format="color"/>
+        <attr name="chocolate_BoxButton_RippleColor" format="color"/>
+        <attr name="chocolate_BoxButton_RippleSelectedColor" format="color"/>
         <attr name="chocolate_BoxButton_BackgroundColor" format="color"/>
         <attr name="chocolate_BoxButton_BackgroundSelectedColor" format="color"/>
         <attr name="chocolate_BoxButton_BackgroundDisabledColor" format="color"/>
         <attr name="chocolate_BoxButton_BackgroundCornerRadius" format="dimension"/>
+
+        <attr name="chocolate_BoxButton_IconPosition" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr name="chocolate_BoxButton_ChainStyle" format="enum">
+            <enum name="packed" value="0"/>
+            <enum name="spread" value="1"/>
+            <enum name="spread_inside" value="2"/>
+        </attr>
+        <attr name="chocolate_BoxButton_Gravity" format="enum">
+            <enum name="start" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="end" value="2"/>
+        </attr>
     </declare-styleable>
 
     <!-- LoadingIndicatorView -->

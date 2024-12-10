@@ -22,6 +22,8 @@
         <item name="chocolate_TextView_TextDisabledColor">@color/chocolate_box_button_text_disabled_day</item>
 
         <!-- ChocolateBoxButton's attributes -->
+        <item name="chocolate_BoxButton_Theme_BoxPaddingVertical">14dp</item>
+        <item name="chocolate_BoxButton_Theme_BoxPaddingHorizontal">18dp</item>
         <item name="chocolate_BoxButton_TextSize">18sp</item>
         <item name="chocolate_BoxButton_TextColor">@color/chocolate_box_button_text_day</item>
         <item name="chocolate_BoxButton_TextDisabledColor">@color/chocolate_box_button_text_disabled_day</item>
@@ -29,10 +31,10 @@
         <item name="chocolate_BoxButton_FontFamily">@null</item>
         <item name="chocolate_BoxButton_TextPaddingTop">0dp</item>
         <item name="chocolate_BoxButton_TextPaddingBottom">0dp</item>
-        <item name="chocolate_BoxButton_LeftIconMarginWithText">4dp</item>
-        <item name="chocolate_BoxButton_LeftIconPadding">1dp</item>
-        <item name="chocolate_BoxButton_RightIconMarginWithText">0dp</item>
-        <item name="chocolate_BoxButton_RightIconPadding">1dp</item>
+        <item name="chocolate_BoxButton_IconTint">@color/chocolate_box_button_text_day</item>
+        <item name="chocolate_BoxButton_IconPadding">2dp</item>
+        <item name="chocolate_BoxButton_IconMarginWithText">8dp</item>
+
         <item name="chocolate_BoxButton_RippleColor">@color/chocolate_ripple_color_black_day</item>
         <item name="chocolate_BoxButton_BackgroundColor">@color/chocolate_primary_color_day</item>
         <item name="chocolate_BoxButton_BackgroundDisabledColor">@color/chocolate_box_button_background_disabled_day</item>
@@ -66,6 +68,8 @@
         <item name="chocolate_TextView_TextDisabledColor">@color/chocolate_box_button_text_disabled_night</item>
 
         <!-- ChocolateBoxButton's attributes -->
+        <item name="chocolate_BoxButton_Theme_BoxPaddingVertical">14dp</item>
+        <item name="chocolate_BoxButton_Theme_BoxPaddingHorizontal">18dp</item>
         <item name="chocolate_BoxButton_TextSize">18sp</item>
         <item name="chocolate_BoxButton_TextColor">@color/chocolate_box_button_text_night</item>
         <item name="chocolate_BoxButton_TextDisabledColor">@color/chocolate_box_button_text_disabled_night</item>
@@ -73,10 +77,9 @@
         <item name="chocolate_BoxButton_FontFamily">@null</item>
         <item name="chocolate_BoxButton_TextPaddingTop">0dp</item>
         <item name="chocolate_BoxButton_TextPaddingBottom">0dp</item>
-        <item name="chocolate_BoxButton_LeftIconMarginWithText">4dp</item>
-        <item name="chocolate_BoxButton_LeftIconPadding">1dp</item>
-        <item name="chocolate_BoxButton_RightIconMarginWithText">0dp</item>
-        <item name="chocolate_BoxButton_RightIconPadding">1dp</item>
+        <item name="chocolate_BoxButton_IconTint">@color/chocolate_box_button_text_night</item>
+        <item name="chocolate_BoxButton_IconPadding">2dp</item>
+        <item name="chocolate_BoxButton_IconMarginWithText">8dp</item>
         <item name="chocolate_BoxButton_RippleColor">@color/chocolate_ripple_color_black_night</item>
         <item name="chocolate_BoxButton_BackgroundColor">@color/chocolate_primary_color_night</item>
         <item name="chocolate_BoxButton_BackgroundDisabledColor">@color/chocolate_box_button_background_disabled_night</item>

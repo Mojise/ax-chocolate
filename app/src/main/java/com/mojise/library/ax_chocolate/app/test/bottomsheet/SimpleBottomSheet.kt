@@ -1,6 +1,5 @@
 package com.mojise.library.ax_chocolate.app.test.bottomsheet
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,7 +7,6 @@ import com.mojise.library.ax_chocolate.app.R
 import com.mojise.library.ax_chocolate.app.databinding.FragmentFloatingBottomSheetSimpleBinding
 import com.mojise.library.ax_chocolate.app.util.TAG
 import com.mojise.library.chocolate.bottomsheet.ChocolateBottomSheetDialogFragment
-import com.mojise.library.chocolate.ext.dp
 
 class SimpleBottomSheet : ChocolateBottomSheetDialogFragment<FragmentFloatingBottomSheetSimpleBinding>() {
 
@@ -16,6 +14,10 @@ class SimpleBottomSheet : ChocolateBottomSheetDialogFragment<FragmentFloatingBot
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.d(TAG, "SimpleBottomSheet :: onViewCreated :: bottomSheetSimple=$this")
+
+        toString()
 
         binding.btnTest1.setOnClickListener {
             binding.text = "Test1"

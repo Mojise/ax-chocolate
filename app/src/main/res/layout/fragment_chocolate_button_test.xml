@@ -14,12 +14,24 @@
             android:gravity="center">
 
             <com.mojise.library.chocolate.button.box.ChocolateBoxButton
+                android:id="@+id/box_button_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                app:chocolate_BoxButton_IconPosition="right"
+                app:chocolate_BoxButton_BackgroundColor="@color/chocolate_green600"
+                app:chocolate_BoxButton_Gravity="start"
+                app:chocolate_BoxButton_ChainStyle="spread_inside"
+                app:chocolate_BoxButton_Text="초콜릿 버튼 abcd efg qqq"
+                app:chocolate_BoxButton_Icon="@drawable/icon_lock"/>
+
+
+            <com.mojise.library.chocolate.button.box.ChocolateBoxButton
                 android:id="@+id/box_button_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:paddingVertical="8dp"
-                android:animateLayoutChanges="false"
                 app:chocolate_BoxButton_Text="초콜릿 버튼 입니다 1"
                 app:chocolate_BoxButton_TextSize="20sp"/>
 
@@ -28,7 +40,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                app:chocolate_BoxButton_Text="누르면 disabled"/>
+                app:chocolate_BoxButton_Text="누르면 disabled"
+                app:chocolate_BoxButton_TextPaddingBottom="1dp"
+                app:chocolate_BoxButton_Gravity="center"
+                app:chocolate_BoxButton_ChainStyle="spread"
+                app:chocolate_BoxButton_Icon="@drawable/icon_lock"
+                app:chocolate_BoxButton_IconPosition="left"
+                app:chocolate_BoxButton_IconPadding="3dp"/>
+
+            <com.mojise.library.chocolate.button.box.ChocolateBoxButton
+                android:id="@+id/box_button_only_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:chocolate_BoxButton_IconSize="20dp"
+                app:chocolate_BoxButton_Icon="@drawable/icon_lock"/>
 
             <com.mojise.library.chocolate.button.box.ChocolateBoxButton
                 android:id="@+id/box_button_simple"
@@ -41,11 +66,21 @@
                 app:chocolate_BoxButton_Text="초콜릿 버튼 입니다 2"
                 app:chocolate_BoxButton_TextSize="20sp"
                 app:chocolate_BoxButton_TextStyle="bold"
+                app:chocolate_BoxButton_FontFamily="@font/chocolate_s_core_dream_6_bold"
                 app:chocolate_BoxButton_TextColor="@color/white"
-                app:chocolate_BoxButton_TextPaddingBottom="1dp"
-                app:chocolate_BoxButton_LeftIconPadding="2dp"
-                app:chocolate_BoxButton_LeftIconDrawable="@drawable/chocolate_icon_shield"
-                app:chocolate_BoxButton_LeftIconTint="@color/white"/>
+                app:chocolate_BoxButton_IconSize="40dp"
+                app:chocolate_BoxButton_IconPadding="1dp"
+                app:chocolate_BoxButton_Icon="@drawable/chocolate_icon_shield"
+                app:chocolate_BoxButton_IconTint="@color/white"/>
+            
+            <com.mojise.library.chocolate.button.box.ChocolateBoxButton
+                android:id="@+id/box_button_spread_inside"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                app:chocolate_BoxButton_ChainStyle="spread_inside"
+                app:chocolate_BoxButton_Icon="@drawable/icon_shield_sample"
+                app:chocolate_BoxButton_Text="초콜릿 버튼 Spread"/>
 
             <com.mojise.library.chocolate.button.box.ChocolateBoxButton
                 android:id="@+id/box_button_simple2"
@@ -57,9 +92,8 @@
                 app:chocolate_BoxButton_Text="초콜릿 버튼 입니다!!"
                 app:chocolate_BoxButton_TextColor="@color/black"
                 app:chocolate_BoxButton_FontFamily="@font/chocolate_s_core_dream_6_bold"
-                app:chocolate_BoxButton_LeftIconDrawable="@drawable/chocolate_icon_shield"
-                app:chocolate_BoxButton_LeftIconTint="@color/chocolate_black"
-                app:chocolate_BoxButton_LeftIconPadding="2dp" />
+                app:chocolate_BoxButton_Icon="@drawable/chocolate_icon_shield"
+                app:chocolate_BoxButton_IconTint="@color/chocolate_black"/>
 
             <com.mojise.library.chocolate.button.box.ChocolateBoxButton
                 android:id="@+id/box_button_gradient"
@@ -92,10 +126,6 @@
                     app:chocolate_BoxButton_BackgroundCornerRadius="8dp"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-
-
 
             <com.mojise.library.chocolate.button.box.ChocolateBoxButton
                 android:id="@+id/box_button_enabled"

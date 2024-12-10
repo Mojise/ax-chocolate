@@ -17,29 +17,18 @@ import com.mojise.library.chocolate.R
 import com.mojise.library.chocolate.ext.dp
 import java.io.Serializable
 
-private data class ViewBinding(
-    val model: com.mojise.library.chocolate.dialog.AxBasicDialogFragment.UiModel,
-    val content: TextView,
-    val btnNegative: TextView,
-    val btnPositive: ConstraintLayout,
-)
-
 class AxBasicDialogFragment : DialogFragment() {
 
     private lateinit var binding: ViewBinding
+    private lateinit var model: UiModel
 
-    private lateinit var model: AxBasicDialogFragment.UiModel
-
-    private var negativeButtonClickedAction: AxBasicDialogFragment.ClickAction =
-        AxBasicDialogFragment.ClickAction()
-    private var positiveButtonClickedAction: AxBasicDialogFragment.ClickAction =
-        AxBasicDialogFragment.ClickAction()
+    private var negativeButtonClickedAction: ClickAction = ClickAction()
+    private var positiveButtonClickedAction: ClickAction = ClickAction()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model = arguments
-            ?.let { BundleCompat.getSerializable(it,
-                AxBasicDialogFragment.Companion.PARAMS_DATA, AxBasicDialogFragment.UiModel::class.java) }
+            ?.let { BundleCompat.getSerializable(it, PARAMS_DATA, UiModel::class.java) }
             ?: run {
                 dismiss()
                 return
@@ -58,7 +47,7 @@ class AxBasicDialogFragment : DialogFragment() {
 
             it.setOnKeyListener { dialog, keyCode, event ->
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    if (model.dialogType == AxBasicDialogFragment.Type.OneButton) {
+                    if (model.dialogType == Type.OneButton) {
                         return@setOnKeyListener true
                     }
 
@@ -112,8 +101,8 @@ class AxBasicDialogFragment : DialogFragment() {
         }
     }
 
-    fun from(supportFragmentManager: FragmentManager): AxBasicDialogFragment.TwoButtonRequestManager {
-        return AxBasicDialogFragment.TwoButtonRequestManager(
+    fun from(supportFragmentManager: FragmentManager): TwoButtonRequestManager {
+        return TwoButtonRequestManager(
             this,
             supportFragmentManager
         )
@@ -128,7 +117,7 @@ class AxBasicDialogFragment : DialogFragment() {
     }
 
     data class UiModel(
-        val dialogType: AxBasicDialogFragment.Type,
+        val dialogType: Type,
         val title: String,
         val content: String,
         val negativeButtonText: String,
@@ -146,14 +135,14 @@ class AxBasicDialogFragment : DialogFragment() {
     ) {
         fun confirmClicked(isAutoDismiss: Boolean = true, action: () -> Unit) = apply {
             dialog.positiveButtonClickedAction =
-                AxBasicDialogFragment.ClickAction(
+                ClickAction(
                     isAutoDismiss = isAutoDismiss,
                     action = action
                 )
         }
 
         fun show() = dialog.show(supportFragmentManager,
-            AxBasicDialogFragment.Companion.TAG
+            TAG
         )
     }
 
@@ -163,7 +152,7 @@ class AxBasicDialogFragment : DialogFragment() {
     ) {
         fun negativeClicked(isAutoDismiss: Boolean = true, action: () -> Unit) = apply {
             dialog.negativeButtonClickedAction =
-                AxBasicDialogFragment.ClickAction(
+                ClickAction(
                     isAutoDismiss = isAutoDismiss,
                     action = action
                 )
@@ -171,25 +160,32 @@ class AxBasicDialogFragment : DialogFragment() {
 
         fun positiveClicked(isAutoDismiss: Boolean = true, action: () -> Unit) = apply {
             dialog.positiveButtonClickedAction =
-                AxBasicDialogFragment.ClickAction(
+                ClickAction(
                     isAutoDismiss = isAutoDismiss,
                     action = action
                 )
         }
 
         fun show() = dialog.show(supportFragmentManager,
-            AxBasicDialogFragment.Companion.TAG
+            TAG
         )
     }
+
+    private data class ViewBinding(
+        val model: UiModel,
+        val content: TextView,
+        val btnNegative: TextView,
+        val btnPositive: ConstraintLayout,
+    )
 
     companion object {
         const val TAG = "AxBasicDialog"
         private const val PARAMS_DATA = "ax_dialog_data"
 
-        fun newInstance(model: AxBasicDialogFragment.UiModel) = AxBasicDialogFragment()
+        fun newInstance(model: UiModel) = AxBasicDialogFragment()
             .also {
             it.arguments = Bundle().apply {
-                putSerializable(AxBasicDialogFragment.Companion.PARAMS_DATA, model)
+                putSerializable(PARAMS_DATA, model)
             }
         }
     }
