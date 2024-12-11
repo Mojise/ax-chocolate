@@ -73,6 +73,6 @@ dependencies {
 
 ## 상세 사용법
 
-- [Ax-Chocolate Theme](docs/Guide_AxChocolate_Theme)
-- [ChocolateView](docs/Guide_ChocolateView)
-- [ChocolateBoxButton](docs/Guide_ChocolateBoxButton)
+- [Ax-Chocolate Theme](docs/Guide_AxChocolate_Theme.md)
+- [ChocolateView](docs/Guide_ChocolateView.md)
+- [ChocolateBoxButton](docs/Guide_ChocolateBoxButton.md)
