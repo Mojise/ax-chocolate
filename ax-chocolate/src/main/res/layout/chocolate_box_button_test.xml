@@ -28,7 +28,6 @@
             android:padding="2dp"
             android:adjustViewBounds="true"
             android:visibility="gone"
-            tools:src="@drawable/icon_shield_sample"
             tools:visibility="visible"
             tools:tint="@color/chocolate_white"/>
 
