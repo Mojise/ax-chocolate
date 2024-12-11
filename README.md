@@ -29,7 +29,7 @@ pluginManagement {
 
 - `libs.versions.toml`
 ```toml
-ax-chocolate = { group = "com.github.mojise", name = "ax-chocolate", version = "0.0.5-beta" }
+ax-chocolate = { group = "com.github.mojise", name = "ax-chocolate", version = "{latest version}" }
 ```
 - `build.gradle.kts`
 ```kotlin
