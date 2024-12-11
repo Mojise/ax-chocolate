@@ -272,9 +272,10 @@
             <enum name="italic" value="2" />
             <enum name="bold_italic" value="3" />
         </attr>
-        <attr name="chocolate_BoxButton_FontFamily" format="reference"/>
         <attr name="chocolate_BoxButton_TextPaddingTop" format="dimension"/>
         <attr name="chocolate_BoxButton_TextPaddingBottom" format="dimension"/>
+        <attr name="chocolate_BoxButton_FontFamily" format="reference"/>
+        <attr name="chocolate_BoxButton_IncludeFontPadding" format="boolean"/>
 
         <attr name="chocolate_BoxButton_Icon" format="reference"/>
         <attr name="chocolate_BoxButton_IconTint" format="color"/>

@@ -28,9 +28,10 @@
         <item name="chocolate_BoxButton_TextColor">@color/chocolate_box_button_text_day</item>
         <item name="chocolate_BoxButton_TextDisabledColor">@color/chocolate_box_button_text_disabled_day</item>
         <item name="chocolate_BoxButton_TextStyle">normal</item>
-        <item name="chocolate_BoxButton_FontFamily">@null</item>
         <item name="chocolate_BoxButton_TextPaddingTop">0dp</item>
         <item name="chocolate_BoxButton_TextPaddingBottom">0dp</item>
+        <item name="chocolate_BoxButton_FontFamily">@null</item>
+        <item name="chocolate_BoxButton_IncludeFontPadding">true</item>
         <item name="chocolate_BoxButton_IconTint">@color/chocolate_box_button_text_day</item>
         <item name="chocolate_BoxButton_IconPadding">2dp</item>
         <item name="chocolate_BoxButton_IconMarginWithText">8dp</item>
@@ -74,9 +75,10 @@
         <item name="chocolate_BoxButton_TextColor">@color/chocolate_box_button_text_night</item>
         <item name="chocolate_BoxButton_TextDisabledColor">@color/chocolate_box_button_text_disabled_night</item>
         <item name="chocolate_BoxButton_TextStyle">normal</item>
-        <item name="chocolate_BoxButton_FontFamily">@null</item>
         <item name="chocolate_BoxButton_TextPaddingTop">0dp</item>
         <item name="chocolate_BoxButton_TextPaddingBottom">0dp</item>
+        <item name="chocolate_BoxButton_FontFamily">@null</item>
+        <item name="chocolate_BoxButton_IncludeFontPadding">true</item>
         <item name="chocolate_BoxButton_IconTint">@color/chocolate_box_button_text_night</item>
         <item name="chocolate_BoxButton_IconPadding">2dp</item>
         <item name="chocolate_BoxButton_IconMarginWithText">8dp</item>

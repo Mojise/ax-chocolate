@@ -32,6 +32,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:paddingVertical="8dp"
+                app:chocolate_BoxButton_IncludeFontPadding="false"
+                app:chocolate_BoxButton_Icon="@drawable/chocolate_icon_shield"
                 app:chocolate_BoxButton_Text="초콜릿 버튼 입니다 1"
                 app:chocolate_BoxButton_TextSize="20sp"/>
 

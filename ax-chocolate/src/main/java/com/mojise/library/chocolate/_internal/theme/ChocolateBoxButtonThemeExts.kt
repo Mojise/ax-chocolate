@@ -4,6 +4,7 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.FontRes
 import com.mojise.library.chocolate.R
+import com.mojise.library.chocolate._internal.exts.getBoolean
 import com.mojise.library.chocolate._internal.exts.getColorFromTheme
 import com.mojise.library.chocolate._internal.exts.getDimensionFromTheme
 import com.mojise.library.chocolate._internal.exts.getInt
@@ -33,6 +34,9 @@ internal val View.theme_chocolate_box_button_text_style: Int
 @get:FontRes
 internal val View.theme_chocolate_box_button_font_family_res_id_or_zero: Int
     get() = context.getResourceIdOrNullFromTheme(R.attr.chocolate_BoxButton_FontFamily) ?: 0
+
+internal val View.theme_chocolate_box_button_include_font_padding: Boolean
+    get() = context.getBoolean(R.attr.chocolate_BoxButton_IncludeFontPadding, true)
 
 @get:ColorInt
 internal val View.theme_chocolate_box_button_text_color: Int

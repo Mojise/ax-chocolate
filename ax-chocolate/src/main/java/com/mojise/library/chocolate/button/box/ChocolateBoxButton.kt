@@ -43,6 +43,7 @@ import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_g
 import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_icon_margin_with_text
 import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_icon_padding
 import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_icon_position
+import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_include_font_padding
 import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_ripple_color
 import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_text_color
 import com.mojise.library.chocolate._internal.theme.theme_chocolate_box_button_text_disabled_color
@@ -113,6 +114,7 @@ class ChocolateBoxButton @JvmOverloads constructor(
 
     /** android:background로 설정한 것인지, 초콜릿 버튼의 백그라운드 색상 설정 방식으로 설정한 것인지 여부 */
     private var isUserSetBackground = false
+    private var prevTextViewHeight = -1
 
     init {
         binding = ViewBinding(
@@ -275,6 +277,8 @@ class ChocolateBoxButton @JvmOverloads constructor(
                 ChocolateTextStyle.Italic -> Typeface.create(binding.textView.typeface, Typeface.ITALIC)
                 ChocolateTextStyle.BoldItalic -> Typeface.create(binding.textView.typeface, Typeface.BOLD_ITALIC)
             }
+            binding.textView.includeFontPadding = array.getBoolean(R.styleable.ChocolateBoxButton_chocolate_BoxButton_IncludeFontPadding, theme_chocolate_box_button_include_font_padding)
+
             // TextView Padding(Top/Bottom) 설정
             array.getDimension(R.styleable.ChocolateBoxButton_chocolate_BoxButton_TextPaddingTop, theme_chocolate_box_button_text_padding_top)
                 .let(Float::toInt)
@@ -317,7 +321,6 @@ class ChocolateBoxButton @JvmOverloads constructor(
         } else {
             binding.iconContainer.isVisible = false
             binding.icon.isVisible = false
-
         }
 
         when (attributes.iconPosition) {
@@ -443,16 +446,12 @@ class ChocolateBoxButton @JvmOverloads constructor(
             attributes.backgroundColors.enabledColor
         )
 
-        binding.iconContainer.addView(binding.icon)
-        binding.iconContainer.addView(binding.loading)
-        addView(binding.textView)
-        addView(binding.iconContainer)
-    }
+//        doOnLayout { Log.d(TAG, "doOnLayout :: iconContainer.width=${binding.iconContainer.width}") }
+//        doOnPreDraw {  Log.d(TAG, "doOnPreDraw :: iconContainer.width=${binding.iconContainer.width}") }
+        
+        viewTreeObserver.addOnGlobalLayoutListener {
+            //Log.d(TAG, "addOnGlobalLayoutListener :: iconContainer.width=${binding.iconContainer.width}")
 
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        super.onLayout(changed, left, top, right, bottom)
-
-        post {
             when (attributes.iconPosition) {
                 IconPosition.Left -> {
                     if (attributes.chainStyle == ChainStyle.SpreadInside) {
@@ -477,22 +476,42 @@ class ChocolateBoxButton @JvmOverloads constructor(
             }
             when {
                 attributes.iconDrawable == null -> {
-                    val indicatorSize = (binding.textView.height * (2/3f)).toInt()
-                    binding.loading.indicatorSize = indicatorSize
-                    binding.loading.trackThickness = calculateLoadingThickness(indicatorSize.toFloat())
+                    if (prevTextViewHeight != binding.textView.height) {
+                        prevTextViewHeight = binding.textView.height
+                        val indicatorSize = (binding.textView.height * (2 / 3f)).toInt()
+                        binding.loading.indicatorSize = indicatorSize
+                        binding.loading.trackThickness =
+                            calculateLoadingThickness(indicatorSize.toFloat())
+                    }
                 }
                 attributes.isSpecificIconSize.not() -> {
-                    val indicatorSize = binding.textView.height
-                    binding.loading.indicatorSize = indicatorSize
-                    binding.loading.trackThickness = calculateLoadingThickness(indicatorSize.toFloat())
+                    if (prevTextViewHeight != binding.textView.height) {
+                        prevTextViewHeight = binding.textView.height
+                        val indicatorSize = binding.textView.height
+                        binding.loading.indicatorSize = indicatorSize
+                        binding.loading.trackThickness = calculateLoadingThickness(indicatorSize.toFloat())
+                    }
                 }
                 else -> {
-                    val indicatorSize = attributes.iconSize!!.toInt()
-                    binding.loading.indicatorSize = indicatorSize
-                    binding.loading.trackThickness = calculateLoadingThickness(indicatorSize.toFloat())
+                    if (binding.loading.indicatorSize != attributes.iconSize!!.toInt()) {
+                        val indicatorSize = attributes.iconSize!!.toInt()
+                        binding.loading.indicatorSize = indicatorSize
+                        binding.loading.trackThickness =
+                            calculateLoadingThickness(indicatorSize.toFloat())
+                    }
                 }
             }
         }
+
+        binding.iconContainer.addView(binding.icon)
+        binding.iconContainer.addView(binding.loading)
+        addView(binding.textView)
+        addView(binding.iconContainer)
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        //Log.e(TAG, "onLayout :: iconContainer.width=${binding.iconContainer.width}")
     }
 
     private fun calculateLoadingThickness(diameterDp: Float): Int {
@@ -561,7 +580,6 @@ class ChocolateBoxButton @JvmOverloads constructor(
      * 버튼의 [enabled] 상태 변경 시 배경 색상, 텍스트 색상, 아이콘 색상을 변경하는 애니메이션을 실행.
      */
     private fun animateButtonEnableStateColorChanged(enabled: Boolean) {
-        Log.e(TAG, "animateButtonEnableStateColorChanged: ")
         if (isUserSetBackground) {
             return
         }
@@ -657,7 +675,6 @@ class ChocolateBoxButton @JvmOverloads constructor(
     }
 
     private fun animateLoading(isLoading: Boolean) {
-        Log.e(TAG, "animateLoading: ")
         if (binding.icon.drawable == null || binding.icon.isVisible.not()) {
             return
         }
