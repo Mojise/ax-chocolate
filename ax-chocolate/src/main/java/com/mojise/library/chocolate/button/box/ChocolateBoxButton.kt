@@ -103,6 +103,17 @@ class ChocolateBoxButton @JvmOverloads constructor(
             binding.textView.isVisible = value.isNotBlank()
         }
 
+    /**
+     * 초콜릿 버튼 아이콘 Drawable 설정
+     */
+    var icon: Drawable?
+        get() = binding.icon.drawable
+        set(value) {
+            binding.icon.setImageDrawable(value)
+            binding.icon.isVisible = value != null
+            updateIconContainer()
+        }
+
     private val isLayoutTransitionEnabled: Boolean
         get() = layoutTransition != null
 
