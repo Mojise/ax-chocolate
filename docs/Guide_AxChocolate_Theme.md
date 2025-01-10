@@ -92,9 +92,10 @@
 | `chocolate_BoxButton_TextColor`                  | 버튼 텍스트 색상          | `color`     | `@color/chocolate_box_button_text`                |
 | `chocolate_BoxButton_TextDisabledColor`          | 비활성화 상태의 버튼 텍스트 색상 | `color`     | `@color/chocolate_box_button_text_disabled`       |
 | `chocolate_BoxButton_TextStyle`                  | 버튼 텍스트 스타일         | `string`    | `normal`                                          |
-| `chocolate_BoxButton_FontFamily`                 | 버튼 텍스트 폰트 패밀리      | `reference` | `@null`                                           |
 | `chocolate_BoxButton_TextPaddingTop`             | 버튼 텍스트 상단 패딩       | `dimension` | `0dp`                                             |
 | `chocolate_BoxButton_TextPaddingBottom`          | 버튼 텍스트 하단 패딩       | `dimension` | `0dp`                                             |
+| `chocolate_BoxButton_FontFamily`                 | 버튼 텍스트 폰트 패밀리      | `reference` | `@null`                                           |
+| `chocolate_BoxButton_IncludeFontPadding`         | 버튼 텍스트의 폰트 패딩 포함 여부 | `boolean`   |                                                   |
 | `chocolate_BoxButton_IconTint`                   | 버튼 아이콘 색상 틴트       | `color`     | `@color/chocolate_box_button_text_day`            |
 | `chocolate_BoxButton_IconPadding`                | 버튼 아이콘 패딩          | `dimension` | `2dp`                                             |
 | `chocolate_BoxButton_IconMarginWithText`         | 버튼 아이콘과 텍스트 간 여백   | `dimension` | `8dp`                                             |
