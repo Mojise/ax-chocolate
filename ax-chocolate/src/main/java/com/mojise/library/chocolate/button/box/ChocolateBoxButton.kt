@@ -109,8 +109,12 @@ class ChocolateBoxButton @JvmOverloads constructor(
     var icon: Drawable?
         get() = binding.icon.drawable
         set(value) {
+            attributes.iconDrawable = value
+
             binding.icon.setImageDrawable(value)
-            binding.icon.isVisible = value != null
+
+            updateIconContainerPre()
+            updateIconPosition()
             updateIconContainer()
         }
 
@@ -308,148 +312,8 @@ class ChocolateBoxButton @JvmOverloads constructor(
         binding.textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, attributes.textSize)
         binding.textView.setTextColor(attributes.textColor)
 
-        if (attributes.hasIconDrawable) {
-            if (attributes.isSpecificIconSize) {
-                binding.iconContainer.updateLayoutParams<LayoutParams> {
-                    width = LayoutParams.WRAP_CONTENT
-                    height = LayoutParams.WRAP_CONTENT
-                }
-                binding.icon.updateLayoutParams<FrameLayout.LayoutParams> {
-                    width = attributes.iconSize!!.toInt()
-                    height = attributes.iconSize!!.toInt()
-                }
-                binding.loading.updateLayoutParams<FrameLayout.LayoutParams> {
-                    width = attributes.iconSize!!.toInt()
-                    height = attributes.iconSize!!.toInt()
-                }
-            }
-            binding.icon.setImageDrawable(attributes.iconDrawable)
-            binding.icon.setPadding(attributes.iconPadding.toInt())
-            attributes.iconTint?.let(binding.icon::setColorFilter)
-
-            binding.iconContainer.isVisible = true
-            binding.icon.isVisible = true
-        } else {
-            binding.iconContainer.isVisible = false
-            binding.icon.isVisible = false
-        }
-
-        when (attributes.iconPosition) {
-            IconPosition.Left -> {
-                when (attributes.chainStyle) {
-                    ChainStyle.Packed -> {
-                        binding.iconContainer.updateLayoutParams<LayoutParams> {
-                            horizontalChainStyle = LayoutParams.CHAIN_PACKED
-                            horizontalBias = when (attributes.boxButtonGravity) {
-                                Gravity.Start -> 0f
-                                Gravity.Center -> 0.5f
-                                Gravity.End -> 1f
-                            }
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            startToStart = PARENT_ID
-                            endToStart = binding.textView.id
-                        }
-                        binding.textView.updateLayoutParams<LayoutParams> {
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            startToEnd = binding.iconContainer.id
-                            endToEnd = PARENT_ID
-                            marginStart = attributes.iconMarginWithText.toInt()
-                        }
-                    }
-                    ChainStyle.Spread -> {
-                        binding.iconContainer.updateLayoutParams<LayoutParams> {
-                            horizontalChainStyle = LayoutParams.CHAIN_SPREAD_INSIDE
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            startToStart = PARENT_ID
-                            endToStart = binding.textView.id
-                        }
-                        binding.textView.updateLayoutParams<LayoutParams> {
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            startToEnd = binding.iconContainer.id
-                            endToEnd = PARENT_ID
-                        }
-                    }
-                    ChainStyle.SpreadInside -> {
-                        binding.iconContainer.updateLayoutParams<LayoutParams> {
-                            matchConstraintPercentHeight = 1f
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            startToStart = PARENT_ID
-                            //startToEnd = NO_ID
-                        }
-                        binding.textView.updateLayoutParams<LayoutParams> {
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            startToEnd = binding.iconContainer.id
-                            endToEnd = PARENT_ID
-                        }
-                    }
-                }
-            }
-            IconPosition.Right -> {
-                when (attributes.chainStyle) {
-                    ChainStyle.Packed -> {
-                        binding.textView.updateLayoutParams<LayoutParams> {
-                            horizontalChainStyle = LayoutParams.CHAIN_PACKED
-                            horizontalBias = when (attributes.boxButtonGravity) {
-                                Gravity.Start -> 0f
-                                Gravity.Center -> 0.5f
-                                Gravity.End -> 1f
-                            }
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            startToStart = PARENT_ID
-                            endToStart = binding.iconContainer.id
-                            marginEnd = attributes.iconMarginWithText.toInt()
-                        }
-                        binding.iconContainer.updateLayoutParams<LayoutParams> {
-                            horizontalChainStyle = LayoutParams.CHAIN_PACKED
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            startToEnd = binding.textView.id
-                            endToEnd = PARENT_ID
-                        }
-                    }
-                    ChainStyle.Spread -> {
-                        binding.textView.updateLayoutParams<LayoutParams> {
-                            horizontalChainStyle = LayoutParams.CHAIN_SPREAD_INSIDE
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            startToStart = PARENT_ID
-                            endToStart = binding.iconContainer.id
-                        }
-                        binding.iconContainer.updateLayoutParams<LayoutParams> {
-                            horizontalChainStyle = LayoutParams.CHAIN_SPREAD_INSIDE
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            startToEnd = binding.textView.id
-                            endToEnd = PARENT_ID
-                        }
-                    }
-                    ChainStyle.SpreadInside -> {
-                        binding.textView.updateLayoutParams<LayoutParams> {
-                            horizontalBias = 0.5f
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            startToStart = PARENT_ID
-                            endToStart = binding.iconContainer.id
-                        }
-                        binding.iconContainer.updateLayoutParams<LayoutParams> {
-                            matchConstraintPercentHeight = 1f
-                            topToTop = PARENT_ID
-                            bottomToBottom = PARENT_ID
-                            //startToEnd = NO_ID
-                            endToEnd = PARENT_ID
-                        }
-                    }
-                }
-            }
-        }
-
+        updateIconContainerPre()
+        updateIconPosition()
         updateIconContainer()
 
         // 로딩바 색상 설정
@@ -566,6 +430,152 @@ class ChocolateBoxButton @JvmOverloads constructor(
             backgroundColors = attributes.backgroundColors,
         )
         super.setBackground(backgroundDrawable)
+    }
+
+    private fun updateIconContainerPre() {
+        if (attributes.hasIconDrawable) {
+            if (attributes.isSpecificIconSize) {
+                binding.iconContainer.updateLayoutParams<LayoutParams> {
+                    width = LayoutParams.WRAP_CONTENT
+                    height = LayoutParams.WRAP_CONTENT
+                }
+                binding.icon.updateLayoutParams<FrameLayout.LayoutParams> {
+                    width = attributes.iconSize!!.toInt()
+                    height = attributes.iconSize!!.toInt()
+                }
+                binding.loading.updateLayoutParams<FrameLayout.LayoutParams> {
+                    width = attributes.iconSize!!.toInt()
+                    height = attributes.iconSize!!.toInt()
+                }
+            }
+            binding.icon.setImageDrawable(attributes.iconDrawable)
+            binding.icon.setPadding(attributes.iconPadding.toInt())
+            attributes.iconTint?.let(binding.icon::setColorFilter)
+
+            binding.iconContainer.isVisible = true
+            binding.icon.isVisible = true
+        } else {
+            binding.iconContainer.isVisible = false
+            binding.icon.isVisible = false
+        }
+    }
+
+    private fun updateIconPosition() {
+        when (attributes.iconPosition) {
+            IconPosition.Left -> {
+                when (attributes.chainStyle) {
+                    ChainStyle.Packed -> {
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_PACKED
+                            horizontalBias = when (attributes.boxButtonGravity) {
+                                Gravity.Start -> 0f
+                                Gravity.Center -> 0.5f
+                                Gravity.End -> 1f
+                            }
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            endToStart = binding.textView.id
+                        }
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToEnd = binding.iconContainer.id
+                            endToEnd = PARENT_ID
+                            marginStart = attributes.iconMarginWithText.toInt()
+                        }
+                    }
+                    ChainStyle.Spread -> {
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_SPREAD_INSIDE
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            endToStart = binding.textView.id
+                        }
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToEnd = binding.iconContainer.id
+                            endToEnd = PARENT_ID
+                        }
+                    }
+                    ChainStyle.SpreadInside -> {
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            matchConstraintPercentHeight = 1f
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            //startToEnd = NO_ID
+                        }
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToEnd = binding.iconContainer.id
+                            endToEnd = PARENT_ID
+                        }
+                    }
+                }
+            }
+            IconPosition.Right -> {
+                when (attributes.chainStyle) {
+                    ChainStyle.Packed -> {
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_PACKED
+                            horizontalBias = when (attributes.boxButtonGravity) {
+                                Gravity.Start -> 0f
+                                Gravity.Center -> 0.5f
+                                Gravity.End -> 1f
+                            }
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            endToStart = binding.iconContainer.id
+                            marginEnd = attributes.iconMarginWithText.toInt()
+                        }
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_PACKED
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToEnd = binding.textView.id
+                            endToEnd = PARENT_ID
+                        }
+                    }
+                    ChainStyle.Spread -> {
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_SPREAD_INSIDE
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            endToStart = binding.iconContainer.id
+                        }
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            horizontalChainStyle = LayoutParams.CHAIN_SPREAD_INSIDE
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToEnd = binding.textView.id
+                            endToEnd = PARENT_ID
+                        }
+                    }
+                    ChainStyle.SpreadInside -> {
+                        binding.textView.updateLayoutParams<LayoutParams> {
+                            horizontalBias = 0.5f
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            startToStart = PARENT_ID
+                            endToStart = binding.iconContainer.id
+                        }
+                        binding.iconContainer.updateLayoutParams<LayoutParams> {
+                            matchConstraintPercentHeight = 1f
+                            topToTop = PARENT_ID
+                            bottomToBottom = PARENT_ID
+                            //startToEnd = NO_ID
+                            endToEnd = PARENT_ID
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun updateIconContainer() {
