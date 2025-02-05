@@ -310,8 +310,7 @@
         </attr>
     </declare-styleable>
 
-    <!-- LoadingIndicatorView -->
-    <declare-styleable name="LoadingIndicatorView">
+    <declare-styleable name="AVLoadingIndicatorView">
         <attr name="minWidth" format="dimension" />
         <attr name="maxWidth" format="dimension"/>
         <attr name="minHeight" format="dimension" />

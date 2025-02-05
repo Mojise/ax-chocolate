@@ -1,4 +1,4 @@
-package com.mojise.library.chocolate.modal.customview;
+package com.mojise.library.chocolate.loading;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -16,10 +16,9 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 
 import com.mojise.library.chocolate.R;
-import com.mojise.library.chocolate.modal.customview.indicator.BallPulseIndicator;
-import com.mojise.library.chocolate.modal.customview.indicator.BallPulseIndicator;
+import com.mojise.library.chocolate.loading.indicator.BallPulseIndicator;
 
-public class LoadingIndicatorView extends View {
+public class AVLoadingIndicatorView extends View {
 
     private static final String TAG = "LoadingIndicatorView";
 
@@ -68,22 +67,22 @@ public class LoadingIndicatorView extends View {
 
     private boolean mShouldStartAnimationDrawable;
 
-    public LoadingIndicatorView(Context context) {
+    public AVLoadingIndicatorView(Context context) {
         super(context);
         init(context, null,0,0);
     }
 
-    public LoadingIndicatorView(Context context, AttributeSet attrs) {
+    public AVLoadingIndicatorView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs,0, R.style.LoadingIndicatorView);
     }
 
-    public LoadingIndicatorView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AVLoadingIndicatorView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs,defStyleAttr, R.style.LoadingIndicatorView);
     }
 
-    public LoadingIndicatorView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public AVLoadingIndicatorView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context,attrs,defStyleAttr, R.style.LoadingIndicatorView);
     }
@@ -94,14 +93,14 @@ public class LoadingIndicatorView extends View {
         mMinHeight = 24;
         mMaxHeight = 48;
 
-        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LoadingIndicatorView, defStyleAttr, defStyleRes);
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AVLoadingIndicatorView, defStyleAttr, defStyleRes);
 
-        mMinWidth = a.getDimensionPixelSize(R.styleable.LoadingIndicatorView_minWidth, mMinWidth);
-        mMaxWidth = a.getDimensionPixelSize(R.styleable.LoadingIndicatorView_maxWidth, mMaxWidth);
-        mMinHeight = a.getDimensionPixelSize(R.styleable.LoadingIndicatorView_minHeight, mMinHeight);
-        mMaxHeight = a.getDimensionPixelSize(R.styleable.LoadingIndicatorView_maxHeight, mMaxHeight);
-        String indicatorName=a.getString(R.styleable.LoadingIndicatorView_indicatorName);
-        mIndicatorColor=a.getColor(R.styleable.LoadingIndicatorView_indicatorColor, Color.WHITE);
+        mMinWidth = a.getDimensionPixelSize(R.styleable.AVLoadingIndicatorView_minWidth, mMinWidth);
+        mMaxWidth = a.getDimensionPixelSize(R.styleable.AVLoadingIndicatorView_maxWidth, mMaxWidth);
+        mMinHeight = a.getDimensionPixelSize(R.styleable.AVLoadingIndicatorView_minHeight, mMinHeight);
+        mMaxHeight = a.getDimensionPixelSize(R.styleable.AVLoadingIndicatorView_maxHeight, mMaxHeight);
+        String indicatorName=a.getString(R.styleable.AVLoadingIndicatorView_indicatorName);
+        mIndicatorColor=a.getColor(R.styleable.AVLoadingIndicatorView_indicatorColor, Color.WHITE);
         setIndicator(indicatorName);
         if (mIndicator==null){
             setIndicator(DEFAULT_INDICATOR);

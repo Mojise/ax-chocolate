@@ -25,6 +25,7 @@ import com.airbnb.lottie.model.KeyPath
 import com.mojise.library.chocolate.R
 import com.mojise.library.chocolate._internal.exts.getColorFromTheme
 import com.mojise.library.chocolate._internal.TAG
+import com.mojise.library.chocolate.loading.AVLoadingIndicatorView
 import java.io.Serializable
 
 class AxModalLoadingDialogFragment : DialogFragment() {
@@ -125,7 +126,7 @@ class AxModalLoadingDialogFragment : DialogFragment() {
     }
 
     private data class ViewBinding(
-        val loadingIndicatorView: com.mojise.library.chocolate.modal.customview.LoadingIndicatorView,
+        val loadingIndicatorView: AVLoadingIndicatorView,
         // val loadingLottieView: LottieAnimationView,
         val loadingMessage: TextView,
     )

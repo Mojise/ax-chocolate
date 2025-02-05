@@ -1,4 +1,4 @@
-package com.mojise.library.chocolate.modal.customview;
+package com.mojise.library.chocolate.loading;
 
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
