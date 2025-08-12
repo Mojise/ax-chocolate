@@ -1,4 +1,4 @@
-package com.mojise.library.chocolate.loading;
+package com.wang.avi.loading;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 
 import com.mojise.library.chocolate.R;
-import com.mojise.library.chocolate.loading.indicator.BallPulseIndicator;
+import com.wang.avi.loading.indicator.BallPulseIndicator;
 
 public class AVLoadingIndicatorView extends View {
 
@@ -62,7 +62,7 @@ public class AVLoadingIndicatorView extends View {
     int mMinHeight;
     int mMaxHeight;
 
-    private Indicator mIndicator;
+    private com.wang.avi.loading.Indicator mIndicator;
     private int mIndicatorColor;
 
     private boolean mShouldStartAnimationDrawable;
@@ -109,11 +109,11 @@ public class AVLoadingIndicatorView extends View {
         //a.close();
     }
 
-    public Indicator getIndicator() {
+    public com.wang.avi.loading.Indicator getIndicator() {
         return mIndicator;
     }
 
-    public void setIndicator(Indicator d) {
+    public void setIndicator(com.wang.avi.loading.Indicator d) {
         if (mIndicator != d) {
             if (mIndicator != null) {
                 mIndicator.setCallback(null);
@@ -170,7 +170,7 @@ public class AVLoadingIndicatorView extends View {
         drawableClassName.append(indicatorName);
         try {
             Class<?> drawableClass = Class.forName(drawableClassName.toString());
-            Indicator indicator = (Indicator) drawableClass.newInstance();
+            com.wang.avi.loading.Indicator indicator = (com.wang.avi.loading.Indicator) drawableClass.newInstance();
             setIndicator(indicator);
         } catch (ClassNotFoundException e) {
             Log.e(TAG,"Didn't find your class , check the name again !");

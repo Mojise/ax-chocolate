@@ -1,4 +1,4 @@
-package com.mojise.library.chocolate.loading;
+package com.wang.avi.loading;
 
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;

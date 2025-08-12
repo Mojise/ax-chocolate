@@ -1,4 +1,4 @@
-package com.mojise.library.chocolate.loading.indicator;
+package com.wang.avi.loading.indicator;
 
 import android.animation.ValueAnimator;
 import android.graphics.Camera;
@@ -8,7 +8,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.view.animation.LinearInterpolator;
 
-import com.mojise.library.chocolate.loading.Indicator;
+import com.wang.avi.loading.Indicator;
 
 import java.util.ArrayList;
 

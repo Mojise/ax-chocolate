@@ -1,4 +1,4 @@
-package com.mojise.library.chocolate.loading.indicator;
+package com.wang.avi.loading.indicator;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

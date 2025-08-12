@@ -1,11 +1,11 @@
-package com.mojise.library.chocolate.loading.indicator;
+package com.wang.avi.loading.indicator;
 
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 
-import com.mojise.library.chocolate.loading.Indicator;
+import com.wang.avi.loading.Indicator;
 
 import java.util.ArrayList;
 
